@@ -2,6 +2,7 @@
 using System.Linq;
 using UnityEngine;
 using System.Collections;
+using Assets.TBS_Framework.Scripts.ASTR;
 
 class CellGridStateSkillSelected : CellGridState
 {
@@ -43,6 +44,11 @@ class CellGridStateSkillSelected : CellGridState
         if (skillName.Equals("fireball"))
         {
             _skill = new Fireball();
+            _targetable = true;
+        }
+        if (skillName.Equals("buff"))
+        {
+            _skill = new AttackBuffSkill();
             _targetable = true;
         }
     }

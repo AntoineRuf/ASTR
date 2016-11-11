@@ -186,7 +186,10 @@ public class CellGrid : MonoBehaviour
     {
         CellGridState = new CellGridStateSkillSelected(this, "fireball", UnitList[Turn]);
     }
-
+    public void BuffSelection()
+    {
+        CellGridState = new CellGridStateSkillSelected(this, "buff", UnitList[Turn]);
+    }
     public void MovekSelection()
     {
         CellGridState = new CellGridStateUnitSelected(this, UnitList[Turn]);
