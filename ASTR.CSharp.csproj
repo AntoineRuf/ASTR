@@ -64,13 +64,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Calculs.cs" />
+    <Compile Include="Assets\FPSDisplay.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\BasicAttack.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\CalculsCube.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\CellGridStateSkillSelected.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\FacingTile.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\Fireball.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\OnClickDirectionChoice.cs" />
-    <Compile Include="Assets\TBS Framework\Scripts\ASTR\Skill.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\Core\AStarPathfinding.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\Core\BreadthFirstSearch.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\Core\Buff.cs" />
@@ -102,6 +102,7 @@
     <Compile Include="Assets\TBS Framework\Scripts\Core\RandomUnitGenerator.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\Core\RectangularHexGridGenerator.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\Core\RectangularSquareGridGenerator.cs" />
+    <Compile Include="Assets\TBS Framework\Scripts\Core\Skill.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\Core\Square.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\Core\TriangularHexGridGenerator.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\Core\Unit.cs" />

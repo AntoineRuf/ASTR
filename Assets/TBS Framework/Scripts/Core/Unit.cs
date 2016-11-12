@@ -442,7 +442,7 @@ public abstract class Unit : MonoBehaviour
     }
 
     /// <summary>
-    /// Compare the attacker position and the facing of the defender.
+    /// Compare the attacker's position and the facing of the defender.
     /// </summary>
     public int FacingComparison(Unit defender)
     {
@@ -454,22 +454,22 @@ public abstract class Unit : MonoBehaviour
         switch(defender.Facing)
         {
             case _directions.up:
-                Debug.Log("CIBLE REGARDE VERS LE HAUT " + attackerCoord + " -- " + defenderCoord);
+                
                 if (attackerCoord.y > defenderCoord.y) // attacker behind defender
                 {
-                    if (attackerCoord.x == defenderCoord.x) return backstab; // attacker right behind defender
+                    if (isBehind(defender)) return backstab;
                     else return critical;
                 }
                 break;
             case _directions.up_right:
-                if (attackerCoord.x > defenderCoord.x || attackerCoord.y > defenderCoord.y ) // attacker behind defender
+                if (attackerCoord.x < defenderCoord.x || attackerCoord.y > defenderCoord.y ) // attacker behind defender
                 {
                     if (isBehind(defender)) return backstab;
                     else return critical;                   
                 }
                 break;
             case _directions.up_left:
-                if (attackerCoord.x < defenderCoord.x || attackerCoord.y > defenderCoord.y) // attacker behind defender
+                if (attackerCoord.x > defenderCoord.x || attackerCoord.y > defenderCoord.y) // attacker behind defender
                 {
                     if (isBehind(defender)) return backstab;
                     else return critical;
@@ -483,14 +483,14 @@ public abstract class Unit : MonoBehaviour
                 }
                 break;
             case _directions.down_right:
-                if (attackerCoord.x > defenderCoord.x || attackerCoord.y < defenderCoord.y) // attacker behind defender
+                if (attackerCoord.x < defenderCoord.x || attackerCoord.y < defenderCoord.y) // attacker behind defender
                 {
                     if (isBehind(defender)) return backstab;
                     else return critical;
                 }
                 break;
             case _directions.down_left:
-                if (attackerCoord.x < defenderCoord.x || attackerCoord.y < defenderCoord.y) // attacker behind defender
+                if (attackerCoord.x > defenderCoord.x || attackerCoord.y < defenderCoord.y) // attacker behind defender
                 {
                     if (isBehind(defender)) return backstab;
                     else return critical;
@@ -503,22 +503,20 @@ public abstract class Unit : MonoBehaviour
     /// <summary>
     /// Checks if a unit is behind another one using HexGrid Calculations
     /// </summary>
-    public bool isBehind(Unit u)
+    public bool isBehind(Unit unit)
     {
-        int range = 5; // max range
-        float row = u.Cell.OffsetCoord.x;
-        float col = u.Cell.OffsetCoord.y;
-        Vector2 positionOffsetCoord = new Vector2(row, col);
-        Vector3 uPositionCube = ConvertToCube(new Vector2(Cell.OffsetCoord.x, Cell.OffsetCoord.y));
-
+        int range = 1; // max range
+        Vector2 positionOffsetCoord = Cell.OffsetCoord;
+        Vector2 unitPositionOffsetCoord = unit.Cell.OffsetCoord;
+        Vector3 unitPositionCube = ConvertToCube(unitPositionOffsetCoord);
         Vector3 up = new Vector3(0, 1, -1);
         Vector3 down = new Vector3(0, -1, 1);
-        Vector3 downR = new Vector3(-1, 0, 1);
-        Vector3 downL = new Vector3(1, -1, 0);
-        Vector3 upR = new Vector3(-1, 1, 0);
-        Vector3 upL = new Vector3(1, 0, -1);
+        Vector3 upR = new Vector3(+1, 0, -1);
+        Vector3 upL = new Vector3(-1, 1, 0);
+        Vector3 downR = new Vector3(+1, -1, 0);
+        Vector3 downL = new Vector3(-1, 0, 1);
         Vector3 direction = new Vector3();
-        switch (u.Facing)
+        switch (unit.Facing)
         {
             case _directions.up:
                 direction = down;
@@ -541,9 +539,8 @@ public abstract class Unit : MonoBehaviour
         }
         for (int i = 0; i < range; ++i)
         {
-            uPositionCube += direction;
-
-            if (ConvertToOffsetCoord(uPositionCube) == positionOffsetCoord)
+            unitPositionCube += direction;
+            if (ConvertToOffsetCoord(unitPositionCube).Equals(positionOffsetCoord))
             {
                 return true;
             }
@@ -558,7 +555,7 @@ public abstract class Unit : MonoBehaviour
     /// </summary>
     Vector2 ConvertToOffsetCoord(Vector3 v)
     {
-        return new Vector2(v.x, (v.z + (v.x - (Mathf.Abs(v.x) % 2)) / 2));
+        return new Vector2(v.x, (v.z + (v.x + (Mathf.Abs(v.x) % 2)) / 2));
     }
 
     /// <summary>

@@ -9,7 +9,7 @@ public class BasicAttack : Skill {
         {
             return;
         }
-        Debug.Log("EST CE QUE CA MARCHE : " + caster.FacingComparison(receiver));
+        Debug.Log("CRITICAL INT : " + caster.FacingComparison(receiver));
         caster.DealDamage(receiver);
         receiver.printDamage(caster.AttackFactor);
         caster.ActionPoints--;
