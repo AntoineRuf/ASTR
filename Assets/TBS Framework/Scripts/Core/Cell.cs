@@ -75,13 +75,18 @@ public abstract class Cell : MonoBehaviour, IGraphNode
     /// <summary>
     /// Method returns the cell to its base appearance.
     /// </summary>
+    public virtual void MarkAsSkillRange() { }
+    public virtual void MarkAsSkillRangeSelected() { }
     public abstract void UnMark();
+    
 
     public int GetDistance(IGraphNode other)
     {
         return GetDistance(other as Cell);
     }
 
+    public virtual bool IsCellTargetable(Cell targetCell, int minRange, int maxRange, bool inLine) { return false; }
+    public virtual bool isCellInLine(Cell targetCell, int maxRange) { return false; }
     //------------------ ASTR
-    
+
 }

@@ -13,7 +13,23 @@ public abstract class CellGridState
     public virtual void OnUnitClicked(Unit unit)
     {
     }
-    
+
+    public virtual void OnUnitSelected(Unit unit)
+    { 
+    }
+
+    public virtual void OnUnitDeselected(Unit unit)
+    {
+    }
+
+    public virtual void OnUnitForTargetSelected(Unit unit)
+    {
+    }
+
+    public virtual void OnUnitForTargetDeselected(Unit unit)
+    {
+    }
+
     public virtual void OnCellDeselected(Cell cell)
     {
         cell.UnMark();

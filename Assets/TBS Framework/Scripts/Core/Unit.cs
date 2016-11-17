@@ -23,6 +23,8 @@ public abstract class Unit : MonoBehaviour
     /// </summary>
     public event EventHandler UnitHighlighted;
     public event EventHandler UnitDehighlighted;
+    public event EventHandler UnitForTargetSelected;
+    public event EventHandler UnitForTargetDeselected;
     public event EventHandler<AttackEventArgs> UnitAttacked;
     public event EventHandler<AttackEventArgs> UnitDestroyed;
     public event EventHandler<MovementEventArgs> UnitMoved;
@@ -116,11 +118,15 @@ public abstract class Unit : MonoBehaviour
     {
         if (UnitHighlighted != null)
             UnitHighlighted.Invoke(this, new EventArgs());
+        if (UnitForTargetSelected != null)
+            UnitForTargetSelected.Invoke(this, new EventArgs());
     }
     protected virtual void OnMouseExit()
     {
         if (UnitDehighlighted != null)
             UnitDehighlighted.Invoke(this, new EventArgs());
+        if (UnitForTargetDeselected != null)
+            UnitForTargetDeselected.Invoke(this, new EventArgs());
     }
 
     /// <summary>
@@ -183,6 +189,8 @@ public abstract class Unit : MonoBehaviour
 
         return false;
     }
+
+
     /// <summary>
     /// Method deals damage to unit given as parameter.
     /// </summary>
@@ -191,8 +199,6 @@ public abstract class Unit : MonoBehaviour
         if (isMoving)
             return;
         if (ActionPoints == 0)
-            return;
-        if (!IsUnitAttackable(other, Cell))
             return;
 
         MarkAsAttacking(other);
@@ -245,6 +251,7 @@ public abstract class Unit : MonoBehaviour
         MovementPoints -= totalMovementCost;
 
         Cell.IsTaken = false;
+        Cell.Occupent = null;
         Cell = destinationCell;
         destinationCell.IsTaken = true;
         destinationCell.Occupent = this;

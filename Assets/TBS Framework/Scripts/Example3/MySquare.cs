@@ -30,6 +30,7 @@ public class MySquare : Square
         SetColor(new Color(1,1,1,0));
     }
 
+
     private void SetColor(Color color)
     {
         var highlighter = transform.FindChild("Highlighter");

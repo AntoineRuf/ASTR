@@ -15,9 +15,5 @@ public class BasicAttack : Skill {
         caster.ActionPoints--;
     }
 
-    public override  void Apply(Unit caster, Cell receiver, CellGrid cellGrid) { return; }
-    public int Range { get; set; }
-    public int Damage { get; set; }
-    public int Cooldown { get; set; }
-    public bool Targetable { get; set; }
+    public override void Apply(Unit caster, Cell receiver, CellGrid cellGrid) { return; }
 }

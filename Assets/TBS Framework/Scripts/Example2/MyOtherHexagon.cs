@@ -1,26 +1,36 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class MyOtherHexagon : Hexagon
 {
     public GroundType GroundType;
     public bool IsSkyTaken;//Indicates if a flying unit is occupying the cell.
-
+    public CellColors cellGridColors;
     public void Start()
     {
-        SetColor(new Color(1,1,1,0));
+        cellGridColors = transform.parent.gameObject.GetComponent<CellColors>();
+        SetColor(cellGridColors.start);
     }
 
     public override void MarkAsReachable()
     {
-        SetColor(new Color(1, 0.92f, 0.016f, 1));
+        SetColor(cellGridColors.reachable);
     }
     public override void MarkAsPath()
     {
-        SetColor(new Color(0,1,0,1));
+        SetColor(cellGridColors.path);
     }
     public override void MarkAsHighlighted()
     {
-        SetColor(new Color(0.5f,0.5f,0.5f,0.25f));
+        SetColor(cellGridColors.higlighted);
+    }
+    public override void MarkAsSkillRange()
+    {
+        SetColor(cellGridColors.skillRange);
+    }
+    public override void MarkAsSkillRangeSelected()
+    {
+        SetColor(cellGridColors.skillRangeSelected);
     }
     public override void UnMark()
     {
@@ -43,6 +53,41 @@ public class MyOtherHexagon : Hexagon
 
             child.GetComponent<SpriteRenderer>().color = childColor;
         }
+    }
+
+    /// <summary>
+    /// Method indicates if it is possible to target a cell
+    /// </summary>
+    public override bool IsCellTargetable(Cell targetCell, int minRange, int maxRange, bool inLine)
+    {
+        if (GetDistance(targetCell) <= maxRange && GetDistance(targetCell) >= minRange)
+            return true;
+
+        return false;
+    }
+
+    /// <summary>
+    /// Indicates if there is a line between two cells. The parameter maxRange is used for optimization
+    /// </summary>
+    public override bool isCellInLine(Cell targetCell, int maxRange)
+    {
+        Vector2 tmpOffset = new Vector2();
+        Vector3 tmpCube = new Vector3();
+        foreach (var direction in Directions.getDirections())
+        {
+            tmpOffset = OffsetCoord;
+            tmpCube = Directions.ConvertToCube(tmpOffset);
+            for (int i = 0; i < maxRange; ++i)
+            {
+                tmpCube += direction;
+                if (Directions.ConvertToOffsetCoord(tmpCube).Equals(targetCell.OffsetCoord))
+                {
+                    return true;
+                }
+
+            }
+        }
+        return false;
     }
 
     public override Vector3 GetCellDimensions()

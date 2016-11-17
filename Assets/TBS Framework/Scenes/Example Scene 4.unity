@@ -280,6 +280,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &40130829
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -451,6 +452,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &42105126
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -673,6 +675,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &69911533
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1243,6 +1246,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &173474742
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1622,6 +1626,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &207906745
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1867,6 +1872,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &226496237
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2360,6 +2366,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &276575568
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3061,6 +3068,22 @@ Prefab:
       propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 21229638, guid: 26c95ef7c0ee34d4e903c6b92f36f9ad, type: 2}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 21229638, guid: 26c95ef7c0ee34d4e903c6b92f36f9ad, type: 2}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 21229638, guid: 26c95ef7c0ee34d4e903c6b92f36f9ad, type: 2}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 21229638, guid: 26c95ef7c0ee34d4e903c6b92f36f9ad, type: 2}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 26c95ef7c0ee34d4e903c6b92f36f9ad, type: 2}
   m_IsPrefabParent: 0
@@ -3252,6 +3275,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &370801968
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3525,6 +3549,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &400431038
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4711,6 +4736,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &525285682
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5093,6 +5119,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &559096025
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5190,6 +5217,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &559120992
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5614,6 +5642,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &598895855
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6386,6 +6415,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &656087722
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6623,6 +6653,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &686773382
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6720,6 +6751,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &691690694
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7292,6 +7324,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &743536171
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7389,6 +7422,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &746068534
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7684,6 +7718,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &766186849
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8019,6 +8054,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &791815177
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8774,6 +8810,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &843191481
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9266,6 +9303,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &874088884
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9593,6 +9631,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &886445389
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9690,6 +9729,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &900513308
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9913,6 +9953,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &921460236
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10300,6 +10341,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &970183534
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10925,6 +10967,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &1031016762
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -11272,6 +11315,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &1055822606
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -11431,6 +11475,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &1074110817
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -11475,6 +11520,7 @@ GameObject:
   - 114: {fileID: 1077317994}
   - 114: {fileID: 1077317992}
   - 114: {fileID: 1077317991}
+  - 114: {fileID: 1077317993}
   m_Layer: 0
   m_Name: CellGrid
   m_TagString: Untagged
@@ -11583,6 +11629,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UnitsParent: {fileID: 1765133624}
   CellsParent: {fileID: 1077317990}
+--- !u!114 &1077317993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1077317989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bdffe2cfff634b49b68dd61d0e704c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  start: {r: 1, g: 1, b: 1, a: 0}
+  reachable: {r: 0.5955882, g: 1, b: 0.5983773, a: 0.241}
+  path: {r: 0.47102073, g: 0.665297, b: 0.9705882, a: 0.316}
+  higlighted: {r: 0.5, g: 0.5, b: 0.5, a: 0.25}
+  skillRange: {r: 1, g: 0.8896551, b: 0, a: 0.637}
+  UnitOnlySkillRange: {r: 0, g: 0, b: 0, a: 0}
+  skillRangeSelected: {r: 1, g: 0, b: 0, a: 0.256}
 --- !u!114 &1077317994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11661,6 +11725,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &1084264230
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -11852,6 +11917,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &1085730624
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -12011,6 +12077,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &1102631423
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -12108,6 +12175,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &1109171702
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -12554,6 +12622,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &1137343647
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -12783,6 +12852,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &1165291919
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -13290,6 +13360,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &1212042382
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -13555,6 +13626,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &1220179689
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -13715,6 +13787,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &1230268023
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -14009,6 +14082,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &1252497569
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -14230,6 +14304,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &1277790722
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -14327,6 +14402,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &1290144613
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -14677,6 +14753,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &1323583097
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -14832,6 +14909,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &1362140002
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -15022,7 +15100,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!58 &1395743984
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -15055,6 +15133,7 @@ MonoBehaviour:
   HexGridType: 0
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &1395743986
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -15166,6 +15245,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &1415086971
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -15522,6 +15602,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &1461528198
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -15767,6 +15848,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &1471176188
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -16315,6 +16397,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &1534561890
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -16631,6 +16714,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &1551138696
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -16791,6 +16875,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &1568861128
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -16888,6 +16973,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &1589340517
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -17059,6 +17145,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &1625743825
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -17499,6 +17586,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &1670260016
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -18660,6 +18748,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &1843833589
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -18851,6 +18940,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &1864045249
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -19193,6 +19283,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &1917615308
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -19290,6 +19381,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &1923640072
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -19580,6 +19672,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &1941827460
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -19896,6 +19989,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &1971406720
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -20167,6 +20261,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &2016486257
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -20482,6 +20577,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &2052811961
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -20886,6 +20982,7 @@ MonoBehaviour:
   HexGridType: 1
   GroundType: 0
   IsSkyTaken: 0
+  cellGridColors: {fileID: 0}
 --- !u!212 &2082359093
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -65,12 +65,24 @@
   <ItemGroup>
     <Compile Include="Assets\Calculs.cs" />
     <Compile Include="Assets\FPSDisplay.cs" />
+    <Compile Include="Assets\SimpleDragAndDrop\Scripts\DragAndDropCell.cs" />
+    <Compile Include="Assets\SimpleDragAndDrop\Scripts\DragAndDropItem.cs" />
+    <Compile Include="Assets\SimpleDragAndDrop\Scripts\DummyControlUnit.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\BasicAttack.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\CalculsCube.cs" />
+    <Compile Include="Assets\TBS Framework\Scripts\ASTR\CellColors.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\CellGridStateSkillSelected.cs" />
+    <Compile Include="Assets\TBS Framework\Scripts\ASTR\Classes\Mage.cs" />
+    <Compile Include="Assets\TBS Framework\Scripts\ASTR\Classes\Rogue.cs" />
+    <Compile Include="Assets\TBS Framework\Scripts\ASTR\Classes\Warrior.cs" />
+    <Compile Include="Assets\TBS Framework\Scripts\ASTR\Directions.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\FacingTile.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\Fireball.cs" />
+    <Compile Include="Assets\TBS Framework\Scripts\ASTR\GameControl.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\OnClickDirectionChoice.cs" />
+    <Compile Include="Assets\TBS Framework\Scripts\ASTR\Rogue\TwinDaggers.cs" />
+    <Compile Include="Assets\TBS Framework\Scripts\ASTR\Skill.cs" />
+    <Compile Include="Assets\TBS Framework\Scripts\ASTR\Squad.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\Core\AStarPathfinding.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\Core\BreadthFirstSearch.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\Core\Buff.cs" />
@@ -102,7 +114,6 @@
     <Compile Include="Assets\TBS Framework\Scripts\Core\RandomUnitGenerator.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\Core\RectangularHexGridGenerator.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\Core\RectangularSquareGridGenerator.cs" />
-    <Compile Include="Assets\TBS Framework\Scripts\Core\Skill.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\Core\Square.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\Core\TriangularHexGridGenerator.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\Core\Unit.cs" />

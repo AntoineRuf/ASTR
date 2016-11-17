@@ -52,7 +52,7 @@ public class CellGrid : MonoBehaviour
     void Start()
     {
         Turn = 0;
-    
+        Directions.Initialize(); // initialize static class Directions
         Players = new List<Player>();
         for (int i = 0; i < PlayersParent.childCount; i++)
         {
@@ -90,6 +90,9 @@ public class CellGrid : MonoBehaviour
             {
                 unit.UnitClicked += OnUnitClicked;
                 unit.UnitDestroyed += OnUnitDestroyed;
+                unit.UnitForTargetSelected += OnUnitForTargetSelected;
+                unit.UnitForTargetDeselected += OnUnitForTargetDeselected;
+                unit.Cell.Occupent = unit;
             }
         }
         else
@@ -127,7 +130,17 @@ public class CellGrid : MonoBehaviour
                 GameEnded.Invoke(this, new EventArgs());
         }
     }
-    
+
+    private void OnUnitForTargetSelected(object sender, EventArgs e)
+    {
+        CellGridState.OnUnitForTargetSelected(sender as Unit);
+    }
+
+    private void OnUnitForTargetDeselected(object sender, EventArgs e)
+    {
+        CellGridState.OnUnitForTargetDeselected(sender as Unit);
+    }
+
     /// <summary>
     /// Method is called once, at the beggining of the game.
     /// </summary>
@@ -179,7 +192,7 @@ public class CellGrid : MonoBehaviour
 
     public void BasicAttackSelection()
     {
-        CellGridState = new CellGridStateSkillSelected(this, "basicAttack", UnitList[Turn]);
+        CellGridState = new CellGridStateSkillSelected(this, "twinDaggers", UnitList[Turn]);
     }
 
     public void FireballSelection()
@@ -214,7 +227,6 @@ public class CellGrid : MonoBehaviour
 
         while (!directionChosen)
         {
-            Debug.Log("Still in Loop");
             foreach (GameObject dGO in directions)
             {
                 if (dGO.GetComponent<OnClickDirectionChoice>().clicked)
