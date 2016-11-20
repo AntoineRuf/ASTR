@@ -46,6 +46,10 @@ public abstract class Unit : MonoBehaviour
     /// </summary>
     public Cell Cell { get; set; }
     public List<Skill> Skills;
+
+    public string ClassName;
+    public Class Class;
+
     public int HitPoints;
     public int AttackRange;
     public int AttackFactor;
@@ -103,10 +107,13 @@ public abstract class Unit : MonoBehaviour
         Buffs = new List<Buff>();
 
         UnitState = new UnitStateNormal(this);
-
-        TotalHitPoints = HitPoints;
-        TotalMovementPoints = MovementPoints;
-        TotalActionPoints = ActionPoints;
+        Class = ClassSelection(ClassName);
+        TotalHitPoints += Class.HP;
+        HitPoints = TotalHitPoints;
+        TotalMovementPoints += Class.MP;
+        TotalActionPoints = 1;
+        AttackFactor += Class.ATK;
+        Initiative += Class.INIT;
     }
 
     protected virtual void OnMouseDown()
@@ -156,6 +163,7 @@ public abstract class Unit : MonoBehaviour
     protected virtual void OnDestroyed()
     {
         Cell.IsTaken = false;
+        Cell.Occupent = null;
         MarkAsDestroyed();
         Destroy(gameObject);
     }
@@ -574,6 +582,21 @@ public abstract class Unit : MonoBehaviour
         float z = v.y - (v.x + (Mathf.Abs(v.x) % 2)) / 2;
         float y = -x - z;
         return new Vector3(x, y, z);
+    }
+
+    Class ClassSelection(string className)
+    {
+        switch (className)
+        {
+            case "Rogue":
+                return new Rogue();
+            case "Warrior":
+                return new Warrior();
+            case "Mage":
+                return new Mage();
+            default :
+                throw new Exception("Error in Class Name");
+        }
     }
 }
 

@@ -163,6 +163,14 @@ public class CellGrid : MonoBehaviour
 
     public void RealEndTurn()
     {
+        for (int i = 0; i < 6; ++i)
+        {
+            UnitList[Turn].transform.GetChild(2).GetChild(i).GetComponent<OnClickDirectionChoice>().clicked = false;
+            UnitList[Turn].transform.GetChild(2).GetChild(i).GetComponent<OnClickDirectionChoice>().hovering = false;
+            UnitList[Turn].transform.GetChild(2).GetChild(i).GetComponent<SpriteRenderer>().color =
+                UnitList[Turn].transform.GetChild(2).GetChild(i).GetComponent<OnClickDirectionChoice>().StartColor;
+        }
+        
         UnitListRefresh(UnitList);
         Turn = (Turn + 1) % Units.Count();
 

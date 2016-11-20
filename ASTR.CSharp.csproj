@@ -72,6 +72,8 @@
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\CalculsCube.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\CellColors.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\CellGridStateSkillSelected.cs" />
+    <Compile Include="Assets\TBS Framework\Scripts\ASTR\Character.cs" />
+    <Compile Include="Assets\TBS Framework\Scripts\ASTR\Classes\Class.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\Classes\Mage.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\Classes\Rogue.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\Classes\Warrior.cs" />
