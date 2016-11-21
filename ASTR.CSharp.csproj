@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.4.1f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -66,15 +64,31 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Calculs.cs" />
-    <Compile Include="Assets\TBS Framework\Scripts\ASTR\AttackBuff.cs" />
+    <Compile Include="Assets\FPSDisplay.cs" />
+    <Compile Include="Assets\SimpleDragAndDrop\Scripts\DragAndDropCell.cs" />
+    <Compile Include="Assets\SimpleDragAndDrop\Scripts\DragAndDropItem.cs" />
+    <Compile Include="Assets\SimpleDragAndDrop\Scripts\DummyControlUnit.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\BasicAttack.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\CalculsCube.cs" />
+    <Compile Include="Assets\TBS Framework\Scripts\ASTR\CellColors.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\CellGridStateSkillSelected.cs" />
+    <Compile Include="Assets\TBS Framework\Scripts\ASTR\Character.cs" />
+    <Compile Include="Assets\TBS Framework\Scripts\ASTR\Classes\Class.cs" />
+    <Compile Include="Assets\TBS Framework\Scripts\ASTR\Classes\Mage.cs" />
+    <Compile Include="Assets\TBS Framework\Scripts\ASTR\Classes\Rogue.cs" />
+    <Compile Include="Assets\TBS Framework\Scripts\ASTR\Classes\Warrior.cs" />
+    <Compile Include="Assets\TBS Framework\Scripts\ASTR\Directions.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\FacingTile.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\Fireball.cs" />
+    <Compile Include="Assets\TBS Framework\Scripts\ASTR\GameControl.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\OnClickDirectionChoice.cs" />
-    <Compile Include="Assets\TBS Framework\Scripts\ASTR\PowerBuff.cs" />
+    <Compile Include="Assets\TBS Framework\Scripts\ASTR\Rogue\TwinDaggers.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\Skill.cs" />
+    <Compile Include="Assets\TBS Framework\Scripts\ASTR\Squad.cs" />
+    <Compile Include="Assets\TBS Framework\Scripts\ASTR\Trap.cs" />
+    <Compile Include="Assets\TBS Framework\Scripts\ASTR\TrapManager.cs" />
+    <Compile Include="Assets\TBS Framework\Scripts\ASTR\WeaknessTrap.cs" />
+    <Compile Include="Assets\TBS Framework\Scripts\ASTR\WeaknessTrapSkill.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\Core\AStarPathfinding.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\Core\BreadthFirstSearch.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\Core\Buff.cs" />

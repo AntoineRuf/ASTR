@@ -25,13 +25,6 @@ public class CalculsCube : MonoBehaviour
         z = col - (row + (Mathf.Abs(row) % 2)) / 2;
         y = -x - z;
         Vector3 cube = new Vector3(x, y, z);
-        Debug.Log(cube);
-        Debug.Log("UP" + Convert(cube + up));
-        Debug.Log("DOWN" + Convert(cube + down));
-        Debug.Log("UP R" + Convert(cube + upR));
-        Debug.Log("UP L" + Convert(cube + upL));
-        Debug.Log("DOWN R" + Convert(cube + downR));
-        Debug.Log("DOWN L" + Convert(cube + downL));
 
     }
 

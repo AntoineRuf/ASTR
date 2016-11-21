@@ -28,6 +28,7 @@ public abstract class Hexagon : Cell
                         ret.z = OffsetCoord.y - (OffsetCoord.x + (Mathf.Abs(OffsetCoord.x) % 2)) / 2;
                         ret.y = -ret.x - ret.z;
                         break;
+
                     }
                 case HexGridType.even_q:
                     {

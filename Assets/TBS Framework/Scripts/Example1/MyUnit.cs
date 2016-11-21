@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.TBS_Framework.Scripts.ASTR;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -31,12 +32,7 @@ public class MyUnit : Unit
         base.Defend(other, damage);
         UpdateHpBar();
     }
-
-    public override void Move(Cell destinationCell, List<Cell> path)
-    {
-        base.Move(destinationCell, path);
-    }
-
+    
     public override void MarkAsAttacking(Unit other)
     {
         StartCoroutine(Jerk(other));

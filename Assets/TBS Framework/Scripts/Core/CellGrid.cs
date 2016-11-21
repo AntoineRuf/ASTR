@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using System.Collections;
+using Assets.TBS_Framework.Scripts.ASTR;
 
 /// <summary>
 /// CellGrid class keeps track of the game, stores cells, units and players objects. It starts the game and makes turn transitions. 
@@ -48,11 +49,13 @@ public class CellGrid : MonoBehaviour
     public List<Unit> Units { get; private set; }
     public List<Unit> UnitList; // sorted list by decreasing Initiative
     public int Turn;
+    public TrapManager trapmanager;
 
     void Start()
     {
         Turn = 0;
-    
+        trapmanager = new TrapManager();
+        Directions.Initialize(); // initialize static class Directions
         Players = new List<Player>();
         for (int i = 0; i < PlayersParent.childCount; i++)
         {
@@ -90,6 +93,9 @@ public class CellGrid : MonoBehaviour
             {
                 unit.UnitClicked += OnUnitClicked;
                 unit.UnitDestroyed += OnUnitDestroyed;
+                unit.UnitForTargetSelected += OnUnitForTargetSelected;
+                unit.UnitForTargetDeselected += OnUnitForTargetDeselected;
+                unit.Cell.Occupent = unit;
             }
         }
         else
@@ -127,7 +133,17 @@ public class CellGrid : MonoBehaviour
                 GameEnded.Invoke(this, new EventArgs());
         }
     }
-    
+
+    private void OnUnitForTargetSelected(object sender, EventArgs e)
+    {
+        CellGridState.OnUnitForTargetSelected(sender as Unit);
+    }
+
+    private void OnUnitForTargetDeselected(object sender, EventArgs e)
+    {
+        CellGridState.OnUnitForTargetDeselected(sender as Unit);
+    }
+
     /// <summary>
     /// Method is called once, at the beggining of the game.
     /// </summary>
@@ -150,6 +166,14 @@ public class CellGrid : MonoBehaviour
 
     public void RealEndTurn()
     {
+        for (int i = 0; i < 6; ++i)
+        {
+            UnitList[Turn].transform.GetChild(2).GetChild(i).GetComponent<OnClickDirectionChoice>().clicked = false;
+            UnitList[Turn].transform.GetChild(2).GetChild(i).GetComponent<OnClickDirectionChoice>().hovering = false;
+            UnitList[Turn].transform.GetChild(2).GetChild(i).GetComponent<SpriteRenderer>().color =
+                UnitList[Turn].transform.GetChild(2).GetChild(i).GetComponent<OnClickDirectionChoice>().StartColor;
+        }
+        
         UnitListRefresh(UnitList);
         Turn = (Turn + 1) % Units.Count();
 
@@ -179,20 +203,22 @@ public class CellGrid : MonoBehaviour
 
     public void BasicAttackSelection()
     {
-        CellGridState = new CellGridStateSkillSelected(this, "basicAttack", UnitList[Turn]);
+        CellGridState = new CellGridStateSkillSelected(this, "twinDaggers", UnitList[Turn]);
     }
 
     public void FireballSelection()
     {
         CellGridState = new CellGridStateSkillSelected(this, "fireball", UnitList[Turn]);
     }
-    public void BuffSelection()
-    {
-        CellGridState = new CellGridStateSkillSelected(this, "buff", UnitList[Turn]);
-    }
+
     public void MovekSelection()
     {
         CellGridState = new CellGridStateUnitSelected(this, UnitList[Turn]);
+    }
+
+    public void WeaknessTrapSelection()
+    {
+        CellGridState = new CellGridStateSkillSelected(this, "Weakness Trap", UnitList[Turn]);
     }
 
     /// <summary>
@@ -217,7 +243,6 @@ public class CellGrid : MonoBehaviour
 
         while (!directionChosen)
         {
-            Debug.Log("Still in Loop");
             foreach (GameObject dGO in directions)
             {
                 if (dGO.GetComponent<OnClickDirectionChoice>().clicked)

@@ -37,7 +37,7 @@ class CellGridStateUnitSelected : CellGridState
         else
         {
             var path = _unit.FindPath(_cellGrid.Cells, cell);
-            _unit.Move(cell,path);
+            _unit.Move(cell,path, _cellGrid.trapmanager);
             _cellGrid.CellGridState = new CellGridStateUnitSelected(_cellGrid, _unit);
         }
     }
