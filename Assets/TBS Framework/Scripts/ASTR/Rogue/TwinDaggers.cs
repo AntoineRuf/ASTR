@@ -78,6 +78,9 @@ public class TwinDaggers : Skill
 
     public override void Apply(Unit caster, Unit receiver)
     {
+        Animator anim = caster.GetComponentInChildren<Animator>();
+        anim.SetBool("Attack", true);
+        anim.SetBool("Idle", false);
         if (caster.Equals(receiver))
         {
             return;

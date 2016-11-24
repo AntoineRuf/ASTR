@@ -156,9 +156,17 @@ public abstract class Unit : MonoBehaviour
         Cell.IsTaken = false;
         Cell.Occupent = null;
         MarkAsDestroyed();
-        Destroy(gameObject);
+        Animator anim = GetComponentInChildren<Animator>();
+        anim.SetBool("Idle", false);
+        anim.SetBool("Dead", true);
+        StartCoroutine(DestroyPlayer());
     }
 
+    protected virtual IEnumerator DestroyPlayer()
+    {
+        yield return new WaitForSecondsRealtime(3.0f);
+        Destroy(gameObject);
+    }
     /// <summary>
     /// Method is called when unit is selected.
     /// </summary>
@@ -213,6 +221,7 @@ public abstract class Unit : MonoBehaviour
     // ------ ASRT
     public virtual void DealDamage2(Unit other)
     {
+        GetComponentInChildren<Animator>().SetBool("Attack", true);
         if (isMoving)
             return;
         other.Defend(this, AttackFactor);
@@ -236,6 +245,7 @@ public abstract class Unit : MonoBehaviour
                 UnitDestroyed.Invoke(this, new AttackEventArgs(other, this, damage));
             OnDestroyed();
         }
+
     }
 
     public virtual void Move(Cell destinationCell, List<Cell> path, TrapManager trapmanager)
@@ -290,7 +300,9 @@ public abstract class Unit : MonoBehaviour
     protected virtual IEnumerator MovementAnimation(List<Cell> path)
     {
         isMoving = true;
-
+        Animator anim = this.GetComponentInChildren<Animator>();
+        anim.SetBool("Idle", false);
+        anim.SetBool("Walk", true);
         path.Reverse();
         foreach (var cell in path)
         {
@@ -300,8 +312,9 @@ public abstract class Unit : MonoBehaviour
                 yield return 0;
             }
         }
-
         isMoving = false;
+        anim.SetBool("Walk", false);
+        anim.SetBool("Idle", true);
     }
 
     ///<summary>
