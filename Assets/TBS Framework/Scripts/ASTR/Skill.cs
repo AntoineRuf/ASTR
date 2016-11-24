@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 /// <summary>
 /// Active Skills are used by units, and are the bread and butter of combat.
 /// </summary>
@@ -51,4 +52,6 @@ public abstract class Skill
     public virtual void Apply(Unit caster, List<Cell> receivers, CellGrid cellGrid) { }
 
     public virtual void Apply(Unit caster, Cell receiver, CellGrid cellGrid) { }
+
+    
 }

@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Calculs.cs" />
+    <Compile Include="Assets\CharacterPack6\Sample\Sample.cs" />
     <Compile Include="Assets\FPSDisplay.cs" />
     <Compile Include="Assets\SimpleDragAndDrop\Scripts\DragAndDropCell.cs" />
     <Compile Include="Assets\SimpleDragAndDrop\Scripts\DragAndDropItem.cs" />

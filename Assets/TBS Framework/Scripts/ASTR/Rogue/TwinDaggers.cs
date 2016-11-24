@@ -78,6 +78,9 @@ public class TwinDaggers : Skill
 
     public override void Apply(Unit caster, Unit receiver)
     {
+        Animator anim = caster.GetComponentInChildren<Animator>();
+        anim.SetBool("Attack", true);
+        anim.SetBool("Idle", false);
         if (caster.Equals(receiver))
         {
             return;
@@ -86,6 +89,11 @@ public class TwinDaggers : Skill
         caster.DealDamage2(receiver);
         receiver.printDamage(caster.AttackFactor);
         caster.ActionPoints--;
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Attack") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+        {
+            anim.SetBool("Idle", true);
+            anim.SetBool("Attack", false);
+        }
     }
 
     public override void Apply (Unit caster, List<Unit> receivers)

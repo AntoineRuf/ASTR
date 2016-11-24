@@ -10,9 +10,11 @@ public class BasicAttack : Skill {
             return;
         }
         Debug.Log("CRITICAL INT : " + caster.FacingComparison(receiver));
+        caster.GetComponentInChildren<Animator>().SetBool("Attack", true);
         caster.DealDamage(receiver);
         receiver.printDamage(caster.AttackFactor);
         caster.ActionPoints--;
+
     }
 
     public override void Apply(Unit caster, Cell receiver, CellGrid cellGrid) { return; }
