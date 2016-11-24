@@ -36,7 +36,7 @@ public class TwinDaggers : Skill
 
     public override int Cooldown
     {
-        get { return 0; }
+        get { return 2; } //testing purposes
         set { }
     }
 
@@ -82,10 +82,10 @@ public class TwinDaggers : Skill
         {
             return;
         }
-        Debug.Log("CRITICAL INT : " + caster.FacingComparison(receiver));
         caster.DealDamage2(receiver);
         receiver.printDamage(caster.AttackFactor);
         caster.ActionPoints--;
+        SetCooldown();
     }
 
     public override void Apply (Unit caster, List<Unit> receivers)
@@ -95,6 +95,7 @@ public class TwinDaggers : Skill
             caster.DealDamage2(receiver);
             receiver.printDamage(caster.AttackFactor);
         }
+        SetCooldown();
     }
 
     public override void Apply (Unit caster, List<Cell> cells, CellGrid cellGrid)
@@ -107,6 +108,7 @@ public class TwinDaggers : Skill
                 currentCell.Occupent.printDamage(caster.AttackFactor);
             }
         }
+        SetCooldown();
     }
 
     public override void Apply(Unit caster, Cell receiver, CellGrid cellGrid) { return; }

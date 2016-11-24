@@ -1,7 +1,29 @@
 ﻿class DefenceBuff : Buff
 {
     private int _factor;
+    public string Tooltip
+    {
+        get
+        {
+            return "Target get seuf protection";
+        }
+        set
+        {
 
+        }
+    }
+
+    public string Name
+    {
+        get
+        {
+            return "DefenceBuff";
+        }
+        set
+        {
+
+        }
+    }
     public DefenceBuff(int duration, int factor)
     {
         Duration = duration;

@@ -36,7 +36,6 @@ public abstract class CellGridState
     }
     public virtual void OnCellSelected(Cell cell)
     {
-        //Debug.Log("Selected Cell : " + cell.OffsetCoord + ConvertToOffsetCoord(ConvertToCube(cell.OffsetCoord)));
         cell.MarkAsHighlighted();
     }
     public virtual void OnCellClicked(Cell cell)

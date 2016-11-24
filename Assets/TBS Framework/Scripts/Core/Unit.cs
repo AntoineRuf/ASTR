@@ -38,7 +38,7 @@ public abstract class Unit : MonoBehaviour
 
     public List<Buff> Buffs { get; private set; }
 
-    public int TotalHitPoints { get; private set; }
+    public int TotalHitPoints { get; set; }
     protected int TotalMovementPoints;
     protected int TotalActionPoints;
 
@@ -47,10 +47,7 @@ public abstract class Unit : MonoBehaviour
     /// </summary>
     public Cell Cell { get; set; }
     public List<Skill> Skills;
-
-    public string ClassName;
-    public Class Class;
-
+    public string UnitName;
     public int HitPoints;
     public int AttackRange;
     public int AttackFactor;
@@ -106,15 +103,8 @@ public abstract class Unit : MonoBehaviour
     public virtual void Initialize()
     {
         Buffs = new List<Buff>();
-
+        Skills = new List<Skill>();
         UnitState = new UnitStateNormal(this);
-        Class = ClassSelection(ClassName);
-        TotalHitPoints += Class.HP;
-        HitPoints = TotalHitPoints;
-        TotalMovementPoints += Class.MP;
-        TotalActionPoints = 1;
-        AttackFactor += Class.ATK;
-        Initiative += Class.INIT;
     }
 
     protected virtual void OnMouseDown()
@@ -596,6 +586,18 @@ public abstract class Unit : MonoBehaviour
 
     }
 
+    public void BuffUpdate()
+    {
+        for (int i = 0; i < Buffs.Count(); ++i)
+        {
+            Buffs[i].Duration--;
+            if (Buffs[i].Duration == 0 )
+            {
+                Buffs.Remove(Buffs[i]);
+            }
+        }
+    }
+
     /// <summary>
     /// Convert OffsetCoord to Cube
     /// </summary>
@@ -615,20 +617,6 @@ public abstract class Unit : MonoBehaviour
         return new Vector3(x, y, z);
     }
 
-    Class ClassSelection(string className)
-    {
-        switch (className)
-        {
-            case "Rogue":
-                return new Rogue();
-            case "Warrior":
-                return new Warrior();
-            case "Mage":
-                return new Mage();
-            default :
-                throw new Exception("Error in Class Name");
-        }
-    }
 }
 
 public class MovementEventArgs : EventArgs

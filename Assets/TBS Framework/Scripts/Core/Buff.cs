@@ -3,6 +3,8 @@
 /// </summary>
 public interface Buff
 {
+    string Tooltip { get; set; }
+    string Name { get; set; }
     /// <summary>
     /// Determines how long the buff should last (expressed in turns). If set to negative number, buff will be permanent.
     /// </summary>

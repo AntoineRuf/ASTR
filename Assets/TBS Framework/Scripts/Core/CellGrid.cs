@@ -4,6 +4,9 @@ using System.Linq;
 using System;
 using System.Collections;
 using Assets.TBS_Framework.Scripts.ASTR;
+using UnityEngine.UI;
+using UnityEditor;
+using UnityEngine.EventSystems;
 
 /// <summary>
 /// CellGrid class keeps track of the game, stores cells, units and players objects. It starts the game and makes turn transitions. 
@@ -14,7 +17,19 @@ public class CellGrid : MonoBehaviour
     public event EventHandler GameStarted;
     public event EventHandler GameEnded;
     public event EventHandler TurnEnded;
-    
+
+
+    // UI objects declaration
+    GameObject canvas;
+    Transform SkillPanel;
+    Transform CooldownPanel;
+    Transform BuffPanel;
+    Transform FullHealthbar;
+    Transform EmptyHealthbar;
+    Transform HealthText;
+    Transform MouseOverPannel;
+    // ---
+
     private CellGridState _cellGridState;//The grid delegates some of its behaviours to cellGridState object.
     public CellGridState CellGridState
     {
@@ -53,6 +68,16 @@ public class CellGrid : MonoBehaviour
 
     void Start()
     {
+        // UI initialization
+        canvas = GameObject.Find("UnitCanvas");
+        SkillPanel = canvas.transform.FindChild("SkillPanel");
+        CooldownPanel = canvas.transform.FindChild("CooldownPanel");
+        BuffPanel = canvas.transform.FindChild("BuffsPanel");
+        FullHealthbar = canvas.transform.FindChild("Healthbar").transform.FindChild("fullHealthbar");
+        EmptyHealthbar = canvas.transform.FindChild("Healthbar").transform.FindChild("emptyHealthbar");
+        HealthText = canvas.transform.FindChild("Healthbar").transform.FindChild("HealthText");
+        MouseOverPannel = canvas.transform.FindChild("MouseOverPannel");
+        // ---
         Turn = 0;
         trapmanager = new TrapManager();
         Directions.Initialize(); // initialize static class Directions
@@ -154,6 +179,7 @@ public class CellGrid : MonoBehaviour
 
         Units.FindAll(u => u.PlayerNumber.Equals(CurrentPlayerNumber)).ForEach(u => { u.OnTurnStart(); });
         Players.Find(p => p.PlayerNumber.Equals(CurrentPlayerNumber)).Play(this);
+        UpdateUnitUI();
     }
     /// <summary>
     /// Method makes turn transitions. It is called by player at the end of his turn.
@@ -176,6 +202,9 @@ public class CellGrid : MonoBehaviour
         
         UnitListRefresh(UnitList);
         Turn = (Turn + 1) % Units.Count();
+
+        // updating the unitGUI
+        UpdateUnitUI();
 
         if (Units.Select(u => u.PlayerNumber).Distinct().Count() == 1)
         {
@@ -202,23 +231,31 @@ public class CellGrid : MonoBehaviour
     }
 
     public void BasicAttackSelection()
-    {
-        CellGridState = new CellGridStateSkillSelected(this, "twinDaggers", UnitList[Turn]);
+    { 
+        //CellGridState = new CellGridStateSkillSelected(this, "twinDaggers", UnitList[Turn]);
     }
 
     public void FireballSelection()
     {
-        CellGridState = new CellGridStateSkillSelected(this, "fireball", UnitList[Turn]);
+        //CellGridState = new CellGridStateSkillSelected(this, "fireball", UnitList[Turn]);
     }
 
     public void MovekSelection()
     {
-        CellGridState = new CellGridStateUnitSelected(this, UnitList[Turn]);
+        //CellGridState = new CellGridStateUnitSelected(this, UnitList[Turn]);
     }
 
     public void WeaknessTrapSelection()
     {
-        CellGridState = new CellGridStateSkillSelected(this, "Weakness Trap", UnitList[Turn]);
+        //CellGridState = new CellGridStateSkillSelected(this, "Weakness Trap", UnitList[Turn]);
+    }
+
+    public void OnSkillClicked(Skill skill, int cooldown)
+    {
+        if (cooldown != 0)
+            CellGridState = new CellGridStateWaitingForInput(this);
+        else 
+            CellGridState = new CellGridStateSkillSelected(this, skill, UnitList[Turn]);
     }
 
     /// <summary>
@@ -300,5 +337,167 @@ public class CellGrid : MonoBehaviour
         return resultList;*/
     }
 
+    // UI FUNCTIONS
+    private void UpdateUnitUI()
+    {
+        Unit currentUnit = UnitList[Turn];
+        //updating name
+        NameUpdate(currentUnit, canvas.transform.FindChild("UnitName").GetComponent<Text>());
+        //updating portrait
 
+        //updating skill lists & cooldowns
+        SkillsUpdate(currentUnit);
+        
+        //updating buffs list
+        BuffsUpdate(currentUnit, BuffPanel);
+
+        //updating Healthbar
+        HealthbarUpdate(currentUnit, HealthText, FullHealthbar);
+
+
+    }
+
+    public void MouseEnterUnitUI()
+    {
+        MouseOverPannel.gameObject.SetActive(true);
+    }
+
+    public void MouseExitUnitUI()
+    {
+        MouseOverPannel.gameObject.SetActive(false);
+    }
+
+    public void AddSkillCooldownGUI(int childNumber)
+    {
+        Unit currentUnit = UnitList[Turn];
+        GameObject canvas = GameObject.Find("CurrentUnitCanvas");
+        // skill is disabled
+        CooldownPanel.GetChild(childNumber).GetComponent<Button>().interactable = false;
+        CooldownPanel.GetChild(childNumber).GetComponent<Image>().color = new Color(171, 171, 171, 168);
+        CooldownPanel.GetChild(childNumber).GetComponent<Image>().sprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/TBS Framework/SkillsImages/CD" + currentUnit.Skills[childNumber].CurrentCooldown + ".png");
+    }
+
+    public void printBuffTooltip (string text, int duration, Image parent)
+    {
+        Text tooltip = Instantiate(AssetDatabase.LoadAssetAtPath<Text>("Assets/TBS Framework/Prefabs/ASTR/Tooltip.prefab")) as Text;
+        tooltip.GetComponentInChildren<Text>().text = string.Format("Duration : {0}. {1}", duration, text);
+        tooltip.transform.SetParent(parent.transform);
+        tooltip.rectTransform.localPosition = new Vector3(165, -70, 0);
+    }
+
+    public void printSkillTooltip(string text, int duration, Transform parent)
+    {
+        Text tooltip = Instantiate(AssetDatabase.LoadAssetAtPath<Text>("Assets/TBS Framework/Prefabs/ASTR/Tooltip.prefab")) as Text;
+        tooltip.GetComponentInChildren<Text>().text = string.Format("CD : {0}. {1}", duration, text);
+        tooltip.transform.SetParent(parent.transform);
+        tooltip.rectTransform.localPosition = new Vector3(220, -35, 0);
+    }
+
+    public void deleteBuffTooltip(Image parent)
+    {
+        Transform child = parent.transform.GetChild(0);
+        Destroy(child.gameObject);
+    }
+
+    public void deleteSkillTooltip(Transform parent)
+    {
+        Transform child = parent.transform.GetChild(0);
+        Destroy(child.gameObject);
+    }
+
+    public void BuffsUpdate(Unit currentUnit, Transform BuffPanel)
+    {
+        foreach (Transform child in BuffPanel.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        for (int i = 0; i < currentUnit.Buffs.Count(); ++i)
+        {
+            Image BuffImage = Instantiate(AssetDatabase.LoadAssetAtPath<Image>("Assets/TBS Framework/Prefabs/ASTR/" + currentUnit.Buffs[i].Name + ".prefab")) as Image;
+            BuffImage.rectTransform.SetParent(BuffPanel);
+            BuffImage.rectTransform.localPosition = new Vector3(0, 0, 0);
+            BuffImage.rectTransform.offsetMax = new Vector2(0, 0);
+            BuffImage.rectTransform.offsetMin = new Vector2(0, 0);
+            BuffImage.rectTransform.anchorMin = new Vector2(i * 0.14f, 0.1f);
+            BuffImage.rectTransform.anchorMax = new Vector2((i * 0.14f) + 0.13f, 1f);
+
+            // buffs tooltips
+            EventTrigger trigger = BuffImage.GetComponent<EventTrigger>();
+            EventTrigger.Entry entry = new EventTrigger.Entry();
+            entry.eventID = EventTriggerType.PointerEnter;
+            string currentBuffTooltip = currentUnit.Buffs[i].Tooltip;
+            int currentBuffDuration = currentUnit.Buffs[i].Duration;
+            entry.callback.AddListener((eventData) => { printBuffTooltip(currentBuffTooltip, currentBuffDuration, BuffImage); });
+            trigger.triggers.Add(entry);
+
+            EventTrigger.Entry exit = new EventTrigger.Entry();
+            exit.eventID = EventTriggerType.PointerExit;
+            exit.callback.AddListener((eventData) => { deleteBuffTooltip(BuffImage); });
+            trigger.triggers.Add(exit);
+        }
+    }
+
+    public void SkillsUpdate(Unit currentUnit)
+    {
+        for (int i = 0; i < currentUnit.Skills.Count(); ++i)
+        {
+            // setting the skill images
+            SkillPanel.GetChild(i).GetComponent<Image>().sprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/TBS Framework/SkillsImages/" + currentUnit.Skills[i].Name + ".png");
+            // updating skills cooldowns
+            if (currentUnit.Skills[i].CurrentCooldown > 0)
+            {
+                currentUnit.Skills[i].CurrentCooldown--;
+                if (currentUnit.Skills[i].CurrentCooldown == 0) // skill is enabled
+                {
+                    CooldownPanel.GetChild(i).GetComponent<Button>().interactable = true;
+                    CooldownPanel.GetChild(i).GetComponent<Image>().sprite = null;
+                    CooldownPanel.GetChild(i).GetComponent<Image>().color = new Color(171, 171, 171, 0);
+                }
+                else { // skill is disabled
+                    CooldownPanel.GetChild(i).GetComponent<Button>().interactable = false;
+                    CooldownPanel.GetChild(i).GetComponent<Image>().color = new Color(171, 171, 171, 168);
+                    CooldownPanel.GetChild(i).GetComponent<Image>().sprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/TBS Framework/SkillsImages/CD" + currentUnit.Skills[i].CurrentCooldown + ".png");
+                }
+            }
+            else // skill is enabled
+            {
+                CooldownPanel.GetChild(i).GetComponent<Button>().interactable = true;
+                CooldownPanel.GetChild(i).GetComponent<Image>().sprite = null;
+                CooldownPanel.GetChild(i).GetComponent<Image>().color = new Color(171, 171, 171, 0);
+            }
+            Skill newSkill = currentUnit.Skills[i];
+            int newSkillCD = newSkill.CurrentCooldown;
+            // setting the OnClick() method for each skill
+            CooldownPanel.GetChild(i).GetComponent<Button>().onClick.AddListener(() => OnSkillClicked(newSkill, newSkillCD));
+            // skills tooltips
+            EventTrigger trigger = CooldownPanel.GetChild(i).GetComponent<EventTrigger>();
+            EventTrigger.Entry entry = new EventTrigger.Entry();
+            entry.eventID = EventTriggerType.PointerEnter;
+            string currentSkillTooltip = currentUnit.Skills[i].Name;
+            int currentSkillCD = currentUnit.Skills[i].Cooldown;
+            Transform currentSkillObject = SkillPanel.GetChild(i);
+            entry.callback.AddListener((eventData) => { printSkillTooltip(currentSkillTooltip, currentSkillCD, currentSkillObject); });
+            trigger.triggers.Add(entry);
+
+            EventTrigger.Entry exit = new EventTrigger.Entry();
+            exit.eventID = EventTriggerType.PointerExit;
+            exit.callback.AddListener((eventData) => { deleteSkillTooltip(currentSkillObject); });
+            trigger.triggers.Add(exit);
+        }
+    }
+
+    public void HealthbarUpdate(Unit currentUnit, Transform HealthText, Transform FullHealthbar)
+    {
+        float hpScale = (float)currentUnit.HitPoints / currentUnit.TotalHitPoints;
+        HealthText.GetComponent<Text>().text = string.Format("{0} {1} {2}", currentUnit.HitPoints, "/", currentUnit.TotalHitPoints);
+        FullHealthbar.GetComponent<Image>().rectTransform.localScale = new Vector3(hpScale, 1, 1);
+    }
+
+    public void NameUpdate(Unit currentUnit, Text textComponent)
+    {
+        textComponent.text = currentUnit.UnitName;
+    }
+
+    // END OF UI FUNCTIONS
 }

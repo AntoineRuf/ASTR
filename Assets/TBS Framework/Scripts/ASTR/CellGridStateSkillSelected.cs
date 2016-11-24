@@ -14,8 +14,6 @@ class CellGridStateSkillSelected : CellGridState
     private List<Cell> _cellsAffected;
     private List<Skill> _skills;
 
-    private bool _targetable;
-
     public override void OnStateEnter()
     {
         if (_unit.ActionPoints <= 0) return;
@@ -74,32 +72,14 @@ class CellGridStateSkillSelected : CellGridState
         }
     }
 
-    public CellGridStateSkillSelected(CellGrid cellGrid, string skillName, Unit unit) : base(cellGrid)
+    public CellGridStateSkillSelected(CellGrid cellGrid, Skill skill, Unit unit) : base(cellGrid)
     {
         _unitsInRange = new List<Unit>();
         _unitsAffected = new List<Unit>();
         _cellsInRange = new List<Cell>();
         _cellsAffected = new List<Cell>();
     _unit = unit;
-        if (skillName.Equals("basicAttack")) {
-            _skill = new BasicAttack();
-            _targetable = _skill.CanTargetEmptyCell;
-        }
-        if (skillName.Equals("fireball"))
-        {
-            _skill = new Fireball();
-            _targetable = true;
-        }
-        if (skillName.Equals("twinDaggers"))
-        {
-            _skill = new TwinDaggers();
-            _targetable = true;
-        }
-        if (skillName.Equals("Weakness Trap"))
-        {
-            _skill = new WeaknessTrapSkill();
-            _targetable = true;
-        }
+        _skill = skill;
     }
 
     public override void OnUnitClicked(Unit unit)
@@ -111,6 +91,7 @@ class CellGridStateSkillSelected : CellGridState
         {
             Debug.Log("Units affected : " + _unitsAffected.Count());    
             _skill.Apply(_unit, _unitsAffected);
+            _cellGrid.AddSkillCooldownGUI(_unit.Skills.FindIndex(s => (s.Name == _skill.Name)));
             _cellGrid.EndTurn(); // Add rogue condition here
         }
         
@@ -121,6 +102,7 @@ class CellGridStateSkillSelected : CellGridState
         if (_unit.ActionPoints > 0 && _cellsInRange.Contains(cell) && _skill.CanTargetEmptyCell)
         {
             _skill.Apply(_unit, _cellsAffected, _cellGrid);
+            _cellGrid.AddSkillCooldownGUI(_unit.Skills.FindIndex(s => (s.Name == _skill.Name)));
             _cellGrid.EndTurn(); // Add rogue condition here
         }
         else if (_cellsInRange.Contains(cell)) { }

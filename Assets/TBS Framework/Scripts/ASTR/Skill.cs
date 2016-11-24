@@ -5,6 +5,11 @@ using System.Collections.Generic;
 /// </summary>
 public abstract class Skill
 {
+
+    public Skill()
+    {
+        CurrentCooldown = 0;
+    }
     public virtual string Name { get; set; }
 
     // The skill's minimum casting range, in number of tiles.
@@ -21,6 +26,8 @@ public abstract class Skill
 
     // The skill cooldown time, in number of rounds.
     public virtual int Cooldown { get; set; }
+
+    public virtual int CurrentCooldown { get; set; }
 
     // The Skill AoE Range, in number of tiles
     public virtual int AoERange { get; set; }
@@ -51,4 +58,9 @@ public abstract class Skill
     public virtual void Apply(Unit caster, List<Cell> receivers, CellGrid cellGrid) { }
 
     public virtual void Apply(Unit caster, Cell receiver, CellGrid cellGrid) { }
+
+    public virtual void SetCooldown()
+    {
+        CurrentCooldown = Cooldown;
+    }
 }

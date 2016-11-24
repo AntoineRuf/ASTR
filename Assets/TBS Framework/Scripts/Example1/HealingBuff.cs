@@ -4,6 +4,29 @@ class HealingBuff : Buff
 {
     private int _healingFactor;
 
+    public string Tooltip
+    {
+        get
+        {
+            return "Target get seuf protection";
+        }
+        set
+        {
+
+        }
+    }
+
+    public string Name
+    {
+        get
+        {
+            return "HealingBuff";
+        }
+        set
+        {
+
+        }
+    }
     public HealingBuff(int duration, int healingFactor)
     {
         _healingFactor = healingFactor;
