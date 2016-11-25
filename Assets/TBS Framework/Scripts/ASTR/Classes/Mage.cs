@@ -13,10 +13,12 @@ public class Mage : Unit
         HitPoints = TotalHitPoints;
         TotalMovementPoints = 3;
         TotalActionPoints = 1;
-        AttackFactor = 18;
+        AttackFactor = 1;
+        DefenceFactor = 1;
         Initiative = 60;
         MovementSpeed = 20;
         Image = "Mage";
+        CCImmunity = 0;
         transform.position += new Vector3(0, 0, -1);
 
     }

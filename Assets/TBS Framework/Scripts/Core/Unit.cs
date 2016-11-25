@@ -39,7 +39,7 @@ public abstract class Unit : MonoBehaviour
     public List<Buff> Buffs { get; private set; }
 
     public int TotalHitPoints { get; set; }
-    protected int TotalMovementPoints;
+    public int TotalMovementPoints;
     protected int TotalActionPoints;
 
     /// <summary>
@@ -50,10 +50,11 @@ public abstract class Unit : MonoBehaviour
     public string UnitName;
     public int HitPoints;
     public int AttackRange;
-    public int AttackFactor;
-    public int DefenceFactor;
+    public float AttackFactor;
+    public float DefenceFactor;
     public int Initiative;
     public string Image;
+    public int CCImmunity;
     /// <summary>
     /// The different directions a unit can point to
     /// </summary>
@@ -66,7 +67,7 @@ public abstract class Unit : MonoBehaviour
         down_left,
         up_left
     };
-    public _directions Facing; 
+    public _directions Facing;
     /// <summary>
     /// Determines how far on the grid the unit can move.
     /// </summary>
@@ -99,7 +100,7 @@ public abstract class Unit : MonoBehaviour
     private static IPathfinding _pathfinder = new AStarPathfinding();
 
     /// <summary>
-    /// Method called after object instantiation to initialize fields etc. 
+    /// Method called after object instantiation to initialize fields etc.
     /// </summary>
     public virtual void Initialize()
     {
@@ -211,39 +212,41 @@ public abstract class Unit : MonoBehaviour
 
         MarkAsAttacking(other);
         ActionPoints--;
-        other.Defend(this, AttackFactor);
+        other.Defend(this, 1);
 
         if (ActionPoints == 0)
         {
             SetState(new UnitStateMarkedAsFinished(this));
             MovementPoints = 0;
-        }  
+        }
     }
-    // ------ ASRT
-    public virtual void DealDamage2(Unit other)
+    // ------ ASTR
+    public virtual void DealDamage2(Unit other, int damage)
     {
-        GetComponentInChildren<Animator>().SetBool("Attack", true);
         if (isMoving)
             return;
-        other.Defend(this, AttackFactor);
+        int dealtDamage = (int)Mathf.Floor(damage * AttackFactor);
+        other.Defend(this, dealtDamage);
     }
     // ------------------
 
     /// <summary>
-    /// Attacking unit calls Defend method on defending unit. 
+    /// Attacking unit calls Defend method on defending unit.
     /// </summary>
-    protected virtual void Defend(Unit other, int damage)
+    protected virtual void Defend(Unit other, int dealtDamage)
     {
         MarkAsDefending(other);
-        HitPoints -= Mathf.Clamp(damage - DefenceFactor, 1, damage);  //Damage is calculated by subtracting attack factor of attacker and defence factor of defender. If result is below 1, it is set to 1.
-                                                                      //This behaviour can be overridden in derived classes.
+        int receivedDamage = (int)Mathf.Floor (dealtDamage / DefenceFactor);
+        HitPoints -= receivedDamage;
+        printDamage(receivedDamage);
+
         if (UnitAttacked != null)
-            UnitAttacked.Invoke(this, new AttackEventArgs(other, this, damage));
+            UnitAttacked.Invoke(this, new AttackEventArgs(other, this, receivedDamage));
 
         if (HitPoints <= 0)
         {
             if (UnitDestroyed != null)
-                UnitDestroyed.Invoke(this, new AttackEventArgs(other, this, damage));
+                UnitDestroyed.Invoke(this, new AttackEventArgs(other, this, receivedDamage));
             OnDestroyed();
         }
 
@@ -391,7 +394,7 @@ public abstract class Unit : MonoBehaviour
     public abstract void MarkAsAttacking(Unit other);
     /// <summary>
     /// Gives visual indication that the unit is destroyed. It gets called right before the unit game object is
-    /// destroyed, so either instantiate some new object to indicate destruction or redesign Defend method. 
+    /// destroyed, so either instantiate some new object to indicate destruction or redesign Defend method.
     /// </summary>
     public abstract void MarkAsDestroyed();
 
@@ -417,7 +420,7 @@ public abstract class Unit : MonoBehaviour
     public abstract void UnMark();
 
 
-    // ---------------------------------- ASTR 
+    // ---------------------------------- ASTR
 
     /// <summary>
     /// Method returns currentUnit in unitList
@@ -446,7 +449,7 @@ public abstract class Unit : MonoBehaviour
     }
 
     /// <summary>
-    /// Method returns the next Unit index in the unitList 
+    /// Method returns the next Unit index in the unitList
     /// </summary>
     public int FindNextIndex(List<Unit> unitList)
     {
@@ -478,7 +481,7 @@ public abstract class Unit : MonoBehaviour
     }
 
     /// <summary>
-    /// Change the direction the Unit is facing 
+    /// Change the direction the Unit is facing
     /// </summary>
     public void ChangeFacing(_directions dir)
     {
@@ -487,7 +490,7 @@ public abstract class Unit : MonoBehaviour
         //disable facing points gameObjects
         transform.GetChild(2).gameObject.SetActive(false);
 
-        //change FacileTile     
+        //change FacileTile
         transform.GetChild(3).GetComponent<FacingTile>().ChangeFacingTile(dir);
     }
 
@@ -504,7 +507,7 @@ public abstract class Unit : MonoBehaviour
         switch(defender.Facing)
         {
             case _directions.up:
-                
+
                 if (attackerCoord.y > defenderCoord.y) // attacker behind defender
                 {
                     if (isBehind(defender)) return backstab;
@@ -515,7 +518,7 @@ public abstract class Unit : MonoBehaviour
                 if (attackerCoord.x < defenderCoord.x || attackerCoord.y > defenderCoord.y ) // attacker behind defender
                 {
                     if (isBehind(defender)) return backstab;
-                    else return critical;                   
+                    else return critical;
                 }
                 break;
             case _directions.up_left:

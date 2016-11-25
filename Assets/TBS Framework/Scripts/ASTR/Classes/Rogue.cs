@@ -13,16 +13,18 @@ public class Rogue : Unit
         HitPoints = TotalHitPoints;
         TotalMovementPoints = 4;
         TotalActionPoints = 1;
-        AttackFactor = 20;
+        AttackFactor = 1;
+        DefenceFactor = 1;
         Initiative = 150;
         MovementSpeed = 20;
         transform.position += new Vector3(0, 0, -1);
         Image = "Rogue";
+        CCImmunity = 0;
 
         // TESTING PURPOSES
         Skills.Add(new TwinDaggers());
         Buffs.Add(new TestBuff(2, 15));
-        Buffs.Add(new TestBuff(1, 2));  
+        Buffs.Add(new TestBuff(1, 2));
     }
 
     public override bool IsCellMovableTo(Cell cell)

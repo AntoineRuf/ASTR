@@ -13,12 +13,19 @@ public class Warrior : Unit
         HitPoints = TotalHitPoints;
         TotalMovementPoints = 3;
         TotalActionPoints = 1;
-        AttackFactor = 20;
+        AttackFactor = 1;
+        DefenceFactor = 1;
         Initiative = 50;
         MovementSpeed = 20;
         Image = "Warrior";
         transform.position += new Vector3(0, 0, -1);
-        Skills.Add(new Fireball());
+        CCImmunity = 0;
+
+        // **TODO** Faire fonctionner les buffs & knockbacks;
+        // **TODO** Trouver pourquoi Whirlwind est inlancable;
+        // Skills.Add(new Galvanize());
+        // Skills.Add(new SecondWind());
+        Skills.Add(new Whirlwind());
     }
 
     public override bool IsCellMovableTo(Cell cell)

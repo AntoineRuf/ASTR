@@ -12,7 +12,7 @@ public class BasicAttack : Skill {
         Debug.Log("CRITICAL INT : " + caster.FacingComparison(receiver));
         caster.GetComponentInChildren<Animator>().SetBool("Attack", true);
         caster.DealDamage(receiver);
-        receiver.printDamage(caster.AttackFactor);
+        receiver.printDamage(10);
         caster.ActionPoints--;
 
     }
