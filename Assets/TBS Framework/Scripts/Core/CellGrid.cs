@@ -28,6 +28,7 @@ public class CellGrid : MonoBehaviour
     Transform EmptyHealthbar;
     Transform HealthText;
     Transform MouseOverPannel;
+    Transform Portrait;
     // ---
 
     private CellGridState _cellGridState;//The grid delegates some of its behaviours to cellGridState object.
@@ -77,6 +78,7 @@ public class CellGrid : MonoBehaviour
         EmptyHealthbar = canvas.transform.FindChild("Healthbar").transform.FindChild("emptyHealthbar");
         HealthText = canvas.transform.FindChild("Healthbar").transform.FindChild("HealthText");
         MouseOverPannel = canvas.transform.FindChild("MouseOverPannel");
+        Portrait = canvas.transform.FindChild("Portrait");
         // ---
         Turn = 0;
         trapmanager = new TrapManager();
@@ -242,7 +244,7 @@ public class CellGrid : MonoBehaviour
 
     public void MovekSelection()
     {
-        //CellGridState = new CellGridStateUnitSelected(this, UnitList[Turn]);
+        CellGridState = new CellGridStateUnitSelected(this, UnitList[Turn]);
     }
 
     public void WeaknessTrapSelection()
@@ -330,11 +332,11 @@ public class CellGrid : MonoBehaviour
     public List<Unit> UnitListRefresh(List<Unit> unitList)
     {
         return UnitListSort(Units);
-        /*List<Unit> resultList = unitList;
+        List<Unit> resultList = unitList;
         Unit itemToRemove = unitList.SingleOrDefault(u => u.Initiative == 0);
         if (itemToRemove != null)
             resultList.Remove(itemToRemove);
-        return resultList;*/
+        return resultList;
     }
 
     // UI FUNCTIONS
@@ -344,6 +346,7 @@ public class CellGrid : MonoBehaviour
         //updating name
         NameUpdate(currentUnit, canvas.transform.FindChild("UnitName").GetComponent<Text>());
         //updating portrait
+        PortraitUpdate(currentUnit, Portrait, currentUnit.TeamNumber);
 
         //updating skill lists & cooldowns
         SkillsUpdate(currentUnit);
@@ -429,6 +432,7 @@ public class CellGrid : MonoBehaviour
             string currentBuffTooltip = currentUnit.Buffs[i].Tooltip;
             int currentBuffDuration = currentUnit.Buffs[i].Duration;
             entry.callback.AddListener((eventData) => { printBuffTooltip(currentBuffTooltip, currentBuffDuration, BuffImage); });
+            trigger.triggers.Clear();
             trigger.triggers.Add(entry);
 
             EventTrigger.Entry exit = new EventTrigger.Entry();
@@ -478,6 +482,7 @@ public class CellGrid : MonoBehaviour
             int currentSkillCD = currentUnit.Skills[i].Cooldown;
             Transform currentSkillObject = SkillPanel.GetChild(i);
             entry.callback.AddListener((eventData) => { printSkillTooltip(currentSkillTooltip, currentSkillCD, currentSkillObject); });
+            trigger.triggers.Clear();
             trigger.triggers.Add(entry);
 
             EventTrigger.Entry exit = new EventTrigger.Entry();
@@ -497,6 +502,19 @@ public class CellGrid : MonoBehaviour
     public void NameUpdate(Unit currentUnit, Text textComponent)
     {
         textComponent.text = currentUnit.UnitName;
+    }
+
+    public void PortraitUpdate(Unit currentUnit, Transform Portrait, int teamNumber)
+    {
+        Portrait.FindChild("Image").GetComponent<Image>().sprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/TBS Framework/ASTR/Portraits/" + currentUnit.Image + ".png");
+        if (teamNumber == currentUnit.TeamNumber)
+        {
+            Portrait.FindChild("Border").GetComponent<Image>().color = Color.blue; 
+        }
+        else
+        {
+            Portrait.FindChild("Border").GetComponent<Image>().color = Color.red;
+        }
     }
 
     // END OF UI FUNCTIONS

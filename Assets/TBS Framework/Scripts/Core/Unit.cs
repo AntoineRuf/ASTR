@@ -53,6 +53,7 @@ public abstract class Unit : MonoBehaviour
     public int AttackFactor;
     public int DefenceFactor;
     public int Initiative;
+    public string Image;
     /// <summary>
     /// The different directions a unit can point to
     /// </summary>
@@ -154,12 +155,12 @@ public abstract class Unit : MonoBehaviour
     protected virtual void OnDestroyed()
     {
         Cell.IsTaken = false;
-        Cell.Occupent = null;
         MarkAsDestroyed();
         Animator anim = GetComponentInChildren<Animator>();
         anim.SetBool("Idle", false);
         anim.SetBool("Dead", true);
         StartCoroutine(DestroyPlayer());
+        Cell.Occupent = null;
     }
 
     protected virtual IEnumerator DestroyPlayer()

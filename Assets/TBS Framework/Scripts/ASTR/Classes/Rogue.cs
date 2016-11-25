@@ -17,6 +17,7 @@ public class Rogue : Unit
         Initiative = 150;
         MovementSpeed = 20;
         transform.position += new Vector3(0, 0, -1);
+        Image = "Rogue";
 
         // TESTING PURPOSES
         Skills.Add(new TwinDaggers());

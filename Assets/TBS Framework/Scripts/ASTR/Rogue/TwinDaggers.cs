@@ -107,8 +107,8 @@ public class TwinDaggers : Skill
         {
             if (currentCell.Occupent != null)
             {
-                caster.DealDamage2(currentCell.Occupent);
                 currentCell.Occupent.printDamage(caster.AttackFactor);
+                caster.DealDamage2(currentCell.Occupent);
             }
         }
         SetCooldown();

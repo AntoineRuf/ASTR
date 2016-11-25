@@ -16,6 +16,7 @@ public class Warrior : Unit
         AttackFactor = 20;
         Initiative = 50;
         MovementSpeed = 20;
+        Image = "Warrior";
         transform.position += new Vector3(0, 0, -1);
         Skills.Add(new Fireball());
     }

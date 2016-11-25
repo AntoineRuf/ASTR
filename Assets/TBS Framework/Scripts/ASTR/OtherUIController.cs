@@ -64,6 +64,7 @@ class OtherUIController : MonoBehaviour
             CellGrid.HealthbarUpdate(sender as Unit, HealthbarText, HealthbarFull);
             CellGrid.NameUpdate(sender as Unit, UnitName.GetComponent<Text>());
             CellGrid.BuffsUpdate(sender as Unit, BuffPanel);
+            CellGrid.PortraitUpdate(sender as Unit, Portrait, CellGrid.UnitList[CellGrid.Turn].TeamNumber);
             CellGrid.MouseEnterUnitUI();
         }
         

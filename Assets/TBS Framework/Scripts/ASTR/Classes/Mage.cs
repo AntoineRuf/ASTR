@@ -16,7 +16,9 @@ public class Mage : Unit
         AttackFactor = 18;
         Initiative = 60;
         MovementSpeed = 20;
+        Image = "Mage";
         transform.position += new Vector3(0, 0, -1);
+
     }
 
     public override bool IsCellMovableTo(Cell cell)
