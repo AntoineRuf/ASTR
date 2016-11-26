@@ -159,8 +159,11 @@ class CellGridStateSkillSelected : CellGridState
     {
         if (_cellsInRange.Contains(unit.Cell))
         {
-            if (_skill.isAoE == 0) // spell cast is NOT an AoE
+            if (_skill.isAoE == 0)
+            { // spell cast is NOT an AoE
                 unit.Cell.MarkAsSkillRangeSelected();
+                _unitsAffected.Add(unit);
+            }
             else // spell cast is an AoE
             {
                 foreach (var currentCell in _cellGrid.Cells.FindAll(c => c.GetDistance(unit.Cell) <= _skill.AoERange))

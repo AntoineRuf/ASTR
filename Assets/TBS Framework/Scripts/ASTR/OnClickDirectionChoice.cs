@@ -6,28 +6,27 @@ using UnityEngine;
 
 class OnClickDirectionChoice : MonoBehaviour
 {
-    public Color StartColor;
-    public Color OnClickColor;
-    public Color OnMouseOverColor;
+    public Sprite Start;
+    public Sprite OnMouseOver;
     public bool hovering = false;
     public bool clicked = false;
 
     void OnMouseEnter()
     {
         hovering = true;
-        GetComponent<SpriteRenderer>().color = OnMouseOverColor;
+        GetComponent<SpriteRenderer>().sprite = OnMouseOver;
         //GetComponent<SpriteRenderer>().color = OnMouseOverColor;
     }
 
     void OnMouseExit()
     {
         hovering = false;
-        GetComponent<SpriteRenderer>().color = StartColor;
+        GetComponent<SpriteRenderer>().sprite = Start;
     }
 
     void OnMouseDown()
     {
-        GetComponent<SpriteRenderer>().color = OnClickColor;
+        //GetComponent<SpriteRenderer>().color = OnClickColor;
         clicked = true;
     }
         

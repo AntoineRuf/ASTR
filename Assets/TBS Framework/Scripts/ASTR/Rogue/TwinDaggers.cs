@@ -6,7 +6,7 @@ public class TwinDaggers : Skill
 
     public override string Name
     {
-        get { return "TwinDaggers"; }
+        get { return "Twin Daggers"; }
         set { }
     }
 
@@ -25,7 +25,7 @@ public class TwinDaggers : Skill
 
     public override int MinRange
     {
-        get { return 2; }
+        get { return 1; }
         set { base.MinRange = value;  }
     }
 
@@ -49,13 +49,13 @@ public class TwinDaggers : Skill
 
     public override int Cooldown
     {
-        get { return 2; } //testing purposes
+        get { return 0; } //testing purposes
         set { }
     }
 
     public override bool CanTargetEmptyCell
     {
-        get { return true; }//testing purpose
+        get { return false; }//testing purpose
         set { }
     }
 
@@ -67,7 +67,7 @@ public class TwinDaggers : Skill
 
     public override bool CanTargetAllies
     {
-        get { return false; } 
+        get { return true; } 
         set { }
     }
 
@@ -79,13 +79,13 @@ public class TwinDaggers : Skill
 
     public override int isAoE
     {
-        get { return 1; } //testing purpose
+        get { return 0; } //testing purpose
         set { }
     }
 
     public override int AoERange
     {
-        get { return 1; } //testing purpose
+        get { return 0; } //testing purpose
         set { }
     }
 
