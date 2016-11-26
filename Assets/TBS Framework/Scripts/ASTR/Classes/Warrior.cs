@@ -24,7 +24,7 @@ public class Warrior : Unit
         // **TODO** Faire fonctionner les buffs & knockbacks;
         // Skills.Add(new Galvanize());
         // Skills.Add(new SecondWind());
-        // Skills.Add(new AxeSlash());
+        Skills.Add(new AxeSlash());
         Skills.Add(new Whirlwind());
     }
 
