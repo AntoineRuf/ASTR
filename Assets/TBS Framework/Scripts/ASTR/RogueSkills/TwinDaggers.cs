@@ -6,7 +6,7 @@ public class TwinDaggers : Skill
 
     public override string Name
     {
-        get { return "TwinDaggers"; }
+        get { return "Twin Daggers"; }
         set { }
     }
 

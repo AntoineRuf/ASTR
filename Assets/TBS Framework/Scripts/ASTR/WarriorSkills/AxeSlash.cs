@@ -6,7 +6,7 @@ public class AxeSlash : Skill
 
     public override string Name
     {
-        get { return "AxeSlash"; }
+        get { return "Axe Slash"; }
         set { }
     }
 

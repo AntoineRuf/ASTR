@@ -25,6 +25,7 @@ public class Warrior : Unit
         // **TODO** Trouver pourquoi Whirlwind est inlancable;
         // Skills.Add(new Galvanize());
         // Skills.Add(new SecondWind());
+        // Skills.Add(new AxeSlash());
         Skills.Add(new Whirlwind());
     }
 

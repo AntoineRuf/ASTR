@@ -21,6 +21,7 @@ public class Mage : Unit
         CCImmunity = 0;
         transform.position += new Vector3(0, 0, -1);
 
+        Skills.Add(new ManaStrike());
     }
 
     public override bool IsCellMovableTo(Cell cell)
