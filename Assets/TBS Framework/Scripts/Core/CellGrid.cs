@@ -344,7 +344,7 @@ public class CellGrid : MonoBehaviour
     {
         Unit currentUnit = UnitList[Turn];
         //updating name
-        NameUpdate(currentUnit, canvas.transform.FindChild("UnitName").GetComponent<Text>());
+        NameUpdate(currentUnit, canvas.transform.FindChild("UnitName"));
         //updating portrait
         PortraitUpdate(currentUnit, Portrait, currentUnit.TeamNumber);
 
@@ -356,8 +356,6 @@ public class CellGrid : MonoBehaviour
 
         //updating Healthbar
         HealthbarUpdate(currentUnit, HealthText, FullHealthbar);
-
-
     }
 
     public void MouseEnterUnitUI()
@@ -380,20 +378,24 @@ public class CellGrid : MonoBehaviour
         CooldownPanel.GetChild(childNumber).GetComponent<Image>().sprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/TBS Framework/SkillsImages/CD" + currentUnit.Skills[childNumber].CurrentCooldown + ".png");
     }
 
-    public void printBuffTooltip (string text, int duration, Image parent)
+    public void printBuffTooltip (string name, string text, int duration, Image parent)
     {
-        Text tooltip = Instantiate(AssetDatabase.LoadAssetAtPath<Text>("Assets/TBS Framework/Prefabs/ASTR/Tooltip.prefab")) as Text;
-        tooltip.GetComponentInChildren<Text>().text = string.Format("Duration : {0}. {1}", duration, text);
+        Transform tooltip = Instantiate(AssetDatabase.LoadAssetAtPath<Transform>("Assets/TBS Framework/Prefabs/ASTR/BuffTooltip.prefab")) as Transform;
+        tooltip.FindChild("Name").GetComponent<Text>().text = name;
+        tooltip.FindChild("Description").GetComponent<Text>().text = text;
+        tooltip.FindChild("CD").GetComponent<Text>().text = string.Format("{0}", duration);
         tooltip.transform.SetParent(parent.transform);
-        tooltip.rectTransform.localPosition = new Vector3(165, -70, 0);
+        tooltip.localPosition = new Vector3(110, -70, 0);
     }
 
-    public void printSkillTooltip(string text, int duration, Transform parent)
+    public void printSkillTooltip(string name, string text, int duration, Transform parent)
     {
-        Text tooltip = Instantiate(AssetDatabase.LoadAssetAtPath<Text>("Assets/TBS Framework/Prefabs/ASTR/Tooltip.prefab")) as Text;
-        tooltip.GetComponentInChildren<Text>().text = string.Format("CD : {0}. {1}", duration, text);
+        Transform tooltip = Instantiate(AssetDatabase.LoadAssetAtPath<Transform>("Assets/TBS Framework/Prefabs/ASTR/SkillTooltip.prefab")) as Transform;
+        tooltip.FindChild("Name").GetComponent<Text>().text = name;
+        tooltip.FindChild("Description").GetComponent<Text>().text = text;
+        tooltip.FindChild("CD").GetComponent<Text>().text = string.Format("{0}", duration);
         tooltip.transform.SetParent(parent.transform);
-        tooltip.rectTransform.localPosition = new Vector3(220, -35, 0);
+        tooltip.localPosition = new Vector3(110, -50, 0);
     }
 
     public void deleteBuffTooltip(Image parent)
@@ -419,19 +421,16 @@ public class CellGrid : MonoBehaviour
         {
             Image BuffImage = Instantiate(AssetDatabase.LoadAssetAtPath<Image>("Assets/TBS Framework/Prefabs/ASTR/" + currentUnit.Buffs[i].Name + ".prefab")) as Image;
             BuffImage.rectTransform.SetParent(BuffPanel);
-            BuffImage.rectTransform.localPosition = new Vector3(0, 0, 0);
-            BuffImage.rectTransform.offsetMax = new Vector2(0, 0);
-            BuffImage.rectTransform.offsetMin = new Vector2(0, 0);
-            BuffImage.rectTransform.anchorMin = new Vector2(i * 0.14f, 0.1f);
-            BuffImage.rectTransform.anchorMax = new Vector2((i * 0.14f) + 0.13f, 1f);
+            BuffImage.rectTransform.localPosition = new Vector3(-147 + 40*i, 17, 0);
 
             // buffs tooltips
             EventTrigger trigger = BuffImage.GetComponent<EventTrigger>();
             EventTrigger.Entry entry = new EventTrigger.Entry();
             entry.eventID = EventTriggerType.PointerEnter;
+            string currentBuffName = currentUnit.Buffs[i].Name;
             string currentBuffTooltip = currentUnit.Buffs[i].Tooltip;
             int currentBuffDuration = currentUnit.Buffs[i].Duration;
-            entry.callback.AddListener((eventData) => { printBuffTooltip(currentBuffTooltip, currentBuffDuration, BuffImage); });
+            entry.callback.AddListener((eventData) => { printBuffTooltip(currentBuffName, currentBuffTooltip, currentBuffDuration, BuffImage); });
             trigger.triggers.Clear();
             trigger.triggers.Add(entry);
 
@@ -478,10 +477,11 @@ public class CellGrid : MonoBehaviour
             EventTrigger trigger = CooldownPanel.GetChild(i).GetComponent<EventTrigger>();
             EventTrigger.Entry entry = new EventTrigger.Entry();
             entry.eventID = EventTriggerType.PointerEnter;
-            string currentSkillTooltip = currentUnit.Skills[i].Name;
+            string currentSkillName = currentUnit.Skills[i].Name;
+            string currentSkillTooltip = currentUnit.Skills[i].Tooltip;
             int currentSkillCD = currentUnit.Skills[i].Cooldown;
             Transform currentSkillObject = SkillPanel.GetChild(i);
-            entry.callback.AddListener((eventData) => { printSkillTooltip(currentSkillTooltip, currentSkillCD, currentSkillObject); });
+            entry.callback.AddListener((eventData) => { printSkillTooltip(currentSkillName, currentSkillTooltip, currentSkillCD, currentSkillObject); });
             trigger.triggers.Clear();
             trigger.triggers.Add(entry);
 
@@ -499,9 +499,9 @@ public class CellGrid : MonoBehaviour
         FullHealthbar.GetComponent<Image>().rectTransform.localScale = new Vector3(hpScale, 1, 1);
     }
 
-    public void NameUpdate(Unit currentUnit, Text textComponent)
+    public void NameUpdate(Unit currentUnit, Transform textComponent)
     {
-        textComponent.text = currentUnit.UnitName;
+        textComponent.GetComponentInChildren<Text>().text = currentUnit.UnitName;
     }
 
     public void PortraitUpdate(Unit currentUnit, Transform Portrait, int teamNumber)
@@ -509,11 +509,13 @@ public class CellGrid : MonoBehaviour
         Portrait.FindChild("Image").GetComponent<Image>().sprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/TBS Framework/ASTR/Portraits/" + currentUnit.Image + ".png");
         if (teamNumber == currentUnit.TeamNumber)
         {
-            Portrait.FindChild("Border").GetComponent<Image>().color = Color.blue; 
+            Portrait.FindChild("GlowEnemy").gameObject.SetActive(false);
+            Portrait.FindChild("GlowFriendly").gameObject.SetActive(true);
         }
         else
         {
-            Portrait.FindChild("Border").GetComponent<Image>().color = Color.red;
+            Portrait.FindChild("GlowEnemy").gameObject.SetActive(true);
+            Portrait.FindChild("GlowFriendly").gameObject.SetActive(false);
         }
     }
 

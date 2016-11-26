@@ -10,6 +10,19 @@ public class TwinDaggers : Skill
         set { }
     }
 
+    public override string Tooltip
+    {
+        get
+        {
+            return "Basic rogue attack. Throw explosives kunais to a cell";
+        }
+
+        set
+        {
+            base.Tooltip = value;
+        }
+    }
+
     public override int MinRange
     {
         get { return 2; }
