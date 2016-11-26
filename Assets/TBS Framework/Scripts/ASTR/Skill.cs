@@ -11,6 +11,7 @@ public abstract class Skill
     {
         CurrentCooldown = 0;
     }
+    // The skill's name
     public virtual string Name { get; set; }
 
     // The skill's minimum casting range, in number of tiles.

@@ -9,8 +9,8 @@ using UnityEditor;
 using UnityEngine.EventSystems;
 
 /// <summary>
-/// CellGrid class keeps track of the game, stores cells, units and players objects. It starts the game and makes turn transitions. 
-/// It reacts to user interacting with units or cells, and raises events related to game progress. 
+/// CellGrid class keeps track of the game, stores cells, units and players objects. It starts the game and makes turn transitions.
+/// It reacts to user interacting with units or cells, and raises events related to game progress.
 /// </summary>
 public class CellGrid : MonoBehaviour
 {
@@ -24,8 +24,8 @@ public class CellGrid : MonoBehaviour
     Transform SkillPanel;
     Transform CooldownPanel;
     Transform BuffPanel;
-    Transform FullHealthbar;
-    Transform EmptyHealthbar;
+    protected Transform FullHealthbar;
+    protected Transform EmptyHealthbar;
     Transform HealthText;
     Transform MouseOverPannel;
     Transform Portrait;
@@ -104,14 +104,14 @@ public class CellGrid : MonoBehaviour
             else
                 Debug.LogError("Invalid object in cells parent game object");
         }
-      
+
         foreach (var cell in Cells)
         {
             cell.CellClicked += OnCellClicked;
             cell.CellHighlighted += OnCellHighlighted;
             cell.CellDehighlighted += OnCellDehighlighted;
         }
-             
+
         var unitGenerator = GetComponent<IUnitGenerator>();
         if (unitGenerator != null)
         {
@@ -140,7 +140,7 @@ public class CellGrid : MonoBehaviour
     private void OnCellHighlighted(object sender, EventArgs e)
     {
         CellGridState.OnCellSelected(sender as Cell);
-    } 
+    }
     private void OnCellClicked(object sender, EventArgs e)
     {
         CellGridState.OnCellClicked(sender as Cell);
@@ -201,7 +201,7 @@ public class CellGrid : MonoBehaviour
             UnitList[Turn].transform.GetChild(2).GetChild(i).GetComponent<SpriteRenderer>().color =
                 UnitList[Turn].transform.GetChild(2).GetChild(i).GetComponent<OnClickDirectionChoice>().StartColor;
         }
-        
+
         UnitListRefresh(UnitList);
         Turn = (Turn + 1) % Units.Count();
 
@@ -233,7 +233,7 @@ public class CellGrid : MonoBehaviour
     }
 
     public void BasicAttackSelection()
-    { 
+    {
         //CellGridState = new CellGridStateSkillSelected(this, "twinDaggers", UnitList[Turn]);
     }
 
@@ -256,7 +256,7 @@ public class CellGrid : MonoBehaviour
     {
         if (cooldown != 0)
             CellGridState = new CellGridStateWaitingForInput(this);
-        else 
+        else
             CellGridState = new CellGridStateSkillSelected(this, skill, UnitList[Turn]);
     }
 
@@ -350,7 +350,7 @@ public class CellGrid : MonoBehaviour
 
         //updating skill lists & cooldowns
         SkillsUpdate(currentUnit);
-        
+
         //updating buffs list
         BuffsUpdate(currentUnit, BuffPanel);
 

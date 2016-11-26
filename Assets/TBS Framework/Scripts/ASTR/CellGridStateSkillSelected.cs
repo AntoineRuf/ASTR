@@ -87,13 +87,16 @@ class CellGridStateSkillSelected : CellGridState
         if (unit.isMoving)
             return;
 
-
-        if ((_unitsInRange.Contains(unit) || unit.Equals(_unit)) && _unit.ActionPoints > 0)
+        if ((_unitsInRange.Contains(unit) || (unit.Equals(_unit) && _skill.MinRange == 0)) && _unit.ActionPoints > 0)
         {
             Debug.Log("Units affected : " + _unitsAffected.Count());
             _skill.Apply(_unit, _unitsAffected);
+            //foreach (var unitToUpdate in _unitsAffected) {
+                //_cellGrid.HealthbarUpdate(unitToUpdate, unitToUpdate.HitPoints, _cellGrid.FullHealthbar);
+            //}
             _cellGrid.AddSkillCooldownGUI(_unit.Skills.FindIndex(s => (s.Name == _skill.Name)));
             _cellGrid.EndTurn(); // Add rogue condition here
+            _unitsAffected.Clear();
         }
 
     }
@@ -159,8 +162,10 @@ class CellGridStateSkillSelected : CellGridState
     {
         if (_cellsInRange.Contains(unit.Cell))
         {
-            if (_skill.isAoE == 0) // spell cast is NOT an AoE
+            if (_skill.isAoE == 0) { // spell cast is NOT an AoE
                 unit.Cell.MarkAsSkillRangeSelected();
+                _unitsAffected.Add(unit);
+            }
             else // spell cast is an AoE
             {
                 foreach (var currentCell in _cellGrid.Cells.FindAll(c => c.GetDistance(unit.Cell) <= _skill.AoERange))

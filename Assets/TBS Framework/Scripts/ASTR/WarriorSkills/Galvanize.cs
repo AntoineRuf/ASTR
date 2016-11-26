@@ -97,18 +97,22 @@ public class Galvanize : Skill
         foreach (var receiver in receivers)
         {
             int heal = Random.Range(MinDamage, MaxDamage+1);
+            Debug.Log("Heal de la cible: " + heal);
             receiver.HitPoints += heal;
             if (receiver.HitPoints > receiver.TotalHitPoints)
                 receiver.HitPoints = receiver.TotalHitPoints;
-            Debug.Log("Tentative de création du buff.");
             // receiver.Buffs.Add(new DefenceBuff(2, 0.2f));
+            //cellGrid.HealthbarUpdate(receiver, receiver.HitPoints, FullHealthbar);
         }
 
         int selfHeal = Random.Range(MinDamage, MaxDamage+1);
+        Debug.Log("Heal du caster: " + selfHeal);
         caster.HitPoints += selfHeal;
+
         if (caster.HitPoints > caster.TotalHitPoints)
             caster.HitPoints = caster.TotalHitPoints;
         // caster.Buffs.Add(new DefenceBuff(2, 0.2f));
+        //cellGrid.HealthbarUpdate(caster, caster.HitPoints, FullHealthbar);
 
         caster.ActionPoints--;
         SetCooldown();
