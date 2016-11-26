@@ -22,7 +22,6 @@ public class Warrior : Unit
         CCImmunity = 0;
 
         // **TODO** Faire fonctionner les buffs & knockbacks;
-        // **TODO** Trouver pourquoi Whirlwind est inlancable;
         // Skills.Add(new Galvanize());
         // Skills.Add(new SecondWind());
         // Skills.Add(new AxeSlash());

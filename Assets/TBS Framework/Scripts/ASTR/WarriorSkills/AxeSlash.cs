@@ -10,6 +10,12 @@ public class AxeSlash : Skill
         set { }
     }
 
+    public override string Tooltip
+    {
+        get { return "Basic attack. Slashes in front of the warrior."; }
+        set { }
+    }
+
     public override int MinRange
     {
         get { return 1; }

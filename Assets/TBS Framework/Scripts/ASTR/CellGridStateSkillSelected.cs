@@ -66,7 +66,7 @@ class CellGridStateSkillSelected : CellGridState
                     {
                         currentUnit.SetState(new UnitStateMarkedAsReachableEnemy(currentUnit));
                         _unitsInRange.Add(currentUnit);
-                    }                    
+                    }
                 }
             }
         }
@@ -83,18 +83,19 @@ class CellGridStateSkillSelected : CellGridState
     }
 
     public override void OnUnitClicked(Unit unit)
-    {  
-        if (unit.Equals(_unit) || unit.isMoving)
+    {
+        if (unit.isMoving)
             return;
 
-        if (_unitsInRange.Contains(unit) && _unit.ActionPoints > 0)
+
+        if ((_unitsInRange.Contains(unit) || unit.Equals(_unit)) && _unit.ActionPoints > 0)
         {
-            Debug.Log("Units affected : " + _unitsAffected.Count());    
+            Debug.Log("Units affected : " + _unitsAffected.Count());
             _skill.Apply(_unit, _unitsAffected);
             _cellGrid.AddSkillCooldownGUI(_unit.Skills.FindIndex(s => (s.Name == _skill.Name)));
             _cellGrid.EndTurn(); // Add rogue condition here
         }
-        
+
     }
 
     public override void OnCellClicked(Cell cell)
@@ -105,7 +106,6 @@ class CellGridStateSkillSelected : CellGridState
             _cellGrid.AddSkillCooldownGUI(_unit.Skills.FindIndex(s => (s.Name == _skill.Name)));
             _cellGrid.EndTurn(); // Add rogue condition here
         }
-        else if (_cellsInRange.Contains(cell)) { }
         else
         {
             _cellGrid.CellGridState = new CellGridStateUnitSelected(_cellGrid, _unit);
@@ -118,7 +118,7 @@ class CellGridStateSkillSelected : CellGridState
         if (_cellsInRange.Contains(cell) && _skill.CanTargetEmptyCell)
         {
             if (_skill.isAoE == 0) //spell cast is NOT an AoE
-            { 
+            {
                 cell.MarkAsSkillRangeSelected();
                 _cellsAffected.Add(cell);
                 if (cell.Occupent != null) _unitsAffected.Add(cell.Occupent);
@@ -152,7 +152,7 @@ class CellGridStateSkillSelected : CellGridState
         {
             cell.MarkAsSkillRange();
         }
-        
+
     }
 
     public override void OnUnitForTargetSelected(Unit unit)
@@ -201,5 +201,3 @@ class CellGridStateSkillSelected : CellGridState
         _unitsInRange.Clear();
     }
 }
-
-

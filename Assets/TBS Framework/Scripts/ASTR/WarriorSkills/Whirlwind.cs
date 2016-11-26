@@ -10,6 +10,12 @@ public class Whirlwind : Skill
         set { }
     }
 
+    public override string Tooltip
+    {
+        get { return "Spin in a circle, hitting anyone around."; }
+        set { }
+    }
+
     public override int MinRange
     {
         get { return 0; }
@@ -88,11 +94,14 @@ public class Whirlwind : Skill
 
     public override void Apply (Unit caster, List<Unit> receivers)
     {
+        Debug.Log("Wololo");
+
         Animator anim = caster.GetComponentInChildren<Animator>();
         anim.SetBool("Attack", true);
         anim.SetBool("Idle", false);
 
         float damageBonus = 0.2f * (receivers.Count - 1);
+        Debug.Log(damageBonus);
         caster.AttackFactor += damageBonus;
         foreach (var receiver in receivers)
         {

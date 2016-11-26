@@ -14,7 +14,7 @@ public class TwinDaggers : Skill
     {
         get
         {
-            return "Basic rogue attack. Throw explosives kunais to a cell";
+            return "Basic rogue attack. Throw daggers to a cell";
         }
 
         set
