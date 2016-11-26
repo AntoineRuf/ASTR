@@ -33,6 +33,8 @@ public abstract class Skill
     // The Skill AoE Range, in number of tiles
     public virtual int AoERange { get; set; }
 
+    public virtual string Tooltip { get; set; }
+
     // The skill targetting rules. In order:
     // - SightNeeded (does the caster need to see the target?)
     // - AlignmentNeeded (does the caster need to be aligned with the target?)
