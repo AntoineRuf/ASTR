@@ -55,7 +55,7 @@ public class TwinDaggers : Skill
 
     public override bool CanTargetEmptyCell
     {
-        get { return true; }//testing purpose
+        get { return false; }//testing purpose
         set { }
     }
 

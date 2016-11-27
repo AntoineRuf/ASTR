@@ -6,7 +6,7 @@ public class ManaStrike : Skill
 
     public override string Name
     {
-        get { return "Mana Strike"; }
+        get { return "ManaStrike"; }
         set { }
     }
 
@@ -48,7 +48,7 @@ public class ManaStrike : Skill
 
     public override bool CanTargetEmptyCell
     {
-        get { return true; }//testing purpose
+        get { return true; }
         set { }
     }
 

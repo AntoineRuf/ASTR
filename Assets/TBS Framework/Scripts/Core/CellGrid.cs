@@ -198,8 +198,8 @@ public class CellGrid : MonoBehaviour
         {
             UnitList[Turn].transform.GetChild(2).GetChild(i).GetComponent<OnClickDirectionChoice>().clicked = false;
             UnitList[Turn].transform.GetChild(2).GetChild(i).GetComponent<OnClickDirectionChoice>().hovering = false;
-            UnitList[Turn].transform.GetChild(2).GetChild(i).GetComponent<SpriteRenderer>().color =
-                UnitList[Turn].transform.GetChild(2).GetChild(i).GetComponent<OnClickDirectionChoice>().StartColor;
+            UnitList[Turn].transform.GetChild(2).GetChild(i).GetComponent<SpriteRenderer>().sprite = 
+                UnitList[Turn].transform.GetChild(2).GetChild(i).GetComponent<OnClickDirectionChoice>().Start;
         }
 
         UnitListRefresh(UnitList);
@@ -388,14 +388,16 @@ public class CellGrid : MonoBehaviour
         tooltip.localPosition = new Vector3(110, -70, 0);
     }
 
-    public void printSkillTooltip(string name, string text, int duration, Transform parent)
+    public void printSkillTooltip(string name, int minDamage, int maxDamage, int minRange, int maxRange, int CD, string text, Transform parent)
     {
         Transform tooltip = Instantiate(AssetDatabase.LoadAssetAtPath<Transform>("Assets/TBS Framework/Prefabs/ASTR/SkillTooltip.prefab")) as Transform;
         tooltip.FindChild("Name").GetComponent<Text>().text = name;
         tooltip.FindChild("Description").GetComponent<Text>().text = text;
-        tooltip.FindChild("CD").GetComponent<Text>().text = string.Format("{0}", duration);
+        tooltip.FindChild("CD").GetComponent<Text>().text = string.Format("{0}", CD);
+        tooltip.FindChild("Range").GetComponent<Text>().text = string.Format("{0}-{1}", minRange, maxRange);
+        tooltip.FindChild("Damage").GetComponent<Text>().text = string.Format("{0}-{1}", minDamage, maxDamage);
         tooltip.transform.SetParent(parent.transform);
-        tooltip.localPosition = new Vector3(110, -50, 0);
+        tooltip.localPosition = new Vector3(150, 0, 0);
     }
 
     public void deleteBuffTooltip(Image parent)
@@ -480,8 +482,12 @@ public class CellGrid : MonoBehaviour
             string currentSkillName = currentUnit.Skills[i].Name;
             string currentSkillTooltip = currentUnit.Skills[i].Tooltip;
             int currentSkillCD = currentUnit.Skills[i].Cooldown;
+            int currentSkillMinRange = currentUnit.Skills[i].MinRange;
+            int currentSKillMaxRange = currentUnit.Skills[i].MaxRange;
+            int currentSkillMinDamage = currentUnit.Skills[i].MinDamage;
+            int currentSKillMaxDamage = currentUnit.Skills[i].MaxDamage;
             Transform currentSkillObject = SkillPanel.GetChild(i);
-            entry.callback.AddListener((eventData) => { printSkillTooltip(currentSkillName, currentSkillTooltip, currentSkillCD, currentSkillObject); });
+            entry.callback.AddListener((eventData) => { printSkillTooltip(currentSkillName, currentSkillMinDamage, currentSKillMaxDamage, currentSkillMinRange, currentSKillMaxRange, currentSkillCD, currentSkillTooltip, currentSkillObject); });
             trigger.triggers.Clear();
             trigger.triggers.Add(entry);
 
