@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 
+
 /// <summary>
 /// Every item's cell must contain this script
 /// </summary>
@@ -126,35 +127,42 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
                     {
                         case CellType.Swap:
                             DragAndDropItem currentItem = GetComponentInChildren<DragAndDropItem>();
-                            switch (sourceCell.cellType)
+                            DummyControlUnit sourceSheet = sourceCell.GetComponentInParent<DummyControlUnit>();
+                            DummyControlUnit destinationSheet = this.GetComponentInParent<DummyControlUnit>();
+                            string[] sourcename = sourceSheet.name.Split(' ');
+                            string[] destname = destinationSheet.name.Split(' ');
+                            if (sourcename[0] == destname[0])
                             {
-                                case CellType.Swap:
-                                    SwapItems(sourceCell, this);            // Swap items between cells
-                                    // Fill event descriptor
-                                    desc.item = item;
-                                    desc.sourceCell = sourceCell;
-                                    desc.destinationCell = this;
-                                    // Send message with DragAndDrop info to parents GameObjects
-                                    StartCoroutine(NotifyOnDragEnd(desc));
-                                    if (currentItem != null)
-                                    {
+                                switch (sourceCell.cellType)
+                                {
+                                    case CellType.Swap:
+                                        SwapItems(sourceCell, this);            // Swap items between cells
                                         // Fill event descriptor
-                                        desc.item = currentItem;
-                                        desc.sourceCell = this;
-                                        desc.destinationCell = sourceCell;
+                                        desc.item = item;
+                                        desc.sourceCell = sourceCell;
+                                        desc.destinationCell = this;
                                         // Send message with DragAndDrop info to parents GameObjects
                                         StartCoroutine(NotifyOnDragEnd(desc));
-                                    }
-                                    break;
-                                default:
-                                    PlaceItem(item.gameObject);             // Place dropped item in this cell
-                                    // Fill event descriptor
-                                    desc.item = item;
-                                    desc.sourceCell = sourceCell;
-                                    desc.destinationCell = this;
-                                    // Send message with DragAndDrop info to parents GameObjects
-                                    StartCoroutine(NotifyOnDragEnd(desc));
-                                    break;
+                                        if (currentItem != null)
+                                        {
+                                            // Fill event descriptor
+                                            desc.item = currentItem;
+                                            desc.sourceCell = this;
+                                            desc.destinationCell = sourceCell;
+                                            // Send message with DragAndDrop info to parents GameObjects
+                                            StartCoroutine(NotifyOnDragEnd(desc));
+                                        }
+                                        break;
+                                    default:
+                                        PlaceItem(item.gameObject);             // Place dropped item in this cell
+                                        // Fill event descriptor
+                                        desc.item = item;
+                                        desc.sourceCell = sourceCell;
+                                        desc.destinationCell = this;
+                                        // Send message with DragAndDrop info to parents GameObjects
+                                        StartCoroutine(NotifyOnDragEnd(desc));
+                                        break;
+                                }
                             }
                             break;
                         case CellType.DropOnly:

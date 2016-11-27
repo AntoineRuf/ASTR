@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/TBS Framework/Scenes/Example Scene 4.unity
+- path: Assets/SimpleDragAndDrop/Scenes/MainScene.unity
   isLoaded: 1
   isActive: 1
