@@ -27,6 +27,7 @@ public class Warrior : Unit
         Skills.Add(new AxeSlash());
         Skills.Add(new Whirlwind());
         Skills.Add(new RagingBull());
+        Skills.Add(new ComeBackHere());
     }
 
     public override bool IsCellMovableTo(Cell cell)
