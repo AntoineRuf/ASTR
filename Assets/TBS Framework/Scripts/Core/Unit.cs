@@ -223,8 +223,6 @@ public abstract class Unit : MonoBehaviour
     // ------ ASTR
     public virtual void DealDamage2(Unit other, int damage)
     {
-        if (isMoving)
-            return;
         int dealtDamage = (int)Mathf.Floor(damage * AttackFactor);
         other.Defend(this, dealtDamage);
     }
@@ -238,7 +236,7 @@ public abstract class Unit : MonoBehaviour
         MarkAsDefending(other);
         int receivedDamage = (int)Mathf.Floor (dealtDamage / DefenceFactor);
         HitPoints -= receivedDamage;
-        printDamage(receivedDamage);
+        printDamage(receivedDamage+1);
 
         if (UnitAttacked != null)
             UnitAttacked.Invoke(this, new AttackEventArgs(other, this, receivedDamage));
@@ -301,6 +299,47 @@ public abstract class Unit : MonoBehaviour
         }
 
     }
+
+    public virtual void Dash(Cell destinationCell, List<Cell> path, TrapManager trapmanager)
+    {
+        Cell.IsTaken = false;
+        Cell.Occupent = null;
+        bool trapfound = false;
+        List<Cell> TrapPath = new List<Cell>();
+        foreach(Cell c in path)
+        {
+            if (!trapfound)
+            {
+                TrapPath.Add(c);
+            }
+            if (trapmanager.findTrap(c))
+            {
+                trapmanager.Trigger(this);
+                trapfound = true;
+            }
+        }
+        TrapPath.Reverse();
+        Cell = destinationCell;
+        destinationCell.IsTaken = true;
+        destinationCell.Occupent = this;
+
+        if (MovementSpeed > 0 && trapfound)
+            StartCoroutine(RunAnimation(TrapPath));
+        else if (MovementSpeed > 0 && !trapfound)
+            StartCoroutine(RunAnimation(path));
+        else
+            transform.position = Cell.transform.position;
+
+        if (UnitMoved != null && trapfound)
+        {
+            UnitMoved.Invoke(this, new MovementEventArgs(Cell, destinationCell, TrapPath));
+        }
+        else if (UnitMoved != null && !trapfound)
+        {
+            UnitMoved.Invoke(this, new MovementEventArgs(Cell, destinationCell, path));
+        }
+    }
+
     protected virtual IEnumerator MovementAnimation(List<Cell> path)
     {
         isMoving = true;
@@ -318,6 +357,26 @@ public abstract class Unit : MonoBehaviour
         }
         isMoving = false;
         anim.SetBool("Walk", false);
+        anim.SetBool("Idle", true);
+    }
+
+    protected virtual IEnumerator RunAnimation(List<Cell> path)
+    {
+        isMoving = true;
+        Animator anim = this.GetComponentInChildren<Animator>();
+        anim.SetBool("Idle", false);
+        anim.SetBool("Run", true);
+        path.Reverse();
+        foreach (var cell in path)
+        {
+            while (new Vector2(transform.position.x,transform.position.y) != new Vector2(cell.transform.position.x,cell.transform.position.y))
+            {
+                transform.position = Vector3.MoveTowards(transform.position, new Vector3(cell.transform.position.x,cell.transform.position.y,transform.position.z), Time.deltaTime * MovementSpeed * 2);
+                yield return 0;
+            }
+        }
+        isMoving = false;
+        anim.SetBool("Run", false);
         anim.SetBool("Idle", true);
     }
 

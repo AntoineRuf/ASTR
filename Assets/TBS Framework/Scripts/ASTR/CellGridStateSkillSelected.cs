@@ -90,7 +90,7 @@ class CellGridStateSkillSelected : CellGridState
         if ((_unitsInRange.Contains(unit) || (unit.Equals(_unit) && _skill.MinRange == 0)) && _unit.ActionPoints > 0)
         {
             Debug.Log("Units affected : " + _unitsAffected.Count());
-            _skill.Apply(_unit, _unitsAffected);
+            _skill.Apply(_unit, _unitsAffected, _cellGrid);
             //foreach (var unitToUpdate in _unitsAffected) {
                 //_cellGrid.HealthbarUpdate(unitToUpdate, unitToUpdate.HitPoints, _cellGrid.FullHealthbar);
             //}

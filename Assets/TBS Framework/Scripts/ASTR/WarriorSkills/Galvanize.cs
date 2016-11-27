@@ -88,7 +88,7 @@ public class Galvanize : Skill
 
     // **TODO** Faire fonctionner le buff.
 
-    public override void Apply (Unit caster, List<Unit> receivers)
+    public override void Apply (Unit caster, List<Unit> receivers, CellGrid cellGrid)
     {
         Animator anim = caster.GetComponentInChildren<Animator>();
         anim.SetBool("Attack", true);

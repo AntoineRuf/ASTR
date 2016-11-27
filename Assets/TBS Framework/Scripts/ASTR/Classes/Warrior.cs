@@ -15,7 +15,7 @@ public class Warrior : Unit
         TotalActionPoints = 1;
         AttackFactor = 1;
         DefenceFactor = 1;
-        Initiative = 50;
+        Initiative = 500;
         MovementSpeed = 20;
         Image = "Warrior";
         transform.position += new Vector3(0, 0, -1);
@@ -26,7 +26,7 @@ public class Warrior : Unit
         // Skills.Add(new SecondWind());
         Skills.Add(new AxeSlash());
         Skills.Add(new Whirlwind());
-        Skills.Add(new Galvanize());
+        Skills.Add(new RagingBull());
     }
 
     public override bool IsCellMovableTo(Cell cell)

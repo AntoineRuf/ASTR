@@ -57,7 +57,7 @@ public abstract class Skill
 
     public virtual void Apply(Unit caster, Unit receiver) { }
 
-    public virtual void Apply(Unit caster, List<Unit> receivers) { }
+    public virtual void Apply(Unit caster, List<Unit> receivers, CellGrid cellGrid) { }
 
     public virtual void Apply(Unit caster, List<Cell> receivers, CellGrid cellGrid) { }
 

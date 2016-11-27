@@ -93,7 +93,7 @@ public class ShoulderBash : Skill
 
     public override void Apply(Unit caster, Cell receiver, CellGrid cellGrid){}
 
-    public override void Apply (Unit caster, List<Unit> receivers)
+    public override void Apply (Unit caster, List<Unit> receivers, CellGrid cellGrid)
     {
         Animator anim = caster.GetComponentInChildren<Animator>();
         anim.SetBool("Attack", true);
