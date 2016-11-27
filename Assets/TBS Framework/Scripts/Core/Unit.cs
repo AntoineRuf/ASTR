@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Collections;
 using Assets.TBS_Framework.Scripts.ASTR;
+using Assets.TBS_Framework.Scripts.ASTR.RogueSkills;
 
 /// <summary>
 /// Base class for all units in the game.
@@ -138,6 +139,13 @@ public abstract class Unit : MonoBehaviour
         ActionPoints = TotalActionPoints;
         Cell.Occupent = this;
         SetState(new UnitStateMarkedAsFriendly(this));
+        foreach(Buff b in Buffs)
+        {
+            if(b.isDot)
+            {
+                b.Trigger(this);
+            }
+        }
     }
     /// <summary>
     /// Method is called at the end of each turn.
@@ -147,7 +155,9 @@ public abstract class Unit : MonoBehaviour
         Buffs.FindAll(b => b.Duration == 0).ForEach(b => { b.Undo(this); });
         Buffs.RemoveAll(b => b.Duration == 0);
         Buffs.ForEach(b => { b.Duration--; });
-
+        Animator anim = GetComponentInChildren<Animator>();
+        anim.SetBool("Skill", false);
+        anim.SetBool("Attack", false);
         SetState(new UnitStateNormal(this));
     }
     /// <summary>
@@ -225,8 +235,37 @@ public abstract class Unit : MonoBehaviour
     {
         if (isMoving)
             return;
-        int dealtDamage = (int)Mathf.Floor(damage * AttackFactor);
-        other.Defend(this, dealtDamage);
+        int critChance = UnityEngine.Random.Range(0, 101);
+        if(Buffs.Any())
+        {
+            if ((critChance <= 50 && Buffs.Find(b => b.Name == "Lethal Toxin") != null) || (critChance <= 10))
+            {
+                int dealtDamage = (int)Mathf.Floor(damage * AttackFactor * 1.5f);
+                other.Defend(this, dealtDamage);
+            }
+            else if (Buffs.Find(b => b.Name == "Blinded") != null)
+            {
+                if (UnityEngine.Random.Range(0,2) == 0)
+                {
+                    return;
+                }
+                else
+                {
+                    int dealtDamage = (int)Mathf.Floor(damage * AttackFactor);
+                    other.Defend(this, dealtDamage);
+                }
+            }
+            else
+            {
+                int dealtDamage = (int)Mathf.Floor(damage * AttackFactor);
+                other.Defend(this, dealtDamage);
+            }
+        }        
+        else
+        {
+            int dealtDamage = (int)Mathf.Floor(damage * AttackFactor);
+            other.Defend(this, dealtDamage);
+        }
     }
     // ------------------
 
@@ -239,7 +278,15 @@ public abstract class Unit : MonoBehaviour
         int receivedDamage = (int)Mathf.Floor (dealtDamage / DefenceFactor);
         HitPoints -= receivedDamage;
         printDamage(receivedDamage);
-
+        if(Buffs.Any())
+        {
+            if (other.Buffs.Find(b => String.Equals(b.Name, "Snake Venom")) != null)
+            {
+                SnakeDot snkdot = new SnakeDot();
+                snkdot.Apply(this);
+            }
+        }
+        
         if (UnitAttacked != null)
             UnitAttacked.Invoke(this, new AttackEventArgs(other, this, receivedDamage));
 
@@ -618,7 +665,7 @@ public abstract class Unit : MonoBehaviour
     /// <summary>
     /// Convert OffsetCoord to Cube
     /// </summary>
-    Vector2 ConvertToOffsetCoord(Vector3 v)
+    public Vector2 ConvertToOffsetCoord(Vector3 v)
     {
         return new Vector2(v.x, (v.z + (v.x + (Mathf.Abs(v.x) % 2)) / 2));
     }
@@ -626,7 +673,7 @@ public abstract class Unit : MonoBehaviour
     /// <summary>
     /// Convert OffsetCoord to Cube
     /// </summary>
-    Vector3 ConvertToCube(Vector2 v)
+    public Vector3 ConvertToCube(Vector2 v)
     {
         float x = v.x;
         float z = v.y - (v.x + (Mathf.Abs(v.x) % 2)) / 2;

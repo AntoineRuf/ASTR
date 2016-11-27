@@ -95,10 +95,6 @@ public class ShoulderBash : Skill
 
     public override void Apply (Unit caster, List<Unit> receivers)
     {
-        Animator anim = caster.GetComponentInChildren<Animator>();
-        anim.SetBool("Attack", true);
-        anim.SetBool("Idle", false);
-
         foreach (var receiver in receivers)
         {
             int damage = Random.Range(MinDamage, MaxDamage+1);
@@ -111,11 +107,6 @@ public class ShoulderBash : Skill
 
     public override void Apply (Unit caster, List<Cell> cells, CellGrid cellGrid)
     {
-
-        Animator anim = caster.GetComponentInChildren<Animator>();
-        anim.SetBool("Attack", true);
-        anim.SetBool("Idle", false);
-
         foreach (var currentCell in cells)
         {
             if (currentCell.Occupent != null)

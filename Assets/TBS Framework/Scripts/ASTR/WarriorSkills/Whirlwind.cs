@@ -96,10 +96,6 @@ public class Whirlwind : Skill
     {
         Debug.Log("Wololo");
 
-        Animator anim = caster.GetComponentInChildren<Animator>();
-        anim.SetBool("Attack", true);
-        anim.SetBool("Idle", false);
-
         float damageBonus = 0.2f * (receivers.Count - 1);
         Debug.Log(damageBonus);
         caster.AttackFactor += damageBonus;

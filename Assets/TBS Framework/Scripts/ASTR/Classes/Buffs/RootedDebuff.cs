@@ -1,3 +1,5 @@
+using System;
+
 public class RootedDebuff : Buff
 {
     private float _factor;
@@ -19,6 +21,59 @@ public class RootedDebuff : Buff
     }
 
     public int Duration { get; set; }
+
+    string Buff.Tooltip
+    {
+        get
+        {
+            throw new NotImplementedException();
+        }
+
+        set
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    string Buff.Name
+    {
+        get
+        {
+            throw new NotImplementedException();
+        }
+
+        set
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    int Buff.Duration
+    {
+        get
+        {
+            throw new NotImplementedException();
+        }
+
+        set
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    bool Buff.isDot
+    {
+        get
+        {
+            return false;
+        }
+
+        set
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public void Apply(Unit unit)
     {
         unit.TotalMovementPoints = 0;
@@ -32,5 +87,24 @@ public class RootedDebuff : Buff
     public Buff Clone()
     {
         return new RootedDebuff(Duration, _factor);
+    }
+
+    void Buff.Apply(Unit unit)
+    {
+        throw new NotImplementedException();
+    }
+
+    void Buff.Undo(Unit unit)
+    {
+        throw new NotImplementedException();
+    }
+
+    void Buff.Trigger(Unit unit)
+    {
+    }
+
+    Buff Buff.Clone()
+    {
+        throw new NotImplementedException();
     }
 }

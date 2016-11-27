@@ -90,10 +90,6 @@ public class Galvanize : Skill
 
     public override void Apply (Unit caster, List<Unit> receivers)
     {
-        Animator anim = caster.GetComponentInChildren<Animator>();
-        anim.SetBool("Attack", true);
-        anim.SetBool("Idle", false);
-
         foreach (var receiver in receivers)
         {
             int heal = Random.Range(MinDamage, MaxDamage+1);

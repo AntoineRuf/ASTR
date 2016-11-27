@@ -9,7 +9,10 @@ public interface Buff
     /// Determines how long the buff should last (expressed in turns). If set to negative number, buff will be permanent.
     /// </summary>
     int Duration { get; set; }
-
+    /// <summary>
+    /// Boolean to check if the buff is a DoT. If yes, the method Trigger is used to apply its effects each turn.
+    bool isDot { get; set; }
+    /// </summary>
     /// <summary>
     /// Describes how the unit should be upgraded.
     /// </summary>
@@ -18,7 +21,10 @@ public interface Buff
     /// Returns units stats to normal.
     /// </summary>
     void Undo(Unit unit);
-
+    ///<summary>
+    /// Apply effects of the buff over time.
+    /// </summary>
+    void Trigger(Unit unit);
     /// <summary>
     /// Returns deep copy of the object.
     /// </summary>

@@ -9,8 +9,9 @@ public class UnitStateMarkedAsFinished : UnitState
     public override void Apply()
     {
         _unit.MarkAsFinished();
-        _unit.GetComponentInChildren<Animator>().SetBool("Idle", true);
-        _unit.GetComponentInChildren<Animator>().SetBool("Attack", false);
+        Animator anim = _unit.GetComponentInChildren<Animator>();
+        anim.SetBool("Attack", false);
+        anim.SetBool("Skill", false);
     }
 
     public override void MakeTransition(UnitState state)

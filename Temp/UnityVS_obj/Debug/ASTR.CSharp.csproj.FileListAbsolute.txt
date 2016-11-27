@@ -1,0 +1,13 @@
+C:\Users\antoi\OneDrive\Documents\GitHub\ASTR\Temp\UnityVS_bin\Debug\Assembly-CSharp.dll
+C:\Users\antoi\OneDrive\Documents\GitHub\ASTR\Temp\UnityVS_bin\Debug\Assembly-CSharp.pdb
+C:\Users\antoi\OneDrive\Documents\GitHub\ASTR\Temp\UnityVS_bin\Debug\UnityEditor.dll
+C:\Users\antoi\OneDrive\Documents\GitHub\ASTR\Temp\UnityVS_bin\Debug\UnityEngine.dll
+C:\Users\antoi\OneDrive\Documents\GitHub\ASTR\Temp\UnityVS_bin\Debug\UnityEngine.Networking.dll
+C:\Users\antoi\OneDrive\Documents\GitHub\ASTR\Temp\UnityVS_bin\Debug\UnityEngine.UI.dll
+C:\Users\antoi\OneDrive\Documents\GitHub\ASTR\Temp\UnityVS_bin\Debug\UnityEngine.xml
+C:\Users\antoi\OneDrive\Documents\GitHub\ASTR\Temp\UnityVS_bin\Debug\UnityEngine.UI.xml
+C:\Users\antoi\OneDrive\Documents\GitHub\ASTR\Temp\UnityVS_bin\Debug\UnityEngine.Networking.xml
+C:\Users\antoi\OneDrive\Documents\GitHub\ASTR\Temp\UnityVS_bin\Debug\UnityEditor.xml
+C:\Users\antoi\OneDrive\Documents\GitHub\ASTR\Temp\UnityVS_obj\Debug\ASTR.CSharp.csprojResolveAssemblyReference.cache
+C:\Users\antoi\OneDrive\Documents\GitHub\ASTR\Temp\UnityVS_obj\Debug\Assembly-CSharp.dll
+C:\Users\antoi\OneDrive\Documents\GitHub\ASTR\Temp\UnityVS_obj\Debug\Assembly-CSharp.pdb

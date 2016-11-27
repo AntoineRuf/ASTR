@@ -93,9 +93,6 @@ public class ComeBackHere : Skill
 
     public override void Apply (Unit caster, List<Unit> receivers)
     {
-        Animator anim = caster.GetComponentInChildren<Animator>();
-        anim.SetBool("Attack", true);
-        anim.SetBool("Idle", false);
 
         foreach (var receiver in receivers)
         {
@@ -109,10 +106,6 @@ public class ComeBackHere : Skill
 
     public override void Apply (Unit caster, List<Cell> cells, CellGrid cellGrid)
     {
-
-        Animator anim = caster.GetComponentInChildren<Animator>();
-        anim.SetBool("Attack", true);
-        anim.SetBool("Idle", false);
 
         foreach (var currentCell in cells)
         {

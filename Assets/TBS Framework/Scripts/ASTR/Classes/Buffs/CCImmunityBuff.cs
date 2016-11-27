@@ -1,3 +1,5 @@
+using System;
+
 public class CCImmunityBuff : Buff
 {
     private float _factor;
@@ -19,6 +21,20 @@ public class CCImmunityBuff : Buff
     }
 
     public int Duration { get; set; }
+
+    public bool isDot
+    {
+        get
+        {
+            return false;
+        }
+
+        set
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public void Apply(Unit unit)
     {
         unit.CCImmunity = 1;
@@ -32,5 +48,9 @@ public class CCImmunityBuff : Buff
     public Buff Clone()
     {
         return new CCImmunityBuff(Duration, _factor);
+    }
+
+    public void Trigger(Unit unit)
+    {
     }
 }

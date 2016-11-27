@@ -8,10 +8,11 @@ namespace Assets.TBS_Framework.Scripts.ASTR
     public class TrapManager
     {
         public List<Trap> TrapList;
-        
-        public TrapManager()
+        public CellGrid cellGrid;
+        public TrapManager(CellGrid cellgrid)
         {
             TrapList = new List<Trap>();
+            cellGrid = cellgrid;
         }
 
         public void AddTrap(Trap trapToAdd)

@@ -88,10 +88,6 @@ public class SecondWind : Skill
 
     public override void Apply (Unit caster, List<Unit> receivers)
     {
-        Animator anim = caster.GetComponentInChildren<Animator>();
-        anim.SetBool("Attack", true);
-        anim.SetBool("Idle", false);
-
         int selfHeal = (int)Mathf.Floor((caster.TotalHitPoints - caster.HitPoints) / 2);
         caster.HitPoints += selfHeal;
         if (caster.HitPoints > caster.TotalHitPoints)
