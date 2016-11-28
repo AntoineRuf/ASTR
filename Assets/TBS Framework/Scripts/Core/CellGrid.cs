@@ -198,7 +198,7 @@ public class CellGrid : MonoBehaviour
         {
             UnitList[Turn].transform.GetChild(2).GetChild(i).GetComponent<OnClickDirectionChoice>().clicked = false;
             UnitList[Turn].transform.GetChild(2).GetChild(i).GetComponent<OnClickDirectionChoice>().hovering = false;
-            UnitList[Turn].transform.GetChild(2).GetChild(i).GetComponent<SpriteRenderer>().sprite = 
+            UnitList[Turn].transform.GetChild(2).GetChild(i).GetComponent<SpriteRenderer>().sprite =
                 UnitList[Turn].transform.GetChild(2).GetChild(i).GetComponent<OnClickDirectionChoice>().Start;
         }
 
@@ -244,7 +244,11 @@ public class CellGrid : MonoBehaviour
 
     public void MovekSelection()
     {
-        CellGridState = new CellGridStateUnitSelected(this, UnitList[Turn]);
+        if (UnitList[Turn].ActionPoints == 1)
+            CellGridState = new CellGridStateUnitSelected(this, UnitList[Turn]);
+        else if (UnitList[Turn].Image == "Rogue")
+            CellGridState = new CellGridStateUnitSelected(this, UnitList[Turn]);
+        else return;
     }
 
     public void WeaknessTrapSelection()
