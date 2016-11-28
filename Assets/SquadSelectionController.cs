@@ -67,7 +67,7 @@ public class SquadSelectionController : MonoBehaviour {
     public void onFightButtonClicked()
     {
         PlayerData squad1 = playerData.Find(p => p.squadName == chosenBuildJ1.GetComponentInChildren<Text>().text);
-        PlayerData squad2 = playerData.Find(p => p.squadName == chosenBuildJ1.GetComponentInChildren<Text>().text);
+        PlayerData squad2 = playerData.Find(p => p.squadName == chosenBuildJ2.GetComponentInChildren<Text>().text);
 
         GameObject go = new GameObject();
         DontDestroyOnLoad(go);
