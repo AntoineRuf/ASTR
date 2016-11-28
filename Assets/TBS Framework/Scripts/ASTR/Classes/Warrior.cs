@@ -29,6 +29,20 @@ public class Warrior : Unit
         Skills.Add(new Galvanize());
     }
 
+    public void CustomInitialize()
+    {
+        base.Initialize();
+        TotalHitPoints = 120;
+        HitPoints = TotalHitPoints;
+        TotalMovementPoints = 3;
+        TotalActionPoints = 1;
+        AttackFactor = 1;
+        DefenceFactor = 1;
+        Initiative = 50;
+        MovementSpeed = 20;
+        Image = "Warrior";
+    }
+
     public override bool IsCellMovableTo(Cell cell)
     {
         return base.IsCellMovableTo(cell) && (cell as MyOtherHexagon).GroundType != GroundType.Water;

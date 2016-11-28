@@ -87,7 +87,7 @@ public class Incinerate : Skill
     public override void Apply (Unit caster, List<Unit> receivers)
     {
         Animator anim = caster.GetComponentInChildren<Animator>();
-        anim.SetBool("Attack", true);
+        anim.SetBool("Skill", true);
         anim.SetBool("Idle", false);
 
         foreach (var receiver in receivers)
@@ -104,7 +104,7 @@ public class Incinerate : Skill
     {
 
         Animator anim = caster.GetComponentInChildren<Animator>();
-        anim.SetBool("Attack", true);
+        anim.SetBool("Skill", true);
         anim.SetBool("Idle", false);
 
         foreach (var currentCell in cells)

@@ -147,7 +147,6 @@ public abstract class Unit : MonoBehaviour
         Buffs.FindAll(b => b.Duration == 0).ForEach(b => { b.Undo(this); });
         Buffs.RemoveAll(b => b.Duration == 0);
         Buffs.ForEach(b => { b.Duration--; });
-
         SetState(new UnitStateNormal(this));
     }
     /// <summary>

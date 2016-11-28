@@ -18,7 +18,7 @@ public class Hero : MyUnit
     public override void OnTurnEnd()
     {
         _buffSpawner.SpawnBuff(new HealingBuff(1, 1), Cell, this, 1, false);
-        _buffSpawner.SpawnBuff(new DefenceBuff(1, 1), Cell, this, 1, false);//Hero has the ability to heal and raise defence od adjacent units.
+        _buffSpawner.SpawnBuff(new DefenceBuff(1,1), Cell, this, 1, false);//Hero has the ability to heal and raise defence od adjacent units.
         base.OnTurnEnd();
     }
     public override void OnUnitSelected()

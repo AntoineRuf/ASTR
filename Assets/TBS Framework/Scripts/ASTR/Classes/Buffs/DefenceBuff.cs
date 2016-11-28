@@ -7,7 +7,7 @@ public class DefenceBuff : Buff
     }
 
     public string Name {
-        get { return "DefenceBuff"; }
+        get { return "Defence Buff"; }
         set {}
     }
 

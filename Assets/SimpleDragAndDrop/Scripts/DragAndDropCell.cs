@@ -117,6 +117,7 @@ public class DragAndDropCell : MonoBehaviour, IDropHandler
                             string itemName = item.name;
                             item = Instantiate(item);                       // Clone item from source cell
                             item.name = itemName;
+                            Debug.Log(item._skill);
                             break;
                         default:
                             // Nothing to do

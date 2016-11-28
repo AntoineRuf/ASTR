@@ -1,12 +1,12 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class FrozenLance : Skill
+public class IceLance : Skill
 {
 
     public override string Name
     {
-        get { return "Frozen Lance"; }
+        get { return "Ice Lance"; }
         set { }
     }
 
