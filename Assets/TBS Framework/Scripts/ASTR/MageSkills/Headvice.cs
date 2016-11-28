@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Assets.TBS_Framework.Scripts.ASTR.Classes.Buffs;
 
 public class Headvice : Skill
 {
@@ -97,7 +98,7 @@ public class Headvice : Skill
 
     // **TODO** Implémenter les dégâts supplémentaires au centre.
 
-    public override void Apply (Unit caster, List<Unit> receivers)
+    public override void Apply (Unit caster, List<Unit> receivers, CellGrid cellgrid)
     {
         Animator anim = caster.GetComponentInChildren<Animator>();
         anim.SetBool("Skill", true);
@@ -107,9 +108,8 @@ public class Headvice : Skill
         {
             int damage = Random.Range(MinDamage, MaxDamage + 1);
             caster.DealDamage2(receiver, damage);
-            StunDebuff StunDebuff = new StunDebuff(1, 0f);
-            receiver.Buffs.Add(StunDebuff);
-            StunDebuff.Apply(receiver);
+            StunDebuff stunDebuff = new StunDebuff();
+            receiver.Buffs.Add(stunDebuff);
         }
 
 

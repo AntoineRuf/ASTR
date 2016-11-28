@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine.SceneManagement;
+using Assets.TBS_Framework.Scripts.ASTR.RogueSkills;
 
 public class SquadBuilderController : MonoBehaviour {
 
@@ -240,6 +241,12 @@ public class SquadBuilderController : MonoBehaviour {
     public List<Skill> LoadRogueSkills(List<Skill> list)
     {
         list.Add(new TwinDaggers());
+        list.Add(new QuickDash());
+        list.Add(new FanOfKnives());
+        list.Add(new LethalToxin());
+        list.Add(new ShrapnelMine());
+        list.Add(new SnakeVenom());
+        list.Add(new CloakAndDagger());
         return list;
     }
 
@@ -250,6 +257,9 @@ public class SquadBuilderController : MonoBehaviour {
         list.Add(new RagingBull());
         list.Add(new SecondWind());
         list.Add(new Whirlwind());
+        list.Add(new ShatteringForce());
+        list.Add(new ComeBackHere());
+        list.Add(new ShieldBash());
         return list;
     }
 

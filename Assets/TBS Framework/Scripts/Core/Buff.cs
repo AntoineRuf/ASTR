@@ -9,7 +9,7 @@ public interface Buff
     /// Determines how long the buff should last (expressed in turns). If set to negative number, buff will be permanent.
     /// </summary>
     int Duration { get; set; }
-
+    bool isDot { get; set; }
     /// <summary>
     /// Describes how the unit should be upgraded.
     /// </summary>
@@ -18,6 +18,7 @@ public interface Buff
     /// Returns units stats to normal.
     /// </summary>
     void Undo(Unit unit);
+    void Trigger(Unit unit);
 
     /// <summary>
     /// Returns deep copy of the object.

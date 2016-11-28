@@ -10,6 +10,12 @@ public class Galvanize : Skill
         set { }
     }
 
+    public override string Tooltip
+    {
+        get { return "Heals the Warrior and its target, and buffs their defense."; }
+        set { }
+    }
+
     public override int MinRange
     {
         get { return 1; }
@@ -88,7 +94,7 @@ public class Galvanize : Skill
 
     // **TODO** Faire fonctionner le buff.
 
-    public override void Apply (Unit caster, List<Unit> receivers)
+    public override void Apply (Unit caster, List<Unit> receivers, CellGrid cellGrid)
     {
         Animator anim = caster.GetComponentInChildren<Animator>();
         anim.SetBool("Attack", true);

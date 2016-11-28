@@ -84,7 +84,7 @@ public class FireRain : Skill
 
     // **TODO** Implémenter les dégâts supplémentaires au centre.
 
-    public override void Apply (Unit caster, List<Unit> receivers)
+    public override void Apply (Unit caster, List<Unit> receivers, CellGrid cellgrid)
     {
         Animator anim = caster.GetComponentInChildren<Animator>();
         anim.SetBool("Skill", true);

@@ -1,40 +1,77 @@
-public class StunDebuff : Buff
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Assets.TBS_Framework.Scripts.ASTR.Classes.Buffs
 {
-    private float _factor;
-    private int _initialMovementPoints;
-    public string Tooltip {
-        get { return "This hero is stuned and cannot move or perform attacks."; }
-        set {}
-    }
-
-    public string Name {
-        get { return "Stun Debuff"; }
-        set {}
-    }
-
-
-    public StunDebuff(int duration, float factor)
+    class StunDebuff : Buff
     {
-        Duration = duration;
-        _factor = 0.0f;
-    }
+        public int Duration
+        {
+            get
+            {
+                return 1;
+            }
 
-    public int Duration { get; set; }
-    public void Apply(Unit unit)
-    {
-        _initialMovementPoints = unit.TotalMovementPoints;
-        unit.ActionPoints = 0;
-        unit.TotalMovementPoints = 0;
-    }
+            set
+            {
+            }
+        }
 
-    public void Undo(Unit unit)
-    {
-        unit.TotalMovementPoints = _initialMovementPoints;
-        unit.ActionPoints = 1;
-    }
+        public bool isDot
+        {
+            get
+            {
+                return true;
+            }
 
-    public Buff Clone()
-    {
-        return new SlowedDebuff(Duration, _factor);
+            set
+            {
+            }
+        }
+
+        public string Name
+        {
+            get
+            {
+                return "Stunned";
+            }
+
+            set
+            {
+            }
+        }
+
+        public string Tooltip
+        {
+            get
+            {
+                return "This unit is disoriented. It won't do anything on its next turn.";
+            }
+
+            set
+            {
+            }
+        }
+
+        public void Apply(Unit unit)
+        {
+        }
+
+        public Buff Clone()
+        {
+            return this;
+        }
+
+        public void Trigger(Unit unit)
+        {
+            unit.ActionPoints = 0;
+            unit.MovementPoints = 0;
+        }
+
+        public void Undo(Unit unit)
+        {
+        }
     }
 }

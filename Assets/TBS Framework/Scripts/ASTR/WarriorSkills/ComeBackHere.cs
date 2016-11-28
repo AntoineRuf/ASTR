@@ -6,7 +6,13 @@ public class ComeBackHere : Skill
 
     public override string Name
     {
-        get { return "Come Back Here!"; }
+        get { return "Come Back Here"; }
+        set { }
+    }
+
+    public override string Tooltip
+    {
+        get { return "Pulls a target with the swipe of an axe, dealing damage."; }
         set { }
     }
 
@@ -82,16 +88,37 @@ public class ComeBackHere : Skill
         set { }
     }
 
-    // **TODO**
-    // Comparer les positions de caster et receiver
-    // Vérifier si receiver a le buff "insensible aux cc"
-    // Déplacer receiver au contact de caster
+    private void MoveTargetToCaster(Unit caster, Unit receiver, CellGrid cellGrid){
+
+      Vector3 casterPos = Directions.ConvertToCube(caster.Cell.OffsetCoord);
+      Vector3 receiverPos = Directions.ConvertToCube(receiver.Cell.OffsetCoord);
+      Vector2 destinationCoord = Directions.NearestNeighbor(casterPos, receiverPos);
+
+      var arrived = false;
+      var checkedCellCoord = receiverPos;
+      var direction = Directions.NearestNeighborDirection(receiverPos, casterPos);
+      List<Cell> path = new List<Cell>();
+
+      while (!arrived) {
+          checkedCellCoord -= direction;
+          var checkedCellOffsetCoord = Directions.ConvertToOffsetCoord(checkedCellCoord);
+          var checkedCell = cellGrid.Cells.Find(x => x.OffsetCoord.Equals(checkedCellOffsetCoord));
+          if (!checkedCell.IsTaken && !checkedCell.Equals(receiver.Cell)) {
+              path.Add(checkedCell);
+          }
+          else {
+              arrived = true;
+          }
+      }
+      path.Reverse();
+      if (path.Count > 0) receiver.Dash(path[path.Count - 1], path, cellGrid.trapmanager);
+    }
 
     public override void Apply(Unit caster, Unit receiver){}
 
     public override void Apply(Unit caster, Cell receiver, CellGrid cellGrid){}
 
-    public override void Apply (Unit caster, List<Unit> receivers)
+    public override void Apply (Unit caster, List<Unit> receivers, CellGrid cellGrid)
     {
         Animator anim = caster.GetComponentInChildren<Animator>();
         anim.SetBool("Attack", true);
@@ -100,6 +127,7 @@ public class ComeBackHere : Skill
         foreach (var receiver in receivers)
         {
             int damage = Random.Range(MinDamage, MaxDamage+1);
+            MoveTargetToCaster(caster, receiver, cellGrid);
             caster.DealDamage2(receiver, damage);
         }
 
@@ -119,6 +147,7 @@ public class ComeBackHere : Skill
             if (currentCell.Occupent != null)
             {
                 int damage = Random.Range(MinDamage, MaxDamage+1);
+                MoveTargetToCaster(caster, currentCell.Occupent, cellGrid);
                 caster.DealDamage2(currentCell.Occupent, damage);
             }
         }

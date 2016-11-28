@@ -41,4 +41,24 @@ public static class Directions {
         float y = -x - z;
         return new Vector3(x, y, z);
     }
+
+    public static Vector3 NearestNeighbor(Vector3 casterPos, Vector3 receiverPos){
+        float x = casterPos.x - receiverPos.x;
+        float y = casterPos.y - receiverPos.y;
+        float z = casterPos.z - receiverPos.z;
+        if (x != 0) x = x / Mathf.Abs(x);
+        if (y != 0) y = y / Mathf.Abs(y);
+        if (z != 0) z = z / Mathf.Abs(z);
+        return new Vector3(receiverPos.x + x, receiverPos.y + y, receiverPos.z + z);
+    }
+
+    public static Vector3 NearestNeighborDirection(Vector3 casterPos, Vector3 receiverPos){
+        float x = casterPos.x - receiverPos.x;
+        float y = casterPos.y - receiverPos.y;
+        float z = casterPos.z - receiverPos.z;
+        if (x != 0) x = x / Mathf.Abs(x);
+        if (y != 0) y = y / Mathf.Abs(y);
+        if (z != 0) z = z / Mathf.Abs(z);
+        return new Vector3(x, y, z);
+    }
 }

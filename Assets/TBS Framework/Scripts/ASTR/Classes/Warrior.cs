@@ -23,10 +23,11 @@ public class Warrior : Unit
 
         // **TODO** Faire fonctionner les buffs & knockbacks;
         // Skills.Add(new Galvanize());
-        // Skills.Add(new SecondWind());
         Skills.Add(new AxeSlash());
-        Skills.Add(new Whirlwind());
-        Skills.Add(new Galvanize());
+        Skills.Add(new SecondWind());
+        Skills.Add(new RagingBull());
+        Skills.Add(new ComeBackHere());
+        Skills.Add(new ShieldBash());
     }
 
     public void CustomInitialize()
@@ -41,6 +42,7 @@ public class Warrior : Unit
         Initiative = 50;
         MovementSpeed = 20;
         Image = "Warrior";
+        CCImmunity = 0;
     }
 
     public override bool IsCellMovableTo(Cell cell)

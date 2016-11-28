@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Collections;
 using Assets.TBS_Framework.Scripts.ASTR;
+using Assets.TBS_Framework.Scripts.ASTR.RogueSkills;
 
 /// <summary>
 /// Base class for all units in the game.
@@ -137,7 +138,19 @@ public abstract class Unit : MonoBehaviour
         MovementPoints = TotalMovementPoints;
         ActionPoints = TotalActionPoints;
         Cell.Occupent = this;
+        if (Buffs.Any())
+        {
+            List<Buff> dotlist = Buffs.FindAll(b => b.isDot);
+            if (dotlist != null)
+            {
+                foreach (Buff b in dotlist)
+                {
+                    b.Trigger(this);
+                }
+            }
+        }
         SetState(new UnitStateMarkedAsFriendly(this));
+        
     }
     /// <summary>
     /// Method is called at the end of each turn.
@@ -147,6 +160,7 @@ public abstract class Unit : MonoBehaviour
         Buffs.FindAll(b => b.Duration == 0).ForEach(b => { b.Undo(this); });
         Buffs.RemoveAll(b => b.Duration == 0);
         Buffs.ForEach(b => { b.Duration--; });
+
         SetState(new UnitStateNormal(this));
     }
     /// <summary>
@@ -222,8 +236,6 @@ public abstract class Unit : MonoBehaviour
     // ------ ASTR
     public virtual void DealDamage2(Unit other, int damage)
     {
-        if (isMoving)
-            return;
         int dealtDamage = (int)Mathf.Floor(damage * AttackFactor);
         other.Defend(this, dealtDamage);
     }
@@ -237,8 +249,12 @@ public abstract class Unit : MonoBehaviour
         MarkAsDefending(other);
         int receivedDamage = (int)Mathf.Floor (dealtDamage / DefenceFactor);
         HitPoints -= receivedDamage;
-        printDamage(receivedDamage);
-
+        printDamage(receivedDamage+1);
+        if (other.Buffs.Find(b => b.Name == "Snake Venom") != null)
+        {
+            SnakeDot sndot = new SnakeDot();
+            Buffs.Add(sndot);
+        }
         if (UnitAttacked != null)
             UnitAttacked.Invoke(this, new AttackEventArgs(other, this, receivedDamage));
 
@@ -300,6 +316,47 @@ public abstract class Unit : MonoBehaviour
         }
 
     }
+
+    public virtual void Dash(Cell destinationCell, List<Cell> path, TrapManager trapmanager)
+    {
+        Cell.IsTaken = false;
+        Cell.Occupent = null;
+        bool trapfound = false;
+        List<Cell> TrapPath = new List<Cell>();
+        foreach(Cell c in path)
+        {
+            if (!trapfound)
+            {
+                TrapPath.Add(c);
+            }
+            if (trapmanager.findTrap(c))
+            {
+                trapmanager.Trigger(this);
+                trapfound = true;
+            }
+        }
+        TrapPath.Reverse();
+        Cell = destinationCell;
+        destinationCell.IsTaken = true;
+        destinationCell.Occupent = this;
+
+        if (MovementSpeed > 0 && trapfound)
+            StartCoroutine(RunAnimation(TrapPath));
+        else if (MovementSpeed > 0 && !trapfound)
+            StartCoroutine(RunAnimation(path));
+        else
+            transform.position = Cell.transform.position;
+
+        if (UnitMoved != null && trapfound)
+        {
+            UnitMoved.Invoke(this, new MovementEventArgs(Cell, destinationCell, TrapPath));
+        }
+        else if (UnitMoved != null && !trapfound)
+        {
+            UnitMoved.Invoke(this, new MovementEventArgs(Cell, destinationCell, path));
+        }
+    }
+
     protected virtual IEnumerator MovementAnimation(List<Cell> path)
     {
         isMoving = true;
@@ -317,6 +374,26 @@ public abstract class Unit : MonoBehaviour
         }
         isMoving = false;
         anim.SetBool("Walk", false);
+        anim.SetBool("Idle", true);
+    }
+
+    protected virtual IEnumerator RunAnimation(List<Cell> path)
+    {
+        isMoving = true;
+        Animator anim = this.GetComponentInChildren<Animator>();
+        anim.SetBool("Idle", false);
+        anim.SetBool("Run", true);
+        path.Reverse();
+        foreach (var cell in path)
+        {
+            while (new Vector2(transform.position.x,transform.position.y) != new Vector2(cell.transform.position.x,cell.transform.position.y))
+            {
+                transform.position = Vector3.MoveTowards(transform.position, new Vector3(cell.transform.position.x,cell.transform.position.y,transform.position.z), Time.deltaTime * MovementSpeed * 2);
+                yield return 0;
+            }
+        }
+        isMoving = false;
+        anim.SetBool("Run", false);
         anim.SetBool("Idle", true);
     }
 
@@ -617,7 +694,7 @@ public abstract class Unit : MonoBehaviour
     /// <summary>
     /// Convert OffsetCoord to Cube
     /// </summary>
-    Vector2 ConvertToOffsetCoord(Vector3 v)
+    public Vector2 ConvertToOffsetCoord(Vector3 v)
     {
         return new Vector2(v.x, (v.z + (v.x + (Mathf.Abs(v.x) % 2)) / 2));
     }
@@ -625,7 +702,7 @@ public abstract class Unit : MonoBehaviour
     /// <summary>
     /// Convert OffsetCoord to Cube
     /// </summary>
-    Vector3 ConvertToCube(Vector2 v)
+    public Vector3 ConvertToCube(Vector2 v)
     {
         float x = v.x;
         float z = v.y - (v.x + (Mathf.Abs(v.x) % 2)) / 2;

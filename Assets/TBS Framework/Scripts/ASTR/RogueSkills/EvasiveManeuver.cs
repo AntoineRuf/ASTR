@@ -1,131 +1,141 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
-public class EvasiveManeuver : Skill
+namespace Assets.TBS_Framework.Scripts.ASTR.RogueSkills
 {
-
-    public override string Name
+    class EvasiveManeuver : Skill
     {
-        get { return "Evasive Maneuver"; }
-        set { }
-    }
-
-    public override string Tooltip
-    {
-        get
+        public override string Name
         {
-            return "Basic rogue attack. Throw daggers to a cell";
+            get { return "Evasive Maneuvers"; }
+            set { }
         }
 
-        set
+        public override string Tooltip
         {
-            base.Tooltip = value;
-        }
-    }
-
-    public override int MinRange
-    {
-        get { return 1; }
-        set { base.MinRange = value;  }
-    }
-
-    public override int MaxRange
-    {
-        get { return 3; }
-        set { base.MaxRange = value; }
-    }
-
-    public override int MinDamage
-    {
-        get { return 14; }
-        set { base.MinDamage = value; }
-    }
-
-    public override int MaxDamage
-    {
-        get { return 17; }
-        set { base.MaxDamage = value; }
-    }
-
-    public override int Cooldown
-    {
-        get { return 1; }
-        set { }
-    }
-
-    public override bool CanTargetEmptyCell
-    {
-        get { return false; }//testing purpose
-        set { }
-    }
-
-    public override bool CanTargetEnemies
-    {
-        get { return true; }
-        set { }
-    }
-
-    public override bool CanTargetAllies
-    {
-        get { return false; }
-        set { }
-    }
-
-    public override bool AlignmentNeeded
-    {
-        get { return true; }
-        set { }
-    }
-
-    public override int isAoE
-    {
-        get { return 1; }
-        set { }
-    }
-
-    public override int AoERange
-    {
-        get { return 0; }
-        set { }
-    }
-
-    public override void Apply(Unit caster, Unit receiver){}
-
-    public override void Apply(Unit caster, Cell receiver, CellGrid cellGrid){}
-
-    public override void Apply (Unit caster, List<Unit> receivers)
-    {
-        Animator anim = caster.GetComponentInChildren<Animator>();
-        anim.SetBool("Attack", true);
-        anim.SetBool("Idle", false);
-
-        foreach (var receiver in receivers)
-        {
-            int damage = Random.Range(MinDamage, MaxDamage+1);
-            caster.DealDamage2(receiver, damage);
-        }
-
-        caster.ActionPoints--;
-        SetCooldown();
-    }
-
-    public override void Apply (Unit caster, List<Cell> cells, CellGrid cellGrid)
-    {
-
-        Animator anim = caster.GetComponentInChildren<Animator>();
-        anim.SetBool("Attack", true);
-        anim.SetBool("Idle", false);
-
-        foreach (var currentCell in cells)
-        {
-            if (currentCell.Occupent != null)
+            get
             {
-                int damage = Random.Range(MinDamage, MaxDamage+1);
-                caster.DealDamage2(currentCell.Occupent, damage);
+                return "Dashes on a target, deals damage, and use it as a foothold to jump away.";
+            }
+
+            set
+            {
+                base.Tooltip = value;
             }
         }
 
-        caster.ActionPoints--;
-        SetCooldown();
+        public override int MinRange
+        {
+            get { return 1; }
+            set { base.MinRange = value; }
+        }
+
+        public override int MaxRange
+        {
+            get { return 2; }
+            set { base.MaxRange = value; }
+        }
+
+        public override int MinDamage
+        {
+            get { return 18; }
+            set { base.MinDamage = value; }
+        }
+
+        public override int MaxDamage
+        {
+            get { return 25; }
+            set { base.MaxDamage = value; }
+        }
+
+        public override int Cooldown
+        {
+            get { return 4; }
+            set { }
+        }
+
+        public override bool CanTargetEmptyCell
+        {
+            get { return false; }
+            set { }
+        }
+
+        public override bool CanTargetEnemies
+        {
+            get { return true; }
+            set { }
+        }
+
+        public override bool CanTargetAllies
+        {
+            get { return false; }
+            set { }
+        }
+
+        public override bool AlignmentNeeded
+        {
+            get { return false; }
+            set { }
+        }
+
+        public override int isAoE
+        {
+            get { return 0; }
+            set { }
+        }
+
+        public override int AoERange
+        {
+            get { return 0; }
+            set { }
+        }
+
+        public override void Apply(Unit caster, Unit receiver) { }
+
+        public override void Apply(Unit caster, Cell receiver, CellGrid cellGrid) { }
+
+        public override void Apply(Unit caster, List<Unit> receivers, CellGrid cellGrid)
+        {
+            foreach (Unit u in receivers)
+            {
+               int damage = Random.Range(MinDamage, MaxDamage + 1);
+               caster.DealDamage2(u, damage);
+                Vector3 casterCubeCoord = caster.ConvertToCube(caster.Cell.OffsetCoord);
+                Vector3 receiverCubeCoord = u.ConvertToCube(u.Cell.OffsetCoord);
+                Vector3 directiontogo = -(Directions.NearestNeighborDirection(casterCubeCoord, receiverCubeCoord));
+                Vector3 displacement = new Vector3();
+                List<Cell> path = new List<Cell>();
+                for(int i = 1; i >=3; i++)
+                {
+                    if(cellGrid.Cells.Find(c => c.OffsetCoord == Directions.ConvertToOffsetCoord(casterCubeCoord + directiontogo)) != null)
+                    {
+                        Cell celltoExamine = cellGrid.Cells.Find(c => c.OffsetCoord == Directions.ConvertToOffsetCoord(casterCubeCoord + directiontogo));
+                        if (celltoExamine.IsTaken)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            displacement += directiontogo;
+                        }
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+
+
+            }
+            caster.ActionPoints--;
+            SetCooldown();
+
+        }
+
+        public override void Apply(Unit caster, List<Cell> cells, CellGrid cellGrid)
+        {
+          
+        }
     }
 }
+

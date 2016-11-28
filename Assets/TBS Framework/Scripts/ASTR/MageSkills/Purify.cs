@@ -84,7 +84,7 @@ public class Purify : Skill
 
     // **TODO** Implémenter les dégâts supplémentaires au centre.
 
-    public override void Apply (Unit caster, List<Unit> receivers)
+    public override void Apply (Unit caster, List<Unit> receivers, CellGrid cellgrid)
     {
         Animator anim = caster.GetComponentInChildren<Animator>();
         anim.SetBool("Skill", true);
@@ -92,7 +92,11 @@ public class Purify : Skill
         foreach (var receiver in receivers)
         {
             receiver.HitPoints += 40;
-            //Buff DoT = receiver.Buffs.Find(b => b.isDot);
+            Buff DoT = receiver.Buffs.Find(b => b.isDot);
+            if (DoT != null)
+            {
+                receiver.Buffs.Remove(DoT);
+            }
         }
 
 

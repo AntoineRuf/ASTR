@@ -1,3 +1,5 @@
+using System;
+
 public class SlowedDebuff : Buff
 {
     private float _factor;
@@ -7,34 +9,40 @@ public class SlowedDebuff : Buff
     }
 
     public string Name {
-        get { return "SlowedDebuff"; }
+        get { return "Slowed"; }
         set {}
     }
+    
+    public int Duration { get { return 1; } set { } }
 
-
-    public SlowedDebuff(int duration, float factor)
+    public bool isDot
     {
-        Duration = duration;
-        _factor = 0.0f;
+        get
+        {
+            return true;
+        }
+
+        set
+        {
+            throw new NotImplementedException();
+        }
     }
 
-    public int Duration { get; set; }
     public void Apply(Unit unit)
     {
-        if (unit.TotalMovementPoints >= 1)
-        {
-            unit.TotalMovementPoints -= 1;
-            _factor = 1.0f;
-        }
     }
 
     public void Undo(Unit unit)
     {
-        if (_factor == 1.0f) unit.TotalMovementPoints += 1;
     }
 
     public Buff Clone()
     {
-        return new SlowedDebuff(Duration, _factor);
+        return this;
+    }
+
+    public void Trigger(Unit unit)
+    {
+        unit.MovementPoints -= 1;
     }
 }

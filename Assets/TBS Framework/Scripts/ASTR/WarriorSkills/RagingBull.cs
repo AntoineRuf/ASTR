@@ -10,6 +10,12 @@ public class RagingBull : Skill
         set { }
     }
 
+    public override string Tooltip
+    {
+        get { return "Charges towards an enemy, dealing damage to the first unit hit."; }
+        set { }
+    }
+
     public override int MinRange
     {
         get { return 2; }
@@ -82,31 +88,53 @@ public class RagingBull : Skill
         set { }
     }
 
-    public override void Apply(Unit caster, Unit receiver)
-    {
-        // Comparer les positions de caster et receiver
-        // Déplacer caster au contact de receiver
-        // Appliquer les dégâts si contact (dash < 3 cases)
+    private Unit MoveCasterToTarget(Unit caster, Unit receiver, CellGrid cellGrid){
+
+      Vector3 casterPos = Directions.ConvertToCube(caster.Cell.OffsetCoord);
+      Vector3 receiverPos = Directions.ConvertToCube(receiver.Cell.OffsetCoord);
+      Vector2 destinationCoord = Directions.NearestNeighbor(casterPos, receiverPos);
+
+      var arrived = false;
+      var checkedCellCoord = casterPos;
+      Cell obstacleCell = null;
+      var direction = Directions.NearestNeighborDirection(casterPos, receiverPos);
+      List<Cell> path = new List<Cell>();
+
+      while (!arrived) {
+          checkedCellCoord -= direction;
+          var checkedCellOffsetCoord = Directions.ConvertToOffsetCoord(checkedCellCoord);
+          var checkedCell = cellGrid.Cells.Find(x => x.OffsetCoord.Equals(checkedCellOffsetCoord));
+          if (!checkedCell.IsTaken && !checkedCell.Equals(receiver.Cell)) {
+              path.Add(checkedCell);
+          }
+          else {
+              arrived = true;
+              obstacleCell = checkedCell;
+          }
+      }
+      path.Reverse();
+      if (path.Count > 0) caster.Dash(path[path.Count - 1], path, cellGrid.trapmanager);
+      return obstacleCell.Occupent;
     }
+
+    public override void Apply(Unit caster, Unit receiver){}
 
     public override void Apply(Unit caster, Cell receiver, CellGrid cellGrid){}
 
-    public override void Apply (Unit caster, List<Unit> receivers)
+    public override void Apply (Unit caster, List<Unit> receivers, CellGrid cellGrid)
     {
-        Animator anim = caster.GetComponentInChildren<Animator>();
-        anim.SetBool("Attack", true);
-        anim.SetBool("Idle", false);
-
         foreach (var receiver in receivers)
         {
             int damage = Random.Range(MinDamage, MaxDamage+1);
-            caster.DealDamage2(receiver, damage);
+            Unit victim = MoveCasterToTarget(caster, receiver, cellGrid);
+            Debug.Log(victim);
+            Debug.Log(damage);
+            caster.DealDamage2(victim, damage);
         }
 
-        // **TODO**
-        // Comparer les positions de caster et receiver
-        // Déplacer caster au contact de receiver
-        // Appliquer les dégâts si contact (dash < 3 cases)
+        Animator anim = caster.GetComponentInChildren<Animator>();
+        anim.SetBool("Attack", true);
+        anim.SetBool("Idle", false);
 
         caster.ActionPoints--;
         SetCooldown();

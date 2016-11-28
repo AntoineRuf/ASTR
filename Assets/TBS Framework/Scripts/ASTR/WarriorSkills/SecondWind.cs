@@ -10,6 +10,12 @@ public class SecondWind : Skill
         set { }
     }
 
+    public override string Tooltip
+    {
+        get { return "Heals the warrior, and renders him immune to CC for a turn."; }
+        set { }
+    }
+
     public override int MinRange
     {
         get { return 0; }
@@ -86,12 +92,8 @@ public class SecondWind : Skill
 
     public override void Apply(Unit caster, Cell receiver, CellGrid cellGrid){}
 
-    public override void Apply (Unit caster, List<Unit> receivers)
+    public override void Apply (Unit caster, List<Unit> receivers, CellGrid cellGrid)
     {
-        Animator anim = caster.GetComponentInChildren<Animator>();
-        anim.SetBool("Attack", true);
-        anim.SetBool("Idle", false);
-
         int selfHeal = (int)Mathf.Floor((caster.TotalHitPoints - caster.HitPoints) / 2);
         caster.HitPoints += selfHeal;
         if (caster.HitPoints > caster.TotalHitPoints)
