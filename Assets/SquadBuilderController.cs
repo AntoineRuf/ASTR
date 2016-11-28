@@ -9,6 +9,7 @@ using Assets.TBS_Framework.Scripts.ASTR.RogueSkills;
 public class SquadBuilderController : MonoBehaviour {
 
     public Transform SquadPanel;
+    public Transform SquadName;
     public Sprite RogueImage;
     public Sprite MageImage;
     public Sprite WarriorImage;
@@ -294,7 +295,11 @@ public class SquadBuilderController : MonoBehaviour {
 
     public void OnSaveButtonClicked()
     {
-
+        // if squad name is empty, return;
+        if (SquadName.GetComponent<InputField>().text == "")
+            return;
+        PlayerData squadData = new PlayerData();
+        squadData.squadName = SquadName.GetComponent<InputField>().text;
         List<UnitData> unitsData = new List<UnitData>();
         for (int j = 1; j < 4; ++j)
         {
@@ -312,7 +317,9 @@ public class SquadBuilderController : MonoBehaviour {
             currentUnitData.Name = UnitPanel.Find("UnitName").GetComponent<InputField>().text;
             unitsData.Add(currentUnitData);
         }
-        GameControl.Save(unitsData);
+        squadData.playerData = unitsData;
+        GameControl.Save(squadData);
+        Debug.Log("SAVED");
 
         
 
@@ -321,7 +328,7 @@ public class SquadBuilderController : MonoBehaviour {
     public void OnLoadButtonClicked()
     {
         GameControl.Load();
-        Debug.Log(GameControl.playerData[0].Name);
+        List<PlayerData> text = GameControl.playerData;
     }
 
         

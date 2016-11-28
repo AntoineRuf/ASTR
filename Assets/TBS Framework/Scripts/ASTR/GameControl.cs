@@ -10,6 +10,8 @@ public class GameControl : MonoBehaviour
 
     public static GameControl control;
     public static List<UnitData> playerData;
+    public static List<PlayerData> playerData = new List<PlayerData>();
+    public List<UnitData> UnitLayout;
     // Use this for initialization
     void Awake()
     {
@@ -24,21 +26,19 @@ public class GameControl : MonoBehaviour
         }
     }
 
-    public GameControl()
-    {
-        playerData = new List<UnitData>();
-    }
-
-    public static void Save(List<UnitData> pData)
+    public static void Save(PlayerData pData)
     {
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/save.dat");
 
-        PlayerData data = new PlayerData();
-        playerData = pData;
-        data.playerData = playerData;
-
-
+        List<PlayerData> data = new List<PlayerData>();
+        foreach (var currentPlayerDate in playerData)
+        {
+            data.Add(currentPlayerDate);
+        }
+        data.Add(pData);
+        playerData.Add(pData);
+        
         bf.Serialize(file, data);
         file.Close();
     }
@@ -49,16 +49,28 @@ public class GameControl : MonoBehaviour
         {
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + "/save.dat", FileMode.Open);
-            PlayerData data = (PlayerData)bf.Deserialize(file);
-            playerData = data.playerData;
+            List<PlayerData> data = (List<PlayerData>)bf.Deserialize(file);
+            playerData = data;
             file.Close();
         }
+    }
+
+    public static void Delete()
+    {
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(Application.persistentDataPath + "/save.dat");
+
+        List<PlayerData> data = null;
+
+        bf.Serialize(file, data);
+        file.Close();
     }
 }
 
 [Serializable]
 public class PlayerData
 {
+    public string squadName;
     public List<UnitData> playerData;
 }
 
