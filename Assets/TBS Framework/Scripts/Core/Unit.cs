@@ -640,10 +640,10 @@ public abstract class Unit : MonoBehaviour
         Vector3 unitPositionCube = ConvertToCube(unitPositionOffsetCoord);
         Vector3 up = new Vector3(0, 1, -1);
         Vector3 down = new Vector3(0, -1, 1);
-        Vector3 upR = new Vector3(+1, 0, -1);
-        Vector3 upL = new Vector3(-1, 1, 0);
-        Vector3 downR = new Vector3(+1, -1, 0);
-        Vector3 downL = new Vector3(-1, 0, 1);
+        Vector3 upL = new Vector3(+1, 0, -1);
+        Vector3 upR = new Vector3(-1, 1, 0);
+        Vector3 downL = new Vector3(+1, -1, 0);
+        Vector3 downR = new Vector3(-1, 0, 1);
         Vector3 direction = new Vector3();
         switch (unit.Facing)
         {

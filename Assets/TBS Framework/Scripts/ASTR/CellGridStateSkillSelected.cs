@@ -183,33 +183,33 @@ class CellGridStateSkillSelected : CellGridState
                 }
                 else if (direction == upL)
                 {
-                    Vector2 cellToAdd1OffsetCoord = _unit.ConvertToOffsetCoord(cellCubeCoord + upR);
-                    Vector2 cellToAdd2OffsetCoord = _unit.ConvertToOffsetCoord(cellCubeCoord + down);
-                    _cellsAffected.Add(cell);
-                    if (_cellGrid.Cells.Find(c => c.OffsetCoord == cellToAdd1OffsetCoord) != null)
-                        _cellsAffected.Add(_cellGrid.Cells.Find(c => c.OffsetCoord == cellToAdd1OffsetCoord));
-                    if (_cellGrid.Cells.Find(c => c.OffsetCoord == cellToAdd2OffsetCoord) != null)
-                        _cellsAffected.Add(_cellGrid.Cells.Find(c => c.OffsetCoord == cellToAdd2OffsetCoord));
+                    //Vector2 cellToAdd1OffsetCoord = _unit.ConvertToOffsetCoord(cellCubeCoord + upR);
+                    //Vector2 cellToAdd2OffsetCoord = _unit.ConvertToOffsetCoord(cellCubeCoord + down);
+                    //_cellsAffected.Add(cell);
+                    //if (_cellGrid.Cells.Find(c => c.OffsetCoord == cellToAdd1OffsetCoord) != null)
+                    //    _cellsAffected.Add(_cellGrid.Cells.Find(c => c.OffsetCoord == cellToAdd1OffsetCoord));
+                    //if (_cellGrid.Cells.Find(c => c.OffsetCoord == cellToAdd2OffsetCoord) != null)
+                    //    _cellsAffected.Add(_cellGrid.Cells.Find(c => c.OffsetCoord == cellToAdd2OffsetCoord));
                 }
                 else if (direction == downR)
                 {
-                    Vector2 cellToAdd1OffsetCoord = _unit.ConvertToOffsetCoord(cellCubeCoord + up);
-                    Vector2 cellToAdd2OffsetCoord = _unit.ConvertToOffsetCoord(cellCubeCoord + downL);
-                    _cellsAffected.Add(cell);
-                    if (_cellGrid.Cells.Find(c => c.OffsetCoord == cellToAdd1OffsetCoord) != null)
-                        _cellsAffected.Add(_cellGrid.Cells.Find(c => c.OffsetCoord == cellToAdd1OffsetCoord));
-                    if (_cellGrid.Cells.Find(c => c.OffsetCoord == cellToAdd2OffsetCoord) != null)
-                        _cellsAffected.Add(_cellGrid.Cells.Find(c => c.OffsetCoord == cellToAdd2OffsetCoord));
+                    //Vector2 cellToAdd1OffsetCoord = _unit.ConvertToOffsetCoord(cellCubeCoord + up);
+                    //Vector2 cellToAdd2OffsetCoord = _unit.ConvertToOffsetCoord(cellCubeCoord + downL);
+                    //_cellsAffected.Add(cell);
+                    //if (_cellGrid.Cells.Find(c => c.OffsetCoord == cellToAdd1OffsetCoord) != null)
+                    //    _cellsAffected.Add(_cellGrid.Cells.Find(c => c.OffsetCoord == cellToAdd1OffsetCoord));
+                    //if (_cellGrid.Cells.Find(c => c.OffsetCoord == cellToAdd2OffsetCoord) != null)
+                    //    _cellsAffected.Add(_cellGrid.Cells.Find(c => c.OffsetCoord == cellToAdd2OffsetCoord));
                 }
                 else if (direction == downL)
                 {
-                    Vector2 cellToAdd1OffsetCoord = _unit.ConvertToOffsetCoord(cellCubeCoord + up);
-                    Vector2 cellToAdd2OffsetCoord = _unit.ConvertToOffsetCoord(cellCubeCoord + downR);
-                    _cellsAffected.Add(cell);
-                    if (_cellGrid.Cells.Find(c => c.OffsetCoord == cellToAdd1OffsetCoord) != null)
-                        _cellsAffected.Add(_cellGrid.Cells.Find(c => c.OffsetCoord == cellToAdd1OffsetCoord));
-                    if (_cellGrid.Cells.Find(c => c.OffsetCoord == cellToAdd2OffsetCoord) != null)
-                        _cellsAffected.Add(_cellGrid.Cells.Find(c => c.OffsetCoord == cellToAdd2OffsetCoord));
+                    //Vector2 cellToAdd1OffsetCoord = _unit.ConvertToOffsetCoord(cellCubeCoord + up);
+                    //Vector2 cellToAdd2OffsetCoord = _unit.ConvertToOffsetCoord(cellCubeCoord + downR);
+                    //_cellsAffected.Add(cell);
+                    //if (_cellGrid.Cells.Find(c => c.OffsetCoord == cellToAdd1OffsetCoord) != null)
+                    //    _cellsAffected.Add(_cellGrid.Cells.Find(c => c.OffsetCoord == cellToAdd1OffsetCoord));
+                    //if (_cellGrid.Cells.Find(c => c.OffsetCoord == cellToAdd2OffsetCoord) != null)
+                    //    _cellsAffected.Add(_cellGrid.Cells.Find(c => c.OffsetCoord == cellToAdd2OffsetCoord));
                 }
                 foreach (Cell c in _cellsAffected)
                 {
