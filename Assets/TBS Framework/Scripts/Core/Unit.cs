@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Collections;
 using Assets.TBS_Framework.Scripts.ASTR;
-using Assets.TBS_Framework.Scripts.ASTR.RogueSkills;
 using Assets.TBS_Framework.Scripts.ASTR.Classes.Buffs;
 
 /// <summary>
@@ -156,6 +155,10 @@ public abstract class Unit : MonoBehaviour
             warbuff.Apply(this);
         }
         SetState(new UnitStateMarkedAsFriendly(this));
+        Animator anim = GetComponentInChildren<Animator>();
+        anim.SetBool("Attack", false);
+        anim.SetBool("Skill", false);
+        anim.SetBool("Idle", true);
         
     }
     /// <summary>
