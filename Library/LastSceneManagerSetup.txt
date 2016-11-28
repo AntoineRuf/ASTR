@@ -1,1 +1,4 @@
-sceneSetups: []
+sceneSetups:
+- path: Assets/TBS Framework/Scenes/SquadBuilder2.unity
+  isLoaded: 1
+  isActive: 1

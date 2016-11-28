@@ -291,4 +291,29 @@ public class SquadBuilderController : MonoBehaviour {
     {
         SceneManager.LoadScene("TitleScreen", LoadSceneMode.Single);
     }
+
+    public void OnSaveButtonClicked()
+    {
+
+        List<UnitData> unitsData = new List<UnitData>();
+        for (int j = 1; j < 4; ++j)
+        {
+            UnitData currentUnitData = new UnitData();
+            string UnitPanelName = string.Format("Unit{0}", j);
+            Transform UnitPanel = SquadPanel.FindChild(UnitPanelName);
+            List<Skill> unitSkills = new List<Skill>();
+            for (int i = 0; i < 4; ++i)
+            {
+                Transform item = UnitPanel.FindChild("Actifs Slots").FindChild("SkillSheet").GetChild(i).GetChild(0);
+                unitSkills.Add(AllSkills.Find(s => (s.Name == item.name)));
+            }
+            currentUnitData.Skills = unitSkills;
+            currentUnitData.Class = UnitPanel.FindChild("ClassName").GetComponent<Text>().text;
+            currentUnitData.Name = UnitPanel.Find("UnitName").GetComponent<InputField>().text;
+            unitsData.Add(currentUnitData);
+        }
+
+    }
+
+        
 }
