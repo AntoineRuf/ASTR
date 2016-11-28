@@ -39,12 +39,7 @@ public class FireRain : Skill
         get { return 5; }
         set { }
     }
-
-    public override int CurrentCooldown
-    {
-        get { return 0; }
-        set { }
-    }
+    
 
     public override bool CanTargetEmptyCell
     {

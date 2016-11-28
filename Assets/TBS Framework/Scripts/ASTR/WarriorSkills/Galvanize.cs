@@ -46,12 +46,6 @@ public class Galvanize : Skill
         set { }
     }
 
-    public override int CurrentCooldown
-    {
-        get { return 0; }
-        set { }
-    }
-
     public override bool CanTargetEmptyCell
     {
         get { return false; }

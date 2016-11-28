@@ -53,12 +53,7 @@ public class Headvice : Skill
         get { return 6; }
         set { }
     }
-
-    public override int CurrentCooldown
-    {
-        get { return 0; }
-        set { }
-    }
+    
 
     public override bool CanTargetEmptyCell
     {

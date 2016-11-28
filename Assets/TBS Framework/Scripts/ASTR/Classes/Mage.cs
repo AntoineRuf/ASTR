@@ -23,6 +23,9 @@ public class Mage : Unit
 
         Skills.Add(new ManaStrike());
         Skills.Add(new IceLance());
+        Skills.Add(new ChangingWinds());
+        Skills.Add(new Headvice());
+        Skills.Add(new Incinerate());
     }
 
     public void CustomInitialize()
