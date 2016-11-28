@@ -56,7 +56,7 @@ class CloakAndDagger : Skill
 
     public override bool CanTargetEmptyCell
     {
-        get { return true; }
+        get { return false; }
         set { }
     }
 
