@@ -9,7 +9,8 @@ public class GameControl : MonoBehaviour
 {
 
     public static GameControl control;
-    public static AllUnitsData UnitLayout;
+    public static List<UnitData> playerData;
+    public List<UnitData> UnitLayout;
     // Use this for initialization
     void Awake()
     {
@@ -24,33 +25,19 @@ public class GameControl : MonoBehaviour
         }
     }
 
-    public static void Save()
+    public GameControl()
+    {
+        playerData = new List<UnitData>();
+    }
+
+    public static void Save(List<UnitData> pData)
     {
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/save.dat");
 
-        AllUnitsData data = new AllUnitsData();
-        data.Unitdata = new List<UnitData>();
-
-        for (int i = 0; i < 6; ++i)
-        {
-            string testunit1name = "Labite";
-            string testunit1class = "Warrior";
-            int testunit1player = 1;
-            List<Skill> testunit1list = new List<Skill>();
-            testunit1list.Add(new Galvanize());
-            testunit1list.Add(new RagingBull());
-            testunit1list.Add(new ShieldBash());
-            testunit1list.Add(new Whirlwind());
-
-            UnitData unit1 = new UnitData();
-            unit1.Player = testunit1player;
-            unit1.Name = testunit1name;
-            unit1.Class = testunit1class;
-            unit1.Skills = testunit1list;
-
-            data.Unitdata.Add(unit1);
-        }
+        PlayerData data = new PlayerData();
+        playerData = pData;
+        data.playerData = playerData;
 
 
         bf.Serialize(file, data);
@@ -63,16 +50,17 @@ public class GameControl : MonoBehaviour
         {
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + "/save.dat", FileMode.Open);
-            UnitLayout = (AllUnitsData)bf.Deserialize(file);
+            PlayerData data = (PlayerData)bf.Deserialize(file);
+            playerData = data.playerData;
             file.Close();
         }
     }
 }
 
 [Serializable]
-public class AllUnitsData
+public class PlayerData
 {
-    public List<UnitData> Unitdata;
+    public List<UnitData> playerData;
 }
 
 [Serializable]

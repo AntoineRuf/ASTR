@@ -4,6 +4,8 @@ using UnityEngine;
 /// <summary>
 /// Active Skills are used by units, and are the bread and butter of combat.
 /// </summary>
+/// 
+[Serializable]
 public abstract class Skill
 {
 

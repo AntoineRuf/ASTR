@@ -312,7 +312,16 @@ public class SquadBuilderController : MonoBehaviour {
             currentUnitData.Name = UnitPanel.Find("UnitName").GetComponent<InputField>().text;
             unitsData.Add(currentUnitData);
         }
+        GameControl.Save(unitsData);
 
+        
+
+    }
+
+    public void OnLoadButtonClicked()
+    {
+        GameControl.Load();
+        Debug.Log(GameControl.playerData[0].Name);
     }
 
         
