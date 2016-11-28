@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Collections;
 using Assets.TBS_Framework.Scripts.ASTR;
+using Assets.TBS_Framework.Scripts.ASTR.RogueSkills;
 
 /// <summary>
 /// Base class for all units in the game.
@@ -137,7 +138,19 @@ public abstract class Unit : MonoBehaviour
         MovementPoints = TotalMovementPoints;
         ActionPoints = TotalActionPoints;
         Cell.Occupent = this;
+        if (Buffs.Any())
+        {
+            List<Buff> dotlist = Buffs.FindAll(b => b.isDot);
+            if (dotlist != null)
+            {
+                foreach (Buff b in dotlist)
+                {
+                    b.Trigger(this);
+                }
+            }
+        }
         SetState(new UnitStateMarkedAsFriendly(this));
+        
     }
     /// <summary>
     /// Method is called at the end of each turn.
@@ -237,7 +250,11 @@ public abstract class Unit : MonoBehaviour
         int receivedDamage = (int)Mathf.Floor (dealtDamage / DefenceFactor);
         HitPoints -= receivedDamage;
         printDamage(receivedDamage+1);
-
+        if (other.Buffs.Find(b => b.Name == "Snake Venom") != null)
+        {
+            SnakeDot sndot = new SnakeDot();
+            Buffs.Add(sndot);
+        }
         if (UnitAttacked != null)
             UnitAttacked.Invoke(this, new AttackEventArgs(other, this, receivedDamage));
 
@@ -677,7 +694,7 @@ public abstract class Unit : MonoBehaviour
     /// <summary>
     /// Convert OffsetCoord to Cube
     /// </summary>
-    Vector2 ConvertToOffsetCoord(Vector3 v)
+    public Vector2 ConvertToOffsetCoord(Vector3 v)
     {
         return new Vector2(v.x, (v.z + (v.x + (Mathf.Abs(v.x) % 2)) / 2));
     }
@@ -685,7 +702,7 @@ public abstract class Unit : MonoBehaviour
     /// <summary>
     /// Convert OffsetCoord to Cube
     /// </summary>
-    Vector3 ConvertToCube(Vector2 v)
+    public Vector3 ConvertToCube(Vector2 v)
     {
         float x = v.x;
         float z = v.y - (v.x + (Mathf.Abs(v.x) % 2)) / 2;

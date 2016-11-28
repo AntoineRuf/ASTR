@@ -22,6 +22,7 @@ public class Mage : Unit
         transform.position += new Vector3(0, 0, -1);
 
         Skills.Add(new ManaStrike());
+        Skills.Add(new IceLance());
     }
 
     public override bool IsCellMovableTo(Cell cell)

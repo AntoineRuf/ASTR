@@ -14,7 +14,7 @@ public class TwinDaggers : Skill
     {
         get
         {
-            return "Basic rogue attack. Throw daggers to a cell";
+            return "Basic rogue attack. Throw daggers to a cell. Deal more damage up close.";
         }
 
         set
@@ -55,7 +55,7 @@ public class TwinDaggers : Skill
 
     public override bool CanTargetEmptyCell
     {
-        get { return false; }//testing purpose
+        get { return true; }//testing purpose
         set { }
     }
 
@@ -79,7 +79,7 @@ public class TwinDaggers : Skill
 
     public override int isAoE
     {
-        get { return 1; }
+        get { return 3; }
         set { }
     }
 
@@ -96,16 +96,20 @@ public class TwinDaggers : Skill
     public override void Apply (Unit caster, List<Unit> receivers, CellGrid cellGrid)
     {
         Animator anim = caster.GetComponentInChildren<Animator>();
-        anim.SetBool("Attack", true);
-        anim.SetBool("Idle", false);
-
-        foreach (var receiver in receivers)
+        anim.SetBool("Skill", true);
+        foreach(Unit u in receivers)
         {
-            int damage = Random.Range(MinDamage, MaxDamage+1);
-            if (caster.Cell.GetDistance(receiver.Cell)==1) damage += 3;
-            caster.DealDamage2(receiver, damage);
+            if (caster.Cell.GetDistance(u.Cell) == 1)
+            {
+                int damage = Random.Range(17, 21);
+                caster.DealDamage2(u, damage);
+            }
+            else
+            {
+                int damage = Random.Range(MinDamage, MaxDamage + 1);
+                caster.DealDamage2(u, damage);
+            }
         }
-
         caster.ActionPoints--;
         SetCooldown();
     }
@@ -114,18 +118,24 @@ public class TwinDaggers : Skill
     {
 
         Animator anim = caster.GetComponentInChildren<Animator>();
-        anim.SetBool("Attack", true);
-        anim.SetBool("Idle", false);
+        anim.SetBool("Skill", true);
 
         foreach (var currentCell in cells)
         {
             if (currentCell.Occupent != null)
             {
-                int damage = Random.Range(MinDamage, MaxDamage+1);
-                caster.DealDamage2(currentCell.Occupent, damage);
+                if (caster.Cell.GetDistance(currentCell) == 1)
+                {
+                    int damage = Random.Range(17, 21);
+                    caster.DealDamage2(currentCell.Occupent, damage);
+                }
+                else
+                {
+                    int damage = Random.Range(MinDamage, MaxDamage + 1);
+                    caster.DealDamage2(currentCell.Occupent, damage);
+                }
             }
         }
-
         caster.ActionPoints--;
         SetCooldown();
     }
