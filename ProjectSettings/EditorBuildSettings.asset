@@ -19,3 +19,5 @@ EditorBuildSettings:
     path: Assets/TBS Framework/Scenes/TitleScreen.unity
   - enabled: 1
     path: Assets/TBS Framework/Scenes/SquadBuilder2.unity
+  - enabled: 1
+    path: Assets/TBS Framework/Scenes/Credits.unity

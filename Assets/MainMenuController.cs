@@ -25,7 +25,16 @@ public class MainMenuController : MonoBehaviour {
     public void OnExitGameButtonClicked()  {
         Application.Quit();
     }
+    public void OnCreditsButtonClicked()
+    {
+        SceneManager.LoadScene("Credits", LoadSceneMode.Single);
+    }
 
+    public void OnReturnToMenuButtonClicked()
+    {
+        SceneManager.LoadScene("TitleScreen", LoadSceneMode.Single);
+
+    }
     public void OnTeamBuilderButtonClicked()
     {
         SceneManager.LoadScene("SquadBuilder2", LoadSceneMode.Single);
