@@ -110,7 +110,6 @@ public class ComeBackHere : Skill
               arrived = true;
           }
       }
-      path.Reverse();
       if (path.Count > 0) receiver.Dash(path[path.Count - 1], path, cellGrid.trapmanager);
     }
 

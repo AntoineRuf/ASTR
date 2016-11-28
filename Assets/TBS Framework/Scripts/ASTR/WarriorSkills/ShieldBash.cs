@@ -88,13 +88,6 @@ public class ShieldBash : Skill
         set { }
     }
 
-    // **TODO**
-    // Comparer les positions du caster et receiver
-    // Vérifier s'il y a des obstacles dans l'alignement
-    // Vérifier si receiver a le buff "insensible aux cc"
-    // Repousser le receiver de 2 cases ou jusqu'à un obstacle
-    // Rajouter 3 aux dégâts si obstacle
-
     private int KnockbackTarget(Unit caster, Unit receiver, CellGrid cellGrid, int kbRange){
 
       Vector3 casterPos = Directions.ConvertToCube(caster.Cell.OffsetCoord);
@@ -119,7 +112,6 @@ public class ShieldBash : Skill
               obstacleCell = checkedCell;
           }
       }
-      path.Reverse();
       if (path.Count > 0) receiver.Dash(path[path.Count - 1], path, cellGrid.trapmanager);
       if (obstacleCell == null) return 3;
       else if (obstacleCell.Occupent != null && path.Count < kbRange) {
