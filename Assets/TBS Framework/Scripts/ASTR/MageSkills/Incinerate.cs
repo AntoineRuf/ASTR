@@ -39,7 +39,7 @@ public class Incinerate : Skill
         get { return 4; }
         set { }
     }
-    
+
 
     public override bool CanTargetEmptyCell
     {
