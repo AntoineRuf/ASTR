@@ -21,8 +21,7 @@ public class Warrior : Unit
         transform.position += new Vector3(0, 0, -1);
         CCImmunity = 0;
 
-        // **TODO** Faire fonctionner les buffs & knockbacks;
-        // Skills.Add(new Galvanize());
+        // **TODO** Faire fonctionner les buffs;
         Skills.Add(new AxeSlash());
         Skills.Add(new Whirlwind());
         Skills.Add(new RagingBull());

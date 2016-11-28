@@ -320,8 +320,8 @@ public abstract class Unit : MonoBehaviour
         }
         TrapPath.Reverse();
         Cell = destinationCell;
-        destinationCell.IsTaken = true;
-        destinationCell.Occupent = this;
+        Cell.IsTaken = true;
+        Cell.Occupent = this;
 
         if (MovementSpeed > 0 && trapfound)
             StartCoroutine(RunAnimation(TrapPath));
@@ -366,7 +366,6 @@ public abstract class Unit : MonoBehaviour
         Animator anim = this.GetComponentInChildren<Animator>();
         anim.SetBool("Idle", false);
         anim.SetBool("Run", true);
-        path.Reverse();
         foreach (var cell in path)
         {
             while (new Vector2(transform.position.x,transform.position.y) != new Vector2(cell.transform.position.x,cell.transform.position.y))
@@ -535,6 +534,7 @@ public abstract class Unit : MonoBehaviour
     IEnumerator ShowMessage(TextMesh textMesh, string message, float delay)
     {
         textMesh.text = message;
+        textMesh.transform.rotation = Camera.main.transform.rotation;
         yield return new WaitForSeconds(delay);
         textMesh.text = "";
     }

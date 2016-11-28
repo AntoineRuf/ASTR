@@ -112,7 +112,6 @@ public class RagingBull : Skill
               obstacleCell = checkedCell;
           }
       }
-      path.Reverse();
       if (path.Count > 0) caster.Dash(path[path.Count - 1], path, cellGrid.trapmanager);
       return obstacleCell.Occupent;
     }

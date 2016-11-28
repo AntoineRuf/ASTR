@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
@@ -7,7 +9,8 @@ using System.IO;
 public class GameControl : MonoBehaviour {
 
     public static GameControl control;
-    public Squad squad;
+    public List<Unit> units;
+
 	// Use this for initialization
 	void Awake () {
 	    if (control == null)
@@ -20,14 +23,14 @@ public class GameControl : MonoBehaviour {
             Destroy(gameObject);
         }
 	}
-	
+
 	public void Save()
     {
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/save.dat");
 
         PlayerData data = new PlayerData();
-        data.squad = squad;
+        data.unitList = units;
 
         bf.Serialize(file, data);
         file.Close();
@@ -48,5 +51,5 @@ public class GameControl : MonoBehaviour {
 [Serializable]
 class PlayerData
 {
-    public Squad squad;
+    public List<Unit> unitList;
 }
