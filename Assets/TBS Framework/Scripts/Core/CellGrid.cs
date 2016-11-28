@@ -6,6 +6,7 @@ using System.Collections;
 using Assets.TBS_Framework.Scripts.ASTR;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// CellGrid class keeps track of the game, stores cells, units and players objects. It starts the game and makes turn transitions.
@@ -528,5 +529,10 @@ public class CellGrid : MonoBehaviour
         }
     }
 
+
+    public void OnBackButtonClicked()
+    {
+        SceneManager.LoadScene("TitleScreen", LoadSceneMode.Single);
+    }
     // END OF UI FUNCTIONS
 }
