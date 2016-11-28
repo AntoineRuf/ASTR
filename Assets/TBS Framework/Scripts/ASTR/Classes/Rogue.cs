@@ -1,5 +1,4 @@
-﻿using Assets.TBS_Framework.Scripts.ASTR.RogueSkills;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,11 +21,11 @@ public class Rogue : Unit
         Image = "Rogue";
         CCImmunity = 0;
         
-        Skills.Add(new SnakeVenom());
-        Skills.Add(new QuickDash());
-        Skills.Add(new LethalToxin());
-        Skills.Add(new CloakAndDagger());
-        Skills.Add(new FanOfKnives());
+        Skills.Add(new TwinDaggers());
+       // Skills.Add(new QuickDash());
+       // Skills.Add(new LethalToxin());
+       // Skills.Add(new CloakAndDagger());
+       // Skills.Add(new FanOfKnives());
     }
 
     public void CustomInitialize()

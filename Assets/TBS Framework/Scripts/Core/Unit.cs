@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Collections;
 using Assets.TBS_Framework.Scripts.ASTR;
-using Assets.TBS_Framework.Scripts.ASTR.RogueSkills;
 using Assets.TBS_Framework.Scripts.ASTR.Classes.Buffs;
 
 /// <summary>
@@ -108,6 +107,10 @@ public abstract class Unit : MonoBehaviour
     {
         Buffs = new List<Buff>();
         Skills = new List<Skill>();
+        foreach(var skill in GameControl.playerData[CustomUnitGenerator.CurrentUnit].Skills)
+        {
+            Skills.Add(skill);
+        }
         UnitState = new UnitStateNormal(this);
     }
 

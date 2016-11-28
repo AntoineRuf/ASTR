@@ -4,7 +4,6 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine.SceneManagement;
-using Assets.TBS_Framework.Scripts.ASTR.RogueSkills;
 
 public class SquadBuilderController : MonoBehaviour {
 
@@ -312,9 +311,9 @@ public class SquadBuilderController : MonoBehaviour {
             currentUnitData.Name = UnitPanel.Find("UnitName").GetComponent<InputField>().text;
             unitsData.Add(currentUnitData);
         }
-        GameControl.Save(unitsData);
+        //GameControl.Save(unitsData);
 
-        
+
 
     }
 

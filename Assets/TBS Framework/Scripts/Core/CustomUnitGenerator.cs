@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 public class CustomUnitGenerator : MonoBehaviour, IUnitGenerator
 {
     public Transform UnitsParent;
     public Transform CellsParent;
+    public static int CurrentUnit;
 
     /// <summary>
     /// Returns units that are already children of UnitsParent object.
@@ -14,30 +16,101 @@ public class CustomUnitGenerator : MonoBehaviour, IUnitGenerator
     public List<Unit> SpawnUnits(List<Cell> cells)
     {
         List<Unit> ret = new List<Unit>();
-        for (int i = 0; i < UnitsParent.childCount; i++)
+        Vector2[] spawnPos = new Vector2[6];
+        spawnPos[0] = new Vector2(3, 1);
+        spawnPos[1] = new Vector2(1, 1);
+        spawnPos[2] = new Vector2(1, 3);
+        spawnPos[3] = new Vector2(13, 8);
+        spawnPos[4] = new Vector2(13, 10);
+        spawnPos[5] = new Vector2(11, 10);
+        var units = GameControl.playerData;
+        for (int i = 0; i < units.Count; i++)
         {
-            var unit = UnitsParent.GetChild(i).GetComponent<Unit>();
-            if(unit !=null)
+            CurrentUnit = i;
+            if (units[i].Class == "Warrior")
             {
-                var cell = cells.OrderBy(h => Math.Abs((h.transform.position - unit.transform.position).magnitude)).First();
-                if (!cell.IsTaken)
+                Transform Prefab = Instantiate(AssetDatabase.LoadAssetAtPath<Transform>("Assets/TBS Framework/Prefabs/ASTR/Unit/WarriorPrefab" + units[i].Player + ".prefab"));
+                Warrior unit = Prefab.GetComponent<Warrior>();
+                if (unit != null)
                 {
-                    cell.IsTaken = true;
-                    unit.Cell = cell;
-                    unit.transform.position = cell.transform.position;
-                    unit.Initialize();
-                    ret.Add(unit);
-                }//Unit gets snapped to the nearest cell
+                    var cell = cells.Find(x => x.OffsetCoord.Equals(spawnPos[i]));
+                    if (!cell.IsTaken)
+                    {
+                        cell.IsTaken = true;
+                        unit.Cell = cell;
+                        unit.transform.position = cell.transform.position;
+                        unit.Initialize();
+                        unit.PlayerNumber = i;
+                        unit.UnitName = units[i].Name;
+                        Prefab.transform.parent = UnitsParent;
+                        ret.Add(unit);
+                    }//Unit gets snapped to the nearest cell
+                    else
+                    {
+                        Destroy(unit.gameObject);
+                    }//If the nearest cell is taken, the unit gets destroyed.
+                }
                 else
                 {
-                    Destroy(unit.gameObject);
-                }//If the nearest cell is taken, the unit gets destroyed.
+                    Debug.LogError("Invalid object in Units Parent game object");
+                }
+            }
+            else if (units[i].Class == "Mage")
+            {
+                Transform Prefab = Instantiate(AssetDatabase.LoadAssetAtPath<Transform>("Assets/TBS Framework/Prefabs/ASTR/Unit/MagePrefab" + units[i].Player + ".prefab"));
+                Mage unit = Prefab.GetComponent<Mage>();
+                if (unit != null)
+                {
+                    var cell = cells.Find(x => x.OffsetCoord.Equals(spawnPos[i]));
+                    if (!cell.IsTaken)
+                    {
+                        cell.IsTaken = true;
+                        unit.Cell = cell;
+                        unit.transform.position = cell.transform.position;
+                        unit.Initialize();
+                        unit.PlayerNumber = i;
+                        unit.UnitName = units[i].Name;
+                        Prefab.transform.parent = UnitsParent;
+                        ret.Add(unit);
+                    }//Unit gets snapped to the nearest cell
+                    else
+                    {
+                        Destroy(unit.gameObject);
+                    }//If the nearest cell is taken, the unit gets destroyed.
+                }
+                else
+                {
+                    Debug.LogError("Invalid object in Units Parent game object");
+                }
             }
             else
             {
-                Debug.LogError("Invalid object in Units Parent game object");
+                Transform Prefab = Instantiate(AssetDatabase.LoadAssetAtPath<Transform>("Assets/TBS Framework/Prefabs/ASTR/Unit/RoguePrefab" + units[i].Player + ".prefab"));
+                Rogue unit = Prefab.GetComponent<Rogue>();
+                if (unit != null)
+                {
+                    var cell = cells.Find(x => x.OffsetCoord.Equals(spawnPos[i]));
+                    if (!cell.IsTaken)
+                    {
+                        cell.IsTaken = true;
+                        unit.Cell = cell;
+                        unit.transform.position = cell.transform.position;
+                        unit.Initialize();
+                        unit.PlayerNumber = i;
+                        unit.UnitName = units[i].Name;
+                        Prefab.transform.parent = UnitsParent;
+                        ret.Add(unit);
+                    }//Unit gets snapped to the nearest cell
+                    else
+                    {
+                        Destroy(unit.gameObject);
+                    }//If the nearest cell is taken, the unit gets destroyed.
+                }
+                else
+                {
+                    Debug.LogError("Invalid object in Units Parent game object");
+                }
             }
-            
         }
         return ret;
     }

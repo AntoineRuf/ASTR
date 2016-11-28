@@ -22,10 +22,10 @@ public class Mage : Unit
         transform.position += new Vector3(0, 0, -1);
 
         Skills.Add(new ManaStrike());
-        Skills.Add(new IceLance());
-        Skills.Add(new ChangingWinds());
-        Skills.Add(new Headvice());
-        Skills.Add(new Incinerate());
+        //Skills.Add(new IceLance());
+        //Skills.Add(new ChangingWinds());
+        //Skills.Add(new Headvice());
+        //Skills.Add(new Incinerate());
     }
 
     public void CustomInitialize()
