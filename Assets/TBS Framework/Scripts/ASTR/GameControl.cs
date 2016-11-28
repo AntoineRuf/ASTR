@@ -31,9 +31,9 @@ public class GameControl : MonoBehaviour
         FileStream file = File.Create(Application.persistentDataPath + "/save.dat");
 
         List<PlayerData> data = new List<PlayerData>();
-        foreach (var currentPlayerDate in playerData)
+        foreach (var currentPlayerData in playerData)
         {
-            data.Add(currentPlayerDate);
+            data.Add(currentPlayerData);
         }
         data.Add(pData);
         playerData.Add(pData);

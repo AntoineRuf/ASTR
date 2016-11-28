@@ -314,12 +314,18 @@ public class SquadBuilderController : MonoBehaviour {
                 unitSkills.Add(AllSkills.Find(s => (s.Name == item.name)));
             }
             currentUnitData.Skills = unitSkills;
+            Debug.Log(currentUnitData.Skills[0]);
             currentUnitData.Class = UnitPanel.FindChild("ClassName").GetComponent<Text>().text;
             currentUnitData.Name = UnitPanel.Find("UnitName").GetComponent<InputField>().text;
             unitsData.Add(currentUnitData);
         }
         squadData.playerData = unitsData;
         GameControl.Save(squadData);
+        PlayerData squad1 = GameControl.playerData[0];
+        GameObject go = new GameObject();
+        DontDestroyOnLoad(go);
+        go.AddComponent<SquadSelectionToFightScene>();
+        go.GetComponent<SquadSelectionToFightScene>().squad1 = squad1;
         SceneManager.LoadScene("TitleScreen", LoadSceneMode.Single);
 
         

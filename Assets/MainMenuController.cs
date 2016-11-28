@@ -24,6 +24,7 @@ public class MainMenuController : MonoBehaviour {
 
     public void OnExitGameButtonClicked()  {
         Application.Quit();
+        
     }
     public void OnCreditsButtonClicked()
     {
