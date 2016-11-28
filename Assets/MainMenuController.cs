@@ -39,4 +39,9 @@ public class MainMenuController : MonoBehaviour {
     {
         SceneManager.LoadScene("SquadBuilder2", LoadSceneMode.Single);
     }
+
+    public void OnLauchGameButtonClicked()
+    {
+        SceneManager.LoadScene("SquadSelection", LoadSceneMode.Single);
+    }
 }

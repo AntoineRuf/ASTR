@@ -80,4 +80,9 @@ public class SquadSelectionController : MonoBehaviour {
 
         SceneManager.LoadScene("Example Scene 4", LoadSceneMode.Single);
     }
+
+    public void onExitButtonClicked()
+    {
+        SceneManager.LoadScene("TitleScreen", LoadSceneMode.Single);
+    }
 }

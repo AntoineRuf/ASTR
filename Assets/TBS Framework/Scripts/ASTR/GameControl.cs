@@ -9,7 +9,6 @@ public class GameControl : MonoBehaviour
 {
 
     public static GameControl control;
-    public static List<UnitData> playerData;
     public static List<PlayerData> playerData = new List<PlayerData>();
     public List<UnitData> UnitLayout;
     // Use this for initialization

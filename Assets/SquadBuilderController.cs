@@ -10,6 +10,7 @@ public class SquadBuilderController : MonoBehaviour {
 
     public Transform SquadPanel;
     public Transform SquadName;
+    public Transform HelpPanel;
     public Sprite RogueImage;
     public Sprite MageImage;
     public Sprite WarriorImage;
@@ -319,7 +320,7 @@ public class SquadBuilderController : MonoBehaviour {
         }
         squadData.playerData = unitsData;
         GameControl.Save(squadData);
-        Debug.Log("SAVED");
+        SceneManager.LoadScene("TitleScreen", LoadSceneMode.Single);
 
         
 
@@ -331,5 +332,9 @@ public class SquadBuilderController : MonoBehaviour {
         List<PlayerData> text = GameControl.playerData;
     }
 
+    public void OnHelpButtonClicked()
+    {
+        HelpPanel.gameObject.SetActive(!HelpPanel.gameObject.activeSelf);
+    }
         
 }
