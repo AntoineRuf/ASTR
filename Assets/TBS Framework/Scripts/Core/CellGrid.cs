@@ -5,7 +5,6 @@ using System;
 using System.Collections;
 using Assets.TBS_Framework.Scripts.ASTR;
 using UnityEngine.UI;
-using UnityEditor;
 using UnityEngine.EventSystems;
 
 /// <summary>
@@ -379,12 +378,12 @@ public class CellGrid : MonoBehaviour
         // skill is disabled
         CooldownPanel.GetChild(childNumber).GetComponent<Button>().interactable = false;
         CooldownPanel.GetChild(childNumber).GetComponent<Image>().color = new Color(171, 171, 171, 168);
-        CooldownPanel.GetChild(childNumber).GetComponent<Image>().sprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/TBS Framework/SkillsImages/CD" + currentUnit.Skills[childNumber].CurrentCooldown + ".png");
+        CooldownPanel.GetChild(childNumber).GetComponent<Image>().sprite = Resources.Load<Sprite>("SkillsImages/CD" + currentUnit.Skills[childNumber].CurrentCooldown);
     }
 
     public void printBuffTooltip (string name, string text, int duration, Image parent)
     {
-        Transform tooltip = Instantiate(AssetDatabase.LoadAssetAtPath<Transform>("Assets/TBS Framework/Prefabs/ASTR/BuffTooltip.prefab")) as Transform;
+        Transform tooltip = Instantiate(Resources.Load<Transform>("Prefabs/ASTR/BuffTooltip")) ;
         tooltip.FindChild("Name").GetComponent<Text>().text = name;
         tooltip.FindChild("Description").GetComponent<Text>().text = text;
         tooltip.FindChild("CD").GetComponent<Text>().text = string.Format("{0}", duration);
@@ -394,7 +393,7 @@ public class CellGrid : MonoBehaviour
 
     public void printSkillTooltip(string name, int minDamage, int maxDamage, int minRange, int maxRange, int CD, string text, Transform parent)
     {
-        Transform tooltip = Instantiate(AssetDatabase.LoadAssetAtPath<Transform>("Assets/TBS Framework/Prefabs/ASTR/SkillTooltip.prefab")) as Transform;
+        Transform tooltip = Instantiate(Resources.Load<Transform>("Prefabs/ASTR/SkillTooltip"));
         tooltip.FindChild("Name").GetComponent<Text>().text = name;
         tooltip.FindChild("Description").GetComponent<Text>().text = text;
         tooltip.FindChild("CD").GetComponent<Text>().text = string.Format("{0}", CD);
@@ -425,7 +424,7 @@ public class CellGrid : MonoBehaviour
 
         for (int i = 0; i < currentUnit.Buffs.Count(); ++i)
         {
-            Image BuffImage = Instantiate(AssetDatabase.LoadAssetAtPath<Image>("Assets/TBS Framework/Prefabs/ASTR/" + currentUnit.Buffs[i].Name + ".prefab")) as Image;
+            Image BuffImage = Instantiate(Resources.Load<Image>("Prefabs/ASTR/" + currentUnit.Buffs[i].Name));
             BuffImage.rectTransform.SetParent(BuffPanel);
             BuffImage.rectTransform.localPosition = new Vector3(-147 + 40*i, 17, 0);
 
@@ -452,7 +451,7 @@ public class CellGrid : MonoBehaviour
         for (int i = 0; i < currentUnit.Skills.Count(); ++i)
         {
             // setting the skill images
-            SkillPanel.GetChild(i).GetComponent<Image>().sprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/TBS Framework/SkillsImages/" + currentUnit.Skills[i].Name + ".png");
+            SkillPanel.GetChild(i).GetComponent<Image>().sprite = Resources.Load<Sprite>("SkillsImages/" + currentUnit.Skills[i].Name);
             // updating skills cooldowns
             if (currentUnit.Skills[i].CurrentCooldown > 0)
             {
@@ -466,7 +465,7 @@ public class CellGrid : MonoBehaviour
                 else { // skill is disabled
                     CooldownPanel.GetChild(i).GetComponent<Button>().interactable = false;
                     CooldownPanel.GetChild(i).GetComponent<Image>().color = new Color(171, 171, 171, 168);
-                    CooldownPanel.GetChild(i).GetComponent<Image>().sprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/TBS Framework/SkillsImages/CD" + currentUnit.Skills[i].CurrentCooldown + ".png");
+                    CooldownPanel.GetChild(i).GetComponent<Image>().sprite = Resources.Load<Sprite>("SkillsImages/CD" + currentUnit.Skills[i].CurrentCooldown);
                 }
             }
             else // skill is enabled
@@ -516,7 +515,7 @@ public class CellGrid : MonoBehaviour
 
     public void PortraitUpdate(Unit currentUnit, Transform Portrait, int teamNumber)
     {
-        Portrait.FindChild("Image").GetComponent<Image>().sprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/TBS Framework/ASTR/Portraits/" + currentUnit.Image + ".png");
+        Portrait.FindChild("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>("Portraits/" + currentUnit.Image);
         if (teamNumber == currentUnit.TeamNumber)
         {
             Portrait.FindChild("GlowEnemy").gameObject.SetActive(false);

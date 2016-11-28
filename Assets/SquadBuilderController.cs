@@ -2,7 +2,6 @@
 using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine.SceneManagement;
 
 public class SquadBuilderController : MonoBehaviour {
@@ -138,7 +137,9 @@ public class SquadBuilderController : MonoBehaviour {
         {
             Transform item = UnitPanel.FindChild("Actifs Slots").FindChild("SkillSheet").GetChild(i).GetChild(0);
             item.name = SkillNames[i];
-            Sprite SkillSprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/TBS Framework/SkillsImages/" + SkillNames[i] + ".png");
+            string path = string.Format("SkillsImages/{0}", SkillNames[i]);
+            Sprite SkillSprite = Resources.Load<Sprite>(path);
+            Debug.Log(SkillSprite);
             item.GetComponent<Image>().sprite = SkillSprite;
         }
 
@@ -157,7 +158,7 @@ public class SquadBuilderController : MonoBehaviour {
         {
             Transform item = UnitPanel.FindChild("Actifs Slots").FindChild("SkillSheet").GetChild(i).GetChild(0);
             item.name = SkillNames[i];
-            Sprite SkillSprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/TBS Framework/SkillsImages/" + SkillNames[i] + ".png");
+            Sprite SkillSprite = Resources.Load<Sprite>("SkillsImages/" + SkillNames[i]);
             item.GetComponent<Image>().sprite = SkillSprite;
         }
 
@@ -176,7 +177,7 @@ public class SquadBuilderController : MonoBehaviour {
         {
             Transform item = UnitPanel.FindChild("Actifs Slots").FindChild("SkillSheet").GetChild(i).GetChild(0);
             item.name = SkillNames[i];
-            Sprite SkillSprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/TBS Framework/SkillsImages/" + SkillNames[i] + ".png");
+            Sprite SkillSprite = Resources.Load<Sprite>("SkillsImages/" + SkillNames[i]);
             item.GetComponent<Image>().sprite = SkillSprite;
         }
 

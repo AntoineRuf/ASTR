@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
 
 public class CustomUnitGenerator : MonoBehaviour, IUnitGenerator
@@ -18,10 +17,10 @@ public class CustomUnitGenerator : MonoBehaviour, IUnitGenerator
         List<Unit> ret = new List<Unit>();
         Vector2[] spawnPos = new Vector2[6];
         spawnPos[0] = new Vector2(3, 1);
-        spawnPos[1] = new Vector2(1, 1);
-        spawnPos[2] = new Vector2(1, 3);
-        spawnPos[3] = new Vector2(13, 8);
-        spawnPos[4] = new Vector2(13, 10);
+        spawnPos[2] = new Vector2(1, 1);
+        spawnPos[4] = new Vector2(1, 3);
+        spawnPos[1] = new Vector2(13, 8);
+        spawnPos[3] = new Vector2(13, 10);
         spawnPos[5] = new Vector2(11, 10);
         SquadSelectionToFightScene Go = FindObjectOfType<SquadSelectionToFightScene>();
         Debug.Log(Go.squad1.playerData[0].Skills[0].Name);
@@ -39,7 +38,7 @@ public class CustomUnitGenerator : MonoBehaviour, IUnitGenerator
             CurrentUnit = i;
             if (units[i].Class == "Warrior")
             {
-                Transform Prefab = Instantiate(AssetDatabase.LoadAssetAtPath<Transform>("Assets/TBS Framework/Prefabs/ASTR/Unit/Warrior0.prefab"));
+                Transform Prefab = Instantiate(Resources.Load<Transform>("Prefabs/ASTR/Unit/Warrior0"));
                 Warrior unit = Prefab.GetComponent<Warrior>();
                 if (unit != null)
                 {
@@ -68,7 +67,7 @@ public class CustomUnitGenerator : MonoBehaviour, IUnitGenerator
             }
             else if (units[i].Class == "Mage")
             {
-                Transform Prefab = Instantiate(AssetDatabase.LoadAssetAtPath<Transform>("Assets/TBS Framework/Prefabs/ASTR/Unit/Mage0.prefab"));
+                Transform Prefab = Instantiate(Resources.Load<Transform>("Prefabs/ASTR/Unit/Mage0"));
                 Mage unit = Prefab.GetComponent<Mage>();
                 if (unit != null)
                 {
@@ -97,7 +96,7 @@ public class CustomUnitGenerator : MonoBehaviour, IUnitGenerator
             }
             else
             {
-                Transform Prefab = Instantiate(AssetDatabase.LoadAssetAtPath<Transform>("Assets/TBS Framework/Prefabs/ASTR/Unit/Rogue0.prefab"));
+                Transform Prefab = Instantiate(Resources.Load<Transform>("Prefabs/ASTR/Unit/Rogue0") );
                 Rogue unit = Prefab.GetComponent<Rogue>();
                 if (unit != null)
                 {

@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
-using UnityEditor;
 using UnityEngine.SceneManagement;
 
 public class SquadSelectionController : MonoBehaviour {
@@ -25,14 +24,14 @@ public class SquadSelectionController : MonoBehaviour {
         foreach(var data in playerData)
         {
             i += 20;
-            Transform newBuild = Instantiate(AssetDatabase.LoadAssetAtPath<Transform>("Assets/TBS Framework/Prefabs/ASTR/BuildButton.prefab")) as Transform;
+            Transform newBuild = Instantiate(Resources.Load<Transform>("Prefabs/ASTR/BuildButton"));
             newBuild.SetParent(PanelJ1);
             newBuild.localPosition = new Vector3(0, 115 -2*i, 0);
             newBuild.localScale = new Vector3(1, 1, 1);
             newBuild.FindChild("Text").GetComponent<Text>().text = data.squadName;
             newBuild.GetComponent<Button>().onClick.AddListener(() => { OnP1BuildButtonClicker(newBuild.FindChild("Text").GetComponent<Text>().text); });
 
-            Transform newBuild2 = Instantiate(AssetDatabase.LoadAssetAtPath<Transform>("Assets/TBS Framework/Prefabs/ASTR/BuildButton.prefab")) as Transform;
+            Transform newBuild2 = Instantiate(Resources.Load<Transform>("Prefabs/ASTR/BuildButton"));
             newBuild2.SetParent(PanelJ2);
             newBuild2.localPosition = new Vector3(0, 115 -2 * i, 0);
             newBuild2.localScale = new Vector3(1, 1, 1);
@@ -52,13 +51,11 @@ public class SquadSelectionController : MonoBehaviour {
 	public void OnP1BuildButtonClicker(string buildName)
     {
         chosenBuildJ1.GetComponentInChildren<Text>().text = buildName;
-        Debug.Log("Clicked");
     }
 
     public void OnP2BuildButtonClicker(string buildName)
     {
         chosenBuildJ2.GetComponentInChildren<Text>().text = buildName;
-        Debug.Log("Clicked");
     }
 
     public void onDeleteBuildsButtonClicked()
