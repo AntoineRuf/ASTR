@@ -26,7 +26,7 @@ public class SquadBuilderController : MonoBehaviour {
     private Unit unit3Class;
     public List<Skill> AllSkills;
 
-    
+
 
 	// Use this for initialization
 	void Start () {
@@ -50,7 +50,7 @@ public class SquadBuilderController : MonoBehaviour {
         OnMageButton1Clicked(2);
         OnWarriorButton1Clicked(3);
     }
-	
+
     public void OnRogueButton1Clicked(int unitNumber)
     {
         string UnitPanelName = string.Format("Unit{0}", unitNumber);
@@ -121,7 +121,7 @@ public class SquadBuilderController : MonoBehaviour {
             Debug.Log(item.name);
         }
 
-        
+
     }
 
     public void InitializeMageSkills(int unitNumber)
@@ -140,7 +140,7 @@ public class SquadBuilderController : MonoBehaviour {
             Sprite SkillSprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/TBS Framework/SkillsImages/" + SkillNames[i] + ".png");
             item.GetComponent<Image>().sprite = SkillSprite;
         }
-        
+
     }
 
     public void InitializeRogueSkills(int unitNumber)
@@ -224,7 +224,7 @@ public class SquadBuilderController : MonoBehaviour {
                 break;
         }
     }
-    
+
     public List<Skill> LoadMageSkills(List<Skill> list)
     {
         list.Add(new ManaStrike());

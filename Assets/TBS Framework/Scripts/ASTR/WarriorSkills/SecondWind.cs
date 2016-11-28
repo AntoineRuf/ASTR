@@ -12,7 +12,7 @@ public class SecondWind : Skill
 
     public override string Tooltip
     {
-        get { return "Heals the warrior, and renders him immune to CC for a turn."; }
+        get { return "Heals the warrior, and renders him immune to CC for 2 turns."; }
         set { }
     }
 
@@ -42,10 +42,10 @@ public class SecondWind : Skill
 
     public override int Cooldown
     {
-        get { return 4; }
+        get { return 5; }
         set { }
     }
-    
+
     public override bool CanTargetEmptyCell
     {
         get { return false; }
@@ -92,8 +92,9 @@ public class SecondWind : Skill
         caster.HitPoints += selfHeal;
         if (caster.HitPoints > caster.TotalHitPoints)
             caster.HitPoints = caster.TotalHitPoints;
-        // **TODO** Faire fonctionner le buff d'immunité.
-        // caster.Buffs.Add(new CCImmunityBuff(1, 0.0f));
+        SecondWindBuff Buff = new SecondWindBuff();
+        caster.Buffs.Add(Buff);
+        Buff.Apply(caster);
 
         caster.ActionPoints--;
         SetCooldown();

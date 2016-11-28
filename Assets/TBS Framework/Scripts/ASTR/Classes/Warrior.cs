@@ -23,10 +23,10 @@ public class Warrior : Unit
 
         // **TODO** Faire fonctionner les buffs;
         Skills.Add(new AxeSlash());
+        Skills.Add(new Galvanize());
         Skills.Add(new SecondWind());
-        Skills.Add(new RagingBull());
         Skills.Add(new ComeBackHere());
-        Skills.Add(new ShieldBash());
+        Skills.Add(new ShatteringForce());
     }
 
     public void CustomInitialize()
