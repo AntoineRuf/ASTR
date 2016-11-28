@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-namespace Assets.TBS_Framework.Scripts.ASTR.RogueSkills
-{
-    class SnakeDot : Buff
+[Serializable]
+class SnakeDot : Buff
     {
         public int Duration
         {
@@ -64,7 +64,7 @@ namespace Assets.TBS_Framework.Scripts.ASTR.RogueSkills
 
         public void Trigger(Unit unit)
         {
-            int damage = Random.Range(4, 6);
+            int damage = UnityEngine.Random.Range(4, 6);
             unit.DealDamage2(unit, damage);
         }
 
@@ -72,4 +72,3 @@ namespace Assets.TBS_Framework.Scripts.ASTR.RogueSkills
         {
         }
     }
-}

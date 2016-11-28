@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-namespace Assets.TBS_Framework.Scripts.ASTR.RogueSkills
-{
-    class ShrapnelMine : Skill
+[Serializable]
+class ShrapnelMine : Skill
     {
         public override string Name
         {
@@ -113,4 +113,3 @@ namespace Assets.TBS_Framework.Scripts.ASTR.RogueSkills
             SetCooldown();
         }
     }
-}

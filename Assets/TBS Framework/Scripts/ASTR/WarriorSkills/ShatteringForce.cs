@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
+[Serializable]
 public class ShatteringForce : Skill
 {
 
@@ -111,7 +113,7 @@ public class ShatteringForce : Skill
 
         foreach (var receiver in receivers)
         {
-            int damage = Random.Range(MinDamage, MaxDamage+1);
+            int damage = UnityEngine.Random.Range(MinDamage, MaxDamage+1);
             caster.DealDamage2(receiver, damage);
         }
 

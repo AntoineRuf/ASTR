@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
+[Serializable]
 public class ShieldBash : Skill
 {
 
@@ -127,7 +129,7 @@ public class ShieldBash : Skill
 
         foreach (var receiver in receivers)
         {
-            int damage = Random.Range(MinDamage, MaxDamage+1);
+            int damage = UnityEngine.Random.Range(MinDamage, MaxDamage+1);
             var hit = KnockbackTarget(caster, receiver, cellGrid, 2);
             caster.DealDamage2(receiver, damage + hit);
         }
@@ -147,7 +149,7 @@ public class ShieldBash : Skill
         {
             if (currentCell.Occupent != null)
             {
-                int damage = Random.Range(MinDamage, MaxDamage+1);
+                int damage = UnityEngine.Random.Range(MinDamage, MaxDamage+1);
                 caster.DealDamage2(currentCell.Occupent, damage);
             }
         }

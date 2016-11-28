@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
+[Serializable]
 public class Galvanize : Skill
 {
 
@@ -96,7 +98,7 @@ public class Galvanize : Skill
 
         foreach (var receiver in receivers)
         {
-            int heal = Random.Range(MinDamage, MaxDamage+1);
+            int heal = UnityEngine.Random.Range(MinDamage, MaxDamage+1);
             Debug.Log("Heal de la cible: " + heal);
             receiver.HitPoints += heal;
             if (receiver.HitPoints > receiver.TotalHitPoints)
@@ -105,7 +107,7 @@ public class Galvanize : Skill
             //cellGrid.HealthbarUpdate(receiver, receiver.HitPoints, FullHealthbar);
         }
 
-        int selfHeal = Random.Range(MinDamage, MaxDamage+1);
+        int selfHeal = UnityEngine.Random.Range(MinDamage, MaxDamage+1);
         Debug.Log("Heal du caster: " + selfHeal);
         caster.HitPoints += selfHeal;
 

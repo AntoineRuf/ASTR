@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
-namespace Assets.TBS_Framework.Scripts.ASTR.RogueSkills
-{
+[Serializable]
     class SnakeVenomBuff : Buff
     {
         public int Duration
@@ -72,4 +70,3 @@ namespace Assets.TBS_Framework.Scripts.ASTR.RogueSkills
         {
         }
     }
-}

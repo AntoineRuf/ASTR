@@ -5,6 +5,7 @@ using System.Linq;
 using System.Collections;
 using Assets.TBS_Framework.Scripts.ASTR;
 using Assets.TBS_Framework.Scripts.ASTR.RogueSkills;
+using Assets.TBS_Framework.Scripts.ASTR.Classes.Buffs;
 
 /// <summary>
 /// Base class for all units in the game.
@@ -148,6 +149,11 @@ public abstract class Unit : MonoBehaviour
                     b.Trigger(this);
                 }
             }
+        }
+        if (TotalHitPoints == 120)
+        {
+            WarriorBuff warbuff = new WarriorBuff();
+            warbuff.Apply(this);
         }
         SetState(new UnitStateMarkedAsFriendly(this));
         

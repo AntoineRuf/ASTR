@@ -1,7 +1,9 @@
 using UnityEngine;
 using System.Collections.Generic;
 using Assets.TBS_Framework.Scripts.ASTR.Classes.Buffs;
+using System;
 
+[Serializable]
 public class Headvice : Skill
 {
 
@@ -101,7 +103,7 @@ public class Headvice : Skill
         
         foreach (var receiver in receivers)
         {
-            int damage = Random.Range(MinDamage, MaxDamage + 1);
+            int damage = UnityEngine.Random.Range(MinDamage, MaxDamage + 1);
             caster.DealDamage2(receiver, damage);
             StunDebuff stunDebuff = new StunDebuff();
             receiver.Buffs.Add(stunDebuff);

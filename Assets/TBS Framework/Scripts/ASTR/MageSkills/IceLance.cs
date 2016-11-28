@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
+[Serializable]
 public class IceLance : Skill
 {
 
@@ -87,7 +89,7 @@ public class IceLance : Skill
 
         foreach (var receiver in receivers)
         {
-            int damage = Random.Range(MinDamage, MaxDamage+1);
+            int damage = UnityEngine.Random.Range(MinDamage, MaxDamage+1);
             caster.DealDamage2(receiver, damage);
             // receiver.Buffs.Add(new SlowedDebuff(1, 0.0f));
         }
@@ -98,22 +100,5 @@ public class IceLance : Skill
 
     public override void Apply (Unit caster, List<Cell> cells, CellGrid cellGrid)
     {
-
-        Animator anim = caster.GetComponentInChildren<Animator>();
-        anim.SetBool("Attack", true);
-        anim.SetBool("Idle", false);
-
-        foreach (var currentCell in cells)
-        {
-            if (currentCell.Occupent != null)
-            {
-                int damage = Random.Range(MinDamage, MaxDamage+1);
-                caster.DealDamage2(currentCell.Occupent, damage);
-                // receiver.Buffs.Add(new SlowedDebuff(1, 0.0f));
-            }
-        }
-
-        caster.ActionPoints--;
-        SetCooldown();
     }
 }

@@ -85,6 +85,7 @@
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\Classes\Buffs\RootedDebuff.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\Classes\Buffs\SlowedDebuff.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\Classes\Buffs\StunDebuff.cs" />
+    <Compile Include="Assets\TBS Framework\Scripts\ASTR\Classes\Buffs\WarriorBuff.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\Classes\Class.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\Classes\Mage.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\Classes\Rogue.cs" />
@@ -103,7 +104,6 @@
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\OnClickDirectionChoice.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\OtherUIController.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\RogueSkills\CloakAndDagger.cs" />
-    <Compile Include="Assets\TBS Framework\Scripts\ASTR\RogueSkills\EvasiveManeuver.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\RogueSkills\FanOfKnives.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\RogueSkills\LethalToxin.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\RogueSkills\LethalToxinBuff.cs" />

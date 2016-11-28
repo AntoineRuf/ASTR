@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
+[Serializable]
 public class Whirlwind : Skill
 {
 
@@ -100,7 +102,7 @@ public class Whirlwind : Skill
         foreach (var receiver in receivers)
         {
             if (!caster.Equals(receiver)) {
-                int damage = Random.Range(MinDamage, MaxDamage+1);
+                int damage = UnityEngine.Random.Range(MinDamage, MaxDamage+1);
                 caster.DealDamage2(receiver, damage);
             }
         }

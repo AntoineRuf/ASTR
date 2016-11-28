@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.TBS_Framework.Scripts.ASTR.RogueSkills
-{
+[Serializable]
     class QuickDash : Skill
     {
         public override string Name

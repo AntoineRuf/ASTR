@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
+[Serializable]
 public class ChangingWinds : Skill
 {
 
@@ -100,7 +102,7 @@ public class ChangingWinds : Skill
         
         foreach (var receiver in receivers)
         {
-            int heal = Random.Range(MinDamage, MaxDamage + 1);
+            int heal = UnityEngine.Random.Range(MinDamage, MaxDamage + 1);
             receiver.HitPoints += heal;
             if (receiver.HitPoints > receiver.TotalHitPoints)
                 receiver.HitPoints = receiver.TotalHitPoints;
@@ -129,8 +131,8 @@ public class ChangingWinds : Skill
 
         for (int i = 0; i < 3; ++i)
         {
-            int randomReceiver = Random.Range(0, receivers.Count);
-            int damage = Random.Range(MinDamage, MaxDamage + 1);
+            int randomReceiver = UnityEngine.Random.Range(0, receivers.Count);
+            int damage = UnityEngine.Random.Range(MinDamage, MaxDamage + 1);
             caster.DealDamage2(receivers[randomReceiver], damage);
         }
 
