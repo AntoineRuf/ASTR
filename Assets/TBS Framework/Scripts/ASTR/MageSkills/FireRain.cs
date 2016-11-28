@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
+[Serializable]
 public class FireRain : Skill
 {
 
@@ -87,8 +89,8 @@ public class FireRain : Skill
 
         for (int i = 0; i < 3; ++i)
         {
-            int randomReceiver = Random.Range(0, receivers.Count);
-            int damage = Random.Range(MinDamage, MaxDamage + 1);
+            int randomReceiver = UnityEngine.Random.Range(0, receivers.Count);
+            int damage = UnityEngine.Random.Range(MinDamage, MaxDamage + 1);
             caster.DealDamage2(receivers[randomReceiver], damage);
         }
 
@@ -115,8 +117,8 @@ public class FireRain : Skill
 
         for (int i = 0; i < 3; ++i)
         {
-            int randomReceiver = Random.Range(0, receivers.Count);
-            int damage = Random.Range(MinDamage, MaxDamage + 1);
+            int randomReceiver = UnityEngine.Random.Range(0, receivers.Count);
+            int damage = UnityEngine.Random.Range(MinDamage, MaxDamage + 1);
             caster.DealDamage2(receivers[randomReceiver], damage);
         }
 

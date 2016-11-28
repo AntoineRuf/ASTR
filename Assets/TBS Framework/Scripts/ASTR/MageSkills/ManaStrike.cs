@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
+[Serializable]
 public class ManaStrike : Skill
 {
 
@@ -87,36 +89,21 @@ public class ManaStrike : Skill
 
         foreach (var receiver in receivers)
         {
-            int damage = Random.Range(MinDamage, MaxDamage+1);
+            int damage = UnityEngine.Random.Range(MinDamage, MaxDamage+1);
             caster.DealDamage2(receiver, damage);
+
         }
 
+        foreach (Skill s in caster.Skills)
+        {
+            s.CurrentCooldown--;
+            if (s.CurrentCooldown < 0) s.CurrentCooldown = 0;
+        }
         caster.ActionPoints--;
         SetCooldown();
     }
 
     public override void Apply (Unit caster, List<Cell> cells, CellGrid cellGrid)
     {
-
-        Animator anim = caster.GetComponentInChildren<Animator>();
-        anim.SetBool("Attack", true);
-        anim.SetBool("Idle", false);
-
-        foreach (var currentCell in cells)
-        {
-            if (currentCell.Occupent != null)
-            {
-                int damage = Random.Range(MinDamage, MaxDamage+1);
-                caster.DealDamage2(currentCell.Occupent, damage);
-            }
-        }
-        foreach(Skill s in caster.Skills)
-        {
-            s.CurrentCooldown--;
-            if (s.CurrentCooldown < 0) s.CurrentCooldown = 0;
-        }
-
-        caster.ActionPoints--;
-        SetCooldown();
     }
 }

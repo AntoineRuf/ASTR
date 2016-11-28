@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.4.1f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -85,6 +83,7 @@
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\Classes\Buffs\RootedDebuff.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\Classes\Buffs\SlowedDebuff.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\Classes\Buffs\StunDebuff.cs" />
+    <Compile Include="Assets\TBS Framework\Scripts\ASTR\Classes\Buffs\WarriorBuff.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\Classes\Class.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\Classes\Mage.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\Classes\Rogue.cs" />
@@ -103,7 +102,6 @@
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\OnClickDirectionChoice.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\OtherUIController.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\RogueSkills\CloakAndDagger.cs" />
-    <Compile Include="Assets\TBS Framework\Scripts\ASTR\RogueSkills\EvasiveManeuver.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\RogueSkills\FanOfKnives.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\RogueSkills\LethalToxin.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\RogueSkills\LethalToxinBuff.cs" />

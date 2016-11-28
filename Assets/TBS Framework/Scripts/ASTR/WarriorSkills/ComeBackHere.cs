@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
+[Serializable]
 public class ComeBackHere : Skill
 {
 
@@ -121,7 +123,7 @@ public class ComeBackHere : Skill
 
         foreach (var receiver in receivers)
         {
-            int damage = Random.Range(MinDamage, MaxDamage+1);
+            int damage = UnityEngine.Random.Range(MinDamage, MaxDamage+1);
             MoveTargetToCaster(caster, receiver, cellGrid);
             caster.DealDamage2(receiver, damage);
         }
@@ -141,7 +143,7 @@ public class ComeBackHere : Skill
         {
             if (currentCell.Occupent != null)
             {
-                int damage = Random.Range(MinDamage, MaxDamage+1);
+                int damage = UnityEngine.Random.Range(MinDamage, MaxDamage+1);
                 MoveTargetToCaster(caster, currentCell.Occupent, cellGrid);
                 caster.DealDamage2(currentCell.Occupent, damage);
             }

@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
+[Serializable]
 public class Galvanize : Skill
 {
 
@@ -99,7 +101,7 @@ public class Galvanize : Skill
 
         foreach (var receiver in receivers)
         {
-            int heal = Random.Range(MinDamage, MaxDamage+1);
+            int heal = UnityEngine.Random.Range(MinDamage, MaxDamage+1);
             receiver.HitPoints += heal;
             if (receiver.HitPoints > receiver.TotalHitPoints)
                 receiver.HitPoints = receiver.TotalHitPoints;
@@ -107,7 +109,7 @@ public class Galvanize : Skill
             receiver.Buffs.Add(receiverBuff);
         }
 
-        int selfHeal = Random.Range(MinDamage, MaxDamage+1);
+        int selfHeal = UnityEngine.Random.Range(MinDamage, MaxDamage+1);
         caster.HitPoints += selfHeal;
         if (caster.HitPoints > caster.TotalHitPoints)
             caster.HitPoints = caster.TotalHitPoints;

@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
+[Serializable]
 public class RagingBull : Skill
 {
 
@@ -118,7 +120,7 @@ public class RagingBull : Skill
     {
         foreach (var receiver in receivers)
         {
-            int damage = Random.Range(MinDamage, MaxDamage+1);
+            int damage = UnityEngine.Random.Range(MinDamage, MaxDamage+1);
             Unit victim = MoveCasterToTarget(caster, receiver, cellGrid);
             Debug.Log(victim);
             Debug.Log(damage);

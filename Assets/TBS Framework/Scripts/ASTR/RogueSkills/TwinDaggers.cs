@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System;
 
+[Serializable]
 public class TwinDaggers : Skill
 {
 
@@ -96,17 +98,17 @@ public class TwinDaggers : Skill
     public override void Apply (Unit caster, List<Unit> receivers, CellGrid cellGrid)
     {
         Animator anim = caster.GetComponentInChildren<Animator>();
-        anim.SetBool("Skill", true);
+        anim.SetBool("Attack", true);
         foreach(Unit u in receivers)
         {
             if (caster.Cell.GetDistance(u.Cell) == 1)
             {
-                int damage = Random.Range(17, 21);
+                int damage = UnityEngine.Random.Range(17, 21);
                 caster.DealDamage2(u, damage);
             }
             else
             {
-                int damage = Random.Range(MinDamage, MaxDamage + 1);
+                int damage = UnityEngine.Random.Range(MinDamage, MaxDamage + 1);
                 caster.DealDamage2(u, damage);
             }
         }
@@ -116,28 +118,5 @@ public class TwinDaggers : Skill
 
     public override void Apply (Unit caster, List<Cell> cells, CellGrid cellGrid)
     {
-
-        Animator anim = caster.GetComponentInChildren<Animator>();
-        anim.SetBool("Attack", true);
-        anim.SetBool("Idle", false);
-
-        foreach (var currentCell in cells)
-        {
-            if (currentCell.Occupent != null)
-            {
-                if (caster.Cell.GetDistance(currentCell) == 1)
-                {
-                    int damage = Random.Range(17, 21);
-                    caster.DealDamage2(currentCell.Occupent, damage);
-                }
-                else
-                {
-                    int damage = Random.Range(MinDamage, MaxDamage + 1);
-                    caster.DealDamage2(currentCell.Occupent, damage);
-                }
-            }
-        }
-        caster.ActionPoints--;
-        SetCooldown();
     }
 }

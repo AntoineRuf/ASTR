@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Assets.TBS_Framework.Scripts.ASTR;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Assets.TBS_Framework.Scripts.ASTR.RogueSkills
-{
+[Serializable]
     class ShrapnelMineTrap : Trap
     {
         public override int Duration { get { return 4; } set { } }
@@ -35,4 +35,3 @@ namespace Assets.TBS_Framework.Scripts.ASTR.RogueSkills
             return this;
         }
     }
-}

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-namespace Assets.TBS_Framework.Scripts.ASTR.RogueSkills
-{
-    class SnakeVenom : Skill
+[Serializable]
+class SnakeVenom : Skill
     {
         public override string Name
         {
@@ -110,4 +110,3 @@ namespace Assets.TBS_Framework.Scripts.ASTR.RogueSkills
         {
         }
     }
-}

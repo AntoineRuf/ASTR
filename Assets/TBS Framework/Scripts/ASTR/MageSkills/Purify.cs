@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
+[Serializable]
 public class Purify : Skill
 {
 
@@ -100,28 +102,5 @@ public class Purify : Skill
 
     public override void Apply (Unit caster, List<Cell> cells, CellGrid cellGrid)
     {
-
-        Animator anim = caster.GetComponentInChildren<Animator>();
-        anim.SetBool("Skill", true);
-        anim.SetBool("Idle", false);
-
-        List<Unit> receivers = new List<Unit>();
-        foreach (var currentCell in cells)
-        {
-            if (currentCell.Occupent != null)
-            {
-                receivers.Add(currentCell.Occupent);
-            }
-        }
-
-        for (int i = 0; i < 3; ++i)
-        {
-            int randomReceiver = Random.Range(0, receivers.Count);
-            int damage = Random.Range(MinDamage, MaxDamage + 1);
-            caster.DealDamage2(receivers[randomReceiver], damage);
-        }
-
-        caster.ActionPoints--;
-        SetCooldown();
     }
 }

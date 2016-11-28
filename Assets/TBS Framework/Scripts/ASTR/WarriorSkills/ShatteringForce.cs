@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
+[Serializable]
 public class ShatteringForce : Skill
 {
 
@@ -111,7 +113,7 @@ public class ShatteringForce : Skill
 
         foreach (var receiver in receivers)
         {
-            int damage = Random.Range(MinDamage, MaxDamage+1);
+            int damage = UnityEngine.Random.Range(MinDamage, MaxDamage+1);
             caster.DealDamage2(receiver, damage);
             RootedDebuff debuff = new RootedDebuff();
             receiver.Buffs.Add(debuff);
@@ -133,7 +135,7 @@ public class ShatteringForce : Skill
         {
             if (currentCell.Occupent != null)
             {
-                int damage = Random.Range(MinDamage, MaxDamage+1);
+                int damage = UnityEngine.Random.Range(MinDamage, MaxDamage+1);
                 caster.DealDamage2(currentCell.Occupent, damage);
                 RootedDebuff debuff = new RootedDebuff();
                 debuff.Apply(currentCell.Occupent);

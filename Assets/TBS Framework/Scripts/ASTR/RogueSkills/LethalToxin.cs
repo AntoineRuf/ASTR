@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-
-namespace Assets.TBS_Framework.Scripts.ASTR.RogueSkills
-{
+[Serializable]
     class LethalToxin : Skill
     {
         public override string Name
@@ -113,4 +111,3 @@ namespace Assets.TBS_Framework.Scripts.ASTR.RogueSkills
         {
         }
     }
-}
