@@ -7582,6 +7582,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SquadPanel: {fileID: 1855475214}
+  SquadName: {fileID: 1128416920}
   RogueImage: {fileID: 21300000, guid: 797c8c2dd4b367e42bf5927e8b42670d, type: 3}
   MageImage: {fileID: 21300000, guid: 690f3e1b9df788d46895a50ba189e261, type: 3}
   WarriorImage: {fileID: 21300000, guid: e7a23a595fdfbb74eaa7c20307c0c150, type: 3}
@@ -11612,7 +11613,7 @@ GameObject:
   - 114: {fileID: 1128416922}
   - 114: {fileID: 1128416921}
   m_Layer: 0
-  m_Name: InputField
+  m_Name: SquadName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

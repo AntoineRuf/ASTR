@@ -72,6 +72,8 @@
     <Compile Include="Assets\SimpleDragAndDrop\Scripts\DragAndDropItem.cs" />
     <Compile Include="Assets\SimpleDragAndDrop\Scripts\DummyControlUnit.cs" />
     <Compile Include="Assets\SquadBuilderController.cs" />
+    <Compile Include="Assets\SquadSelectionController.cs" />
+    <Compile Include="Assets\SquadSelectionToFightScene.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\BasicAttack.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\CalculsCube.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\CellColors.cs" />
