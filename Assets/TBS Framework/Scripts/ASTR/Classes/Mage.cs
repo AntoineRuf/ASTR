@@ -22,6 +22,25 @@ public class Mage : Unit
         transform.position += new Vector3(0, 0, -1);
 
         Skills.Add(new ManaStrike());
+        Skills.Add(new IceLance());
+        Skills.Add(new ChangingWinds());
+        Skills.Add(new Headvice());
+        Skills.Add(new Incinerate());
+    }
+
+    public void CustomInitialize()
+    {
+        base.Initialize();
+        TotalHitPoints = 70;
+        HitPoints = TotalHitPoints;
+        TotalMovementPoints = 3;
+        TotalActionPoints = 1;
+        AttackFactor = 1;
+        DefenceFactor = 1;
+        Initiative = 60;
+        MovementSpeed = 20;
+        Image = "Mage";
+        CCImmunity = 0;
     }
 
     public override bool IsCellMovableTo(Cell cell)

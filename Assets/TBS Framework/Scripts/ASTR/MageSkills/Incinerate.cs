@@ -39,12 +39,7 @@ public class Incinerate : Skill
         get { return 4; }
         set { }
     }
-
-    public override int CurrentCooldown
-    {
-        get { return 0; }
-        set { }
-    }
+    
 
     public override bool CanTargetEmptyCell
     {
@@ -84,10 +79,10 @@ public class Incinerate : Skill
 
     // **TODO** Implémenter les dégâts supplémentaires au centre.
 
-    public override void Apply (Unit caster, List<Unit> receivers, CellGrid cellGrid)
+    public override void Apply (Unit caster, List<Unit> receivers, CellGrid cellgrid)
     {
         Animator anim = caster.GetComponentInChildren<Animator>();
-        anim.SetBool("Attack", true);
+        anim.SetBool("Skill", true);
         anim.SetBool("Idle", false);
 
         foreach (var receiver in receivers)
@@ -104,7 +99,7 @@ public class Incinerate : Skill
     {
 
         Animator anim = caster.GetComponentInChildren<Animator>();
-        anim.SetBool("Attack", true);
+        anim.SetBool("Skill", true);
         anim.SetBool("Idle", false);
 
         foreach (var currentCell in cells)

@@ -81,7 +81,7 @@ public class CellGrid : MonoBehaviour
         Portrait = canvas.transform.FindChild("Portrait");
         // ---
         Turn = 0;
-        trapmanager = new TrapManager();
+        trapmanager = new TrapManager(this);
         Directions.Initialize(); // initialize static class Directions
         Players = new List<Player>();
         for (int i = 0; i < PlayersParent.childCount; i++)

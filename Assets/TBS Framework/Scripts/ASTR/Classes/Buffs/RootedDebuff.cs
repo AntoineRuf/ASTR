@@ -1,3 +1,5 @@
+using System;
+
 public class RootedDebuff : Buff
 {
     private float _factor;
@@ -19,6 +21,19 @@ public class RootedDebuff : Buff
     }
 
     public int Duration { get; set; }
+
+    public bool isDot
+    {
+        get
+        {
+            return false;
+        }
+
+        set
+        {
+        }
+    }
+
     public void Apply(Unit unit)
     {
         unit.TotalMovementPoints = 0;
@@ -32,5 +47,9 @@ public class RootedDebuff : Buff
     public Buff Clone()
     {
         return new RootedDebuff(Duration, _factor);
+    }
+
+    public void Trigger(Unit unit)
+    {
     }
 }

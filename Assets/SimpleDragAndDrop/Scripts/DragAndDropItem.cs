@@ -11,7 +11,10 @@ public class DragAndDropItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 {
     static public DragAndDropItem draggedItem;                                      // Item that is dragged now
     static public GameObject icon;                                                  // Icon of dragged item
-    static public DragAndDropCell sourceCell;                                       // From this cell dragged item is
+    static public DragAndDropCell sourceCell;                                        // From this cell dragged item is
+
+    public Skill _skill;
+    public Transform SquadBuilderController;
 
     public delegate void DragEvent(DragAndDropItem item);
     static public event DragEvent OnItemDragStartEvent;                             // Drag start event
@@ -23,6 +26,7 @@ public class DragAndDropItem : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     /// <param name="eventData"></param>
     public void OnBeginDrag(PointerEventData eventData)
     {
+        _skill = SquadBuilderController.GetComponent<SquadBuilderController>().AllSkills.Find(s => (s.Name == GetComponentInParent<Transform>().name));
         sourceCell = GetComponentInParent<DragAndDropCell>();                       // Remember source cell
         draggedItem = this;                                                         // Set as dragged item
         icon = new GameObject("Icon");                                              // Create object for item's icon

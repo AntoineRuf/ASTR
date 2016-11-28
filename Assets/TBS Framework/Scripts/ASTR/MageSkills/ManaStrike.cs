@@ -39,12 +39,7 @@ public class ManaStrike : Skill
         get { return 1; }
         set { }
     }
-
-    public override int CurrentCooldown
-    {
-        get { return 0; }
-        set { }
-    }
+    
 
     public override bool CanTargetEmptyCell
     {
@@ -84,7 +79,7 @@ public class ManaStrike : Skill
 
     // **TODO** Implémenter la réduction des CDs.
 
-    public override void Apply (Unit caster, List<Unit> receivers, CellGrid cellGrid)
+    public override void Apply (Unit caster, List<Unit> receivers, CellGrid cellgrid)
     {
         Animator anim = caster.GetComponentInChildren<Animator>();
         anim.SetBool("Attack", true);
@@ -114,6 +109,11 @@ public class ManaStrike : Skill
                 int damage = Random.Range(MinDamage, MaxDamage+1);
                 caster.DealDamage2(currentCell.Occupent, damage);
             }
+        }
+        foreach(Skill s in caster.Skills)
+        {
+            s.CurrentCooldown--;
+            if (s.CurrentCooldown < 0) s.CurrentCooldown = 0;
         }
 
         caster.ActionPoints--;

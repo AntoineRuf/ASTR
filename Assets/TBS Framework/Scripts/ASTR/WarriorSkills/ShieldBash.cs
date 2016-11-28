@@ -45,13 +45,7 @@ public class ShieldBash : Skill
         get { return 3; }
         set { }
     }
-
-    public override int CurrentCooldown
-    {
-        get { return 0; }
-        set { }
-    }
-
+    
     public override bool CanTargetEmptyCell
     {
         get { return true; }

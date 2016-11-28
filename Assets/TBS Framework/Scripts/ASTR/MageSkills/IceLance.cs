@@ -1,12 +1,12 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class FrozenLance : Skill
+public class IceLance : Skill
 {
 
     public override string Name
     {
-        get { return "Frozen Lance"; }
+        get { return "Ice Lance"; }
         set { }
     }
 
@@ -39,12 +39,7 @@ public class FrozenLance : Skill
         get { return 3; }
         set { }
     }
-
-    public override int CurrentCooldown
-    {
-        get { return 0; }
-        set { }
-    }
+    
 
     public override bool CanTargetEmptyCell
     {
