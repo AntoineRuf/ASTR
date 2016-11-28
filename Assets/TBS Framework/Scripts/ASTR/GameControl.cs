@@ -10,7 +10,6 @@ public class GameControl : MonoBehaviour
 
     public static GameControl control;
     public static List<UnitData> playerData;
-    public List<UnitData> UnitLayout;
     // Use this for initialization
     void Awake()
     {

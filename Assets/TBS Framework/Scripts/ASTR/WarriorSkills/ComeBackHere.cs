@@ -47,7 +47,7 @@ public class ComeBackHere : Skill
         get { return 3; }
         set { }
     }
-    
+
 
     public override bool CanTargetEmptyCell
     {
@@ -107,7 +107,8 @@ public class ComeBackHere : Skill
               arrived = true;
           }
       }
-      if (path.Count > 0) receiver.Dash(path[path.Count - 1], path, cellGrid.trapmanager);
+      if (path.Count > 0 && (receiver.CCImmunity==0))
+        receiver.Dash(path[path.Count - 1], path, cellGrid.trapmanager);
     }
 
     public override void Apply(Unit caster, Unit receiver){}

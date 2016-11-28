@@ -78,9 +78,7 @@
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\CellGridStateSkillSelected.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\Character.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\Classes\Buffs\AttackBuff.cs" />
-    <Compile Include="Assets\TBS Framework\Scripts\ASTR\Classes\Buffs\CCImmunityBuff.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\Classes\Buffs\DefenceBuff.cs" />
-    <Compile Include="Assets\TBS Framework\Scripts\ASTR\Classes\Buffs\RootedDebuff.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\Classes\Buffs\SlowedDebuff.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\Classes\Buffs\StunDebuff.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\Classes\Buffs\WarriorBuff.cs" />
@@ -120,8 +118,11 @@
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\WarriorSkills\AxeSlash.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\WarriorSkills\ComeBackHere.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\WarriorSkills\Galvanize.cs" />
+    <Compile Include="Assets\TBS Framework\Scripts\ASTR\WarriorSkills\GalvanizeBuff.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\WarriorSkills\RagingBull.cs" />
+    <Compile Include="Assets\TBS Framework\Scripts\ASTR\WarriorSkills\RootedDebuff.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\WarriorSkills\SecondWind.cs" />
+    <Compile Include="Assets\TBS Framework\Scripts\ASTR\WarriorSkills\SecondWindBuff.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\WarriorSkills\ShatteringForce.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\WarriorSkills\ShieldBash.cs" />
     <Compile Include="Assets\TBS Framework\Scripts\ASTR\WarriorSkills\Whirlwind.cs" />

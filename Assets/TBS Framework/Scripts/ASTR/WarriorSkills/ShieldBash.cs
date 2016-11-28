@@ -47,7 +47,7 @@ public class ShieldBash : Skill
         get { return 3; }
         set { }
     }
-    
+
     public override bool CanTargetEmptyCell
     {
         get { return true; }
@@ -108,11 +108,14 @@ public class ShieldBash : Skill
               obstacleCell = checkedCell;
           }
       }
-      if (path.Count > 0) receiver.Dash(path[path.Count - 1], path, cellGrid.trapmanager);
-      if (obstacleCell == null) return 3;
-      else if (obstacleCell.Occupent != null && path.Count < kbRange) {
-        caster.DealDamage2(obstacleCell.Occupent, 3);
-        return 3;
+      if (path.Count > 0 && (receiver.CCImmunity==0)) {
+          receiver.Dash(path[path.Count - 1], path, cellGrid.trapmanager);
+          if (obstacleCell == null) return 3;
+          else if (obstacleCell.Occupent != null && path.Count < kbRange) {
+              caster.DealDamage2(obstacleCell.Occupent, 3);
+              return 3;
+          }
+          else return 0;
       }
       else return 0;
     }
@@ -150,7 +153,8 @@ public class ShieldBash : Skill
             if (currentCell.Occupent != null)
             {
                 int damage = UnityEngine.Random.Range(MinDamage, MaxDamage+1);
-                caster.DealDamage2(currentCell.Occupent, damage);
+                var hit = KnockbackTarget(caster, currentCell.Occupent, cellGrid, 2);
+                caster.DealDamage2(currentCell.Occupent, damage+hit);
             }
         }
 

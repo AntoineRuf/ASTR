@@ -93,28 +93,28 @@ public class Galvanize : Skill
     public override void Apply (Unit caster, List<Unit> receivers, CellGrid cellGrid)
     {
         Animator anim = caster.GetComponentInChildren<Animator>();
-        anim.SetBool("Attack", true);
+        anim.SetBool("Skill", true);
         anim.SetBool("Idle", false);
+
+        GalvanizeBuff casterBuff = new GalvanizeBuff();
+        GalvanizeBuff receiverBuff = new GalvanizeBuff();
 
         foreach (var receiver in receivers)
         {
             int heal = UnityEngine.Random.Range(MinDamage, MaxDamage+1);
-            Debug.Log("Heal de la cible: " + heal);
             receiver.HitPoints += heal;
             if (receiver.HitPoints > receiver.TotalHitPoints)
                 receiver.HitPoints = receiver.TotalHitPoints;
-            // receiver.Buffs.Add(new DefenceBuff(2, 0.2f));
-            //cellGrid.HealthbarUpdate(receiver, receiver.HitPoints, FullHealthbar);
+            receiverBuff.Apply(receiver);
+            receiver.Buffs.Add(receiverBuff);
         }
 
         int selfHeal = UnityEngine.Random.Range(MinDamage, MaxDamage+1);
-        Debug.Log("Heal du caster: " + selfHeal);
         caster.HitPoints += selfHeal;
-
         if (caster.HitPoints > caster.TotalHitPoints)
             caster.HitPoints = caster.TotalHitPoints;
-        // caster.Buffs.Add(new DefenceBuff(2, 0.2f));
-        //cellGrid.HealthbarUpdate(caster, caster.HitPoints, FullHealthbar);
+        casterBuff.Apply(caster);
+        caster.Buffs.Add(casterBuff);
 
         caster.ActionPoints--;
         SetCooldown();

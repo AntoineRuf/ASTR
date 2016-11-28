@@ -59,7 +59,7 @@ namespace Assets.TBS_Framework.Scripts.ASTR.Classes.Buffs
         {
             unit.AttackFactor = 1;
             float Lifepercentage = (float)unit.HitPoints /unit.TotalHitPoints;
-            unit.AttackFactor += Lifepercentage;
+            unit.AttackFactor += (1f - Lifepercentage)/2;
         }
 
         public Buff Clone()

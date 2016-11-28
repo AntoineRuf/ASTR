@@ -32,22 +32,22 @@ public class ShatteringForce : Skill
 
     public override int MinDamage
     {
-        get { return 0; }
+        get { return 17; }
         set { base.MinDamage = value; }
     }
 
     public override int MaxDamage
     {
-        get { return 0; }
+        get { return 22; }
         set { base.MaxDamage = value; }
     }
 
     public override int Cooldown
     {
-        get { return 4; }
+        get { return 5; }
         set { }
     }
-    
+
     public override bool CanTargetEmptyCell
     {
         get { return true; }//testing purpose
@@ -62,7 +62,7 @@ public class ShatteringForce : Skill
 
     public override bool CanTargetAllies
     {
-        get { return true; }
+        get { return false; }
         set { }
     }
 
@@ -74,13 +74,13 @@ public class ShatteringForce : Skill
 
     public override int isAoE
     {
-        get { return 2; }
+        get { return 1; }
         set { }
     }
 
     public override int AoERange
     {
-        get { return 4; }
+        get { return 0; }
         set { }
     }
 
@@ -115,6 +115,9 @@ public class ShatteringForce : Skill
         {
             int damage = UnityEngine.Random.Range(MinDamage, MaxDamage+1);
             caster.DealDamage2(receiver, damage);
+            RootedDebuff debuff = new RootedDebuff();
+            receiver.Buffs.Add(debuff);
+            debuff.Apply(receiver);
         }
 
         caster.ActionPoints--;
@@ -132,11 +135,11 @@ public class ShatteringForce : Skill
         {
             if (currentCell.Occupent != null)
             {
-                currentCell.Occupent.Buffs.Add(new RootedDebuff(1, currentCell.Occupent.TotalMovementPoints));
-            }
-            else
-            {
-                // **TODO** Voir comment implémenter les murs.
+                int damage = UnityEngine.Random.Range(MinDamage, MaxDamage+1);
+                caster.DealDamage2(currentCell.Occupent, damage);
+                RootedDebuff debuff = new RootedDebuff();
+                debuff.Apply(currentCell.Occupent);
+                currentCell.Occupent.Buffs.Add(debuff);
             }
         }
 
