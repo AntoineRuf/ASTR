@@ -10,6 +10,12 @@ public class ShatteringForce : Skill
         set { }
     }
 
+    public override string Tooltip
+    {
+        get { return "Shatters the ground, immobilising any unit in front of the Warrior."; }
+        set { }
+    }
+
     public override int MinRange
     {
         get { return 1; }

@@ -10,6 +10,12 @@ public class RagingBull : Skill
         set { }
     }
 
+    public override string Tooltip
+    {
+        get { return "Charges towards an enemy, dealing damage to the first unit hit."; }
+        set { }
+    }
+
     public override int MinRange
     {
         get { return 2; }

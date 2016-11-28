@@ -10,6 +10,12 @@ public class Galvanize : Skill
         set { }
     }
 
+    public override string Tooltip
+    {
+        get { return "Heals the Warrior and its target, and buffs their defense."; }
+        set { }
+    }
+
     public override int MinRange
     {
         get { return 1; }

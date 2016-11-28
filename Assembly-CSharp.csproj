@@ -86,7 +86,7 @@
      <Compile Include="Assets\TBS Framework\Scripts\ASTR\WarriorSkills\RagingBull.cs" />
      <Compile Include="Assets\TBS Framework\Scripts\ASTR\WarriorSkills\SecondWind.cs" />
      <Compile Include="Assets\TBS Framework\Scripts\ASTR\WarriorSkills\ShatteringForce.cs" />
-     <Compile Include="Assets\TBS Framework\Scripts\ASTR\WarriorSkills\ShoulderBash.cs" />
+     <Compile Include="Assets\TBS Framework\Scripts\ASTR\WarriorSkills\ShieldBash.cs" />
      <Compile Include="Assets\TBS Framework\Scripts\ASTR\WarriorSkills\Whirlwind.cs" />
      <Compile Include="Assets\TBS Framework\Scripts\ASTR\WeaknessTrap.cs" />
      <Compile Include="Assets\TBS Framework\Scripts\ASTR\WeaknessTrapSkill.cs" />

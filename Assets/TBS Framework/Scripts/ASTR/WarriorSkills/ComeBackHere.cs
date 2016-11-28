@@ -10,6 +10,12 @@ public class ComeBackHere : Skill
         set { }
     }
 
+    public override string Tooltip
+    {
+        get { return "Pulls a target with the swipe of an axe, dealing damage."; }
+        set { }
+    }
+
     public override int MinRange
     {
         get { return 2; }
@@ -90,7 +96,6 @@ public class ComeBackHere : Skill
 
       var arrived = false;
       var checkedCellCoord = receiverPos;
-      Cell obstacleCell = null;
       var direction = Directions.NearestNeighborDirection(receiverPos, casterPos);
       List<Cell> path = new List<Cell>();
 
@@ -103,7 +108,6 @@ public class ComeBackHere : Skill
           }
           else {
               arrived = true;
-              obstacleCell = checkedCell;
           }
       }
       path.Reverse();
