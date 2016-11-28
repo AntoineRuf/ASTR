@@ -96,6 +96,9 @@ namespace Assets.TBS_Framework.Scripts.ASTR.RogueSkills
 
         public override void Apply(Unit caster, List<Unit> receivers, CellGrid cellGrid)
         {
+            Animator anim = caster.GetComponentInChildren<Animator>();
+            anim.SetBool("Attack", true);
+            anim.SetBool("Idle", false);
             foreach (Unit u in receivers)
             {
                 if (caster.isBehind(u))
@@ -115,25 +118,6 @@ namespace Assets.TBS_Framework.Scripts.ASTR.RogueSkills
 
         public override void Apply(Unit caster, List<Cell> cells, CellGrid cellGrid)
         {
-            foreach (var currentCell in cells)
-            {
-                if (currentCell.Occupent != null)
-                {
-                    if (caster.isBehind(currentCell.Occupent))
-                    {
-                        int damage = Random.Range(MinDamage, MaxDamage + 1);
-                        caster.DealDamage2(currentCell.Occupent, damage);
-                    }
-                    else
-                    {
-                        int damage = 0;
-                        caster.DealDamage2(currentCell.Occupent, damage);
-                    }
-                }
-            }
-
-            caster.ActionPoints--;
-            SetCooldown();
         }
     }
 }

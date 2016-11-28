@@ -128,6 +128,7 @@ namespace Assets.TBS_Framework.Scripts.ASTR.RogueSkills
                         caster.DealDamage2(c.Occupent, damage);
                     }
                 }
+                caster.Cell.IsTaken = false;
                 caster.Cell = currentCell;
                 affectedCells.Reverse();
                 caster.Dash(currentCell, affectedCells, cellGrid.trapmanager);

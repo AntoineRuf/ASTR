@@ -102,6 +102,9 @@ namespace Assets.TBS_Framework.Scripts.ASTR.RogueSkills
         {
             foreach (var currentCell in cells)
             {
+                Animator anim = caster.GetComponentInChildren<Animator>();
+                anim.SetBool("Skill", true);
+                anim.SetBool("Idle", false);
                 ShrapnelMineTrap shrpmine = new ShrapnelMineTrap(currentCell, cellGrid.trapmanager, caster);
                 cellGrid.trapmanager.AddTrap(shrpmine);
             }

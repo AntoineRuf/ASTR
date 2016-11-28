@@ -118,7 +118,8 @@ public class TwinDaggers : Skill
     {
 
         Animator anim = caster.GetComponentInChildren<Animator>();
-        anim.SetBool("Skill", true);
+        anim.SetBool("Attack", true);
+        anim.SetBool("Idle", false);
 
         foreach (var currentCell in cells)
         {

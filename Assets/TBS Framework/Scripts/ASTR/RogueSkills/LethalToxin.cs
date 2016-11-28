@@ -99,6 +99,9 @@ namespace Assets.TBS_Framework.Scripts.ASTR.RogueSkills
 
         public override void Apply(Unit caster, List<Unit> receivers, CellGrid cellGrid)
         {
+            Animator anim = caster.GetComponentInChildren<Animator>();
+            anim.SetBool("Skill", true);
+            anim.SetBool("Idle", false);
             LethalToxinBuff lthbuff = new LethalToxinBuff();
             lthbuff.Apply(caster);
             caster.Buffs.Add(lthbuff);

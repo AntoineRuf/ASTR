@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 
 namespace Assets.TBS_Framework.Scripts.ASTR.RogueSkills
 {
@@ -100,6 +101,8 @@ namespace Assets.TBS_Framework.Scripts.ASTR.RogueSkills
         {
             foreach (Unit u in receivers)
             {
+                Animator anim = caster.GetComponentInChildren<Animator>();
+                anim.SetBool("Attack", true);
                 int damage = UnityEngine.Random.Range(MinDamage, MaxDamage);
                 caster.DealDamage2(u, damage);
                 VulnerabilityDebuff vulnebuff = new VulnerabilityDebuff();
@@ -112,6 +115,9 @@ namespace Assets.TBS_Framework.Scripts.ASTR.RogueSkills
 
         public override void Apply(Unit caster, List<Cell> cells, CellGrid cellGrid)
         {
+            Animator anim = caster.GetComponentInChildren<Animator>();
+            anim.SetBool("Attack", true);
+            anim.SetBool("Idle", false);
             foreach (var currentCell in cells)
             {
                 if (currentCell.Occupent != null)
