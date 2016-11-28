@@ -1,5 +1,4 @@
-﻿using Assets.TBS_Framework.Scripts.ASTR.RogueSkills;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +8,7 @@ public class Rogue : Unit
 
     public override void Initialize()
     {
-        base.Initialize();
+        base.CustomInitialize();
         TotalHitPoints = 90;
         HitPoints = TotalHitPoints;
         TotalMovementPoints = 4;
@@ -21,15 +20,11 @@ public class Rogue : Unit
         transform.position += new Vector3(0, 0, -1);
         Image = "Rogue";
         CCImmunity = 0;
-        
-        Skills.Add(new SnakeVenom());
-        Skills.Add(new QuickDash());
-        Skills.Add(new LethalToxin());
-        Skills.Add(new CloakAndDagger());
-        Skills.Add(new FanOfKnives());
+
+        Skills.Add(new TwinDaggers());
     }
 
-    public void CustomInitialize()
+    public override void CustomInitialize()
     {
         base.Initialize();
         TotalHitPoints = 90;

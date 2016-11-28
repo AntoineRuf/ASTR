@@ -8,7 +8,7 @@ public class Warrior : Unit
 
     public override void Initialize()
     {
-        base.Initialize();
+        base.CustomInitialize();
         TotalHitPoints = 120;
         HitPoints = TotalHitPoints;
         TotalMovementPoints = 3;
@@ -23,13 +23,9 @@ public class Warrior : Unit
 
         // **TODO** Faire fonctionner les buffs;
         Skills.Add(new AxeSlash());
-        Skills.Add(new Galvanize());
-        Skills.Add(new SecondWind());
-        Skills.Add(new ComeBackHere());
-        Skills.Add(new ShatteringForce());
     }
 
-    public void CustomInitialize()
+    public override void CustomInitialize()
     {
         base.Initialize();
         TotalHitPoints = 120;

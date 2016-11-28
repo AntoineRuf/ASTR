@@ -4,8 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace Assets.TBS_Framework.Scripts.ASTR.RogueSkills
-{
+[Serializable]
     class FanOfKnives : Skill
     {
         public override string Name
@@ -133,4 +132,4 @@ namespace Assets.TBS_Framework.Scripts.ASTR.RogueSkills
             SetCooldown();
         }
     }
-}
+

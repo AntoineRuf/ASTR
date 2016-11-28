@@ -8,7 +8,7 @@ public class Mage : Unit
 
     public override void Initialize()
     {
-        base.Initialize();
+        base.CustomInitialize();
         TotalHitPoints = 70;
         HitPoints = TotalHitPoints;
         TotalMovementPoints = 3;
@@ -22,13 +22,9 @@ public class Mage : Unit
         transform.position += new Vector3(0, 0, -1);
 
         Skills.Add(new ManaStrike());
-        Skills.Add(new IceLance());
-        Skills.Add(new ChangingWinds());
-        Skills.Add(new Headvice());
-        Skills.Add(new Incinerate());
     }
 
-    public void CustomInitialize()
+    public override void CustomInitialize()
     {
         base.Initialize();
         TotalHitPoints = 70;

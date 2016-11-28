@@ -110,6 +110,28 @@ public abstract class Unit : MonoBehaviour
         UnitState = new UnitStateNormal(this);
     }
 
+    public virtual void CustomInitialize()
+    {
+        Buffs = new List<Buff>();
+        Skills = new List<Skill>();
+        UnitState = new UnitStateNormal(this);
+        SquadSelectionToFightScene Go = FindObjectOfType<SquadSelectionToFightScene>();
+        List<UnitData> units = new List<UnitData>();
+        foreach (UnitData unitdata in Go.squad1.playerData)
+        {
+            units.Add(unitdata);
+        }
+        foreach (UnitData unitdata2 in Go.squad2.playerData)
+        {
+            units.Add(unitdata2);
+        }
+        foreach (var skill in units[CustomUnitGenerator.CurrentUnit].Skills)
+        {
+            Skill newSkill = SkillCheck(skill.Name);
+            Skills.Add(newSkill);
+       }
+    }
+
     protected virtual void OnMouseDown()
     {
         if (UnitClicked != null)
@@ -717,6 +739,55 @@ public abstract class Unit : MonoBehaviour
         float z = v.y - (v.x + (Mathf.Abs(v.x) % 2)) / 2;
         float y = -x - z;
         return new Vector3(x, y, z);
+    }
+
+    public Skill SkillCheck(string name)
+    {
+        switch (name)
+        {
+            case "Galvanize":
+                return new Galvanize();
+            case "Shield Bash":
+                return new ShieldBash();
+            case "Come Back Here":
+                return new ComeBackHere();
+            case "Second Wind":
+                return new SecondWind();
+            case "Raging Bull":
+                return new RagingBull();
+            case "Shattering Force":
+                return new ShatteringForce();
+            case "Whirlwind":
+                return new Whirlwind();
+            case "Backstab":
+                return new CloakAndDagger();
+            case "Quick Dash":
+                return new QuickDash();
+            case "Lethal Toxin":
+                return new LethalToxin();
+            case "Sharpnel Mine":
+                return new ShrapnelMine();
+            case "Snake Venom":
+                return new SnakeVenom();
+            case "Fan of Knives":
+                return new FanOfKnives();
+            case "Fire Rain":
+                return new FireRain();
+            case "Incinerate":
+                return new Incinerate();
+            case "Ice Lance":
+                return new IceLance();
+            case "Purify":
+                return new Purify();
+            case "Void Armor":
+                return new VoidArmor();
+            case "Headvice":
+                return new Headvice();
+            case "Changing Winds":
+                return new Headvice();
+            default:
+                return null;
+        }
     }
 
 }

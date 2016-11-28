@@ -4,7 +4,6 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine.SceneManagement;
-using Assets.TBS_Framework.Scripts.ASTR.RogueSkills;
 
 public class SquadBuilderController : MonoBehaviour {
 
@@ -153,7 +152,7 @@ public class SquadBuilderController : MonoBehaviour {
         SkillNames.Add("Snake Venom");
         SkillNames.Add("Backstab");
         SkillNames.Add("Lethal Toxin");
-        SkillNames.Add("Evasive Maneuver");
+        SkillNames.Add("Fan of Knives");
         for (int i = 0; i < 4; ++i)
         {
             Transform item = UnitPanel.FindChild("Actifs Slots").FindChild("SkillSheet").GetChild(i).GetChild(0);
