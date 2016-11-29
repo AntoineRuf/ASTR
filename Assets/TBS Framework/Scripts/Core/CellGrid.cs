@@ -29,6 +29,7 @@ public class CellGrid : MonoBehaviour
     Transform HealthText;
     Transform MouseOverPannel;
     Transform Portrait;
+    Transform VictoryScreen;
     // ---
 
     private CellGridState _cellGridState;//The grid delegates some of its behaviours to cellGridState object.
@@ -79,6 +80,7 @@ public class CellGrid : MonoBehaviour
         HealthText = canvas.transform.FindChild("Healthbar").transform.FindChild("HealthText");
         MouseOverPannel = canvas.transform.FindChild("MouseOverPannel");
         Portrait = canvas.transform.FindChild("Portrait");
+        VictoryScreen = canvas.transform.FindChild("VictoryScreen");
         // ---
         Turn = 0;
         trapmanager = new TrapManager(this);
@@ -153,9 +155,14 @@ public class CellGrid : MonoBehaviour
     private void OnUnitDestroyed(object sender, AttackEventArgs e)
     {
         Units.Remove(sender as Unit);
+        UnitList.Remove(sender as Unit);
+        Debug.Log("Units remaining : " + UnitList.Count);
         var totalPlayersAlive = Units.Select(u => u.TeamNumber).Distinct().ToList(); //Checking if the game is over
+        Debug.Log(totalPlayersAlive.Count);
         if (totalPlayersAlive.Count == 1)
         {
+            VictoryScreen.transform.GetChild(0).GetComponent<Text>().text = string.Format("Player {0}", CurrentTeamNumber+1);
+            VictoryScreen.gameObject.SetActive(true);
             if(GameEnded != null)
                 GameEnded.Invoke(this, new EventArgs());
         }

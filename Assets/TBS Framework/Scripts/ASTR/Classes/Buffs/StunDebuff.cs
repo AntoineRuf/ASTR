@@ -56,7 +56,8 @@ namespace Assets.TBS_Framework.Scripts.ASTR.Classes.Buffs
         }
 
         public void Apply(Unit unit)
-        {
+        { 
+           
         }
 
         public Buff Clone()

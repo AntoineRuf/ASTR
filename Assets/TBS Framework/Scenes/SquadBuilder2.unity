@@ -7427,11 +7427,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 845340f32d1cac64ea753692c49e6f6c, type: 3}
+  m_audioClip: {fileID: 8300000, guid: acd9868bac2db5849929c7e4c736e7ba, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.263
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   Priority: 128
@@ -9935,7 +9935,7 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: Headvice
+            m_StringArgument: Purify
             m_BoolArgument: 0
           m_CallState: 1
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
@@ -16667,7 +16667,7 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: Headvice
+            m_StringArgument: Purify
             m_BoolArgument: 0
           m_CallState: 1
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
@@ -19050,7 +19050,7 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: Headvice
+            m_StringArgument: Purify
             m_BoolArgument: 0
           m_CallState: 1
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,

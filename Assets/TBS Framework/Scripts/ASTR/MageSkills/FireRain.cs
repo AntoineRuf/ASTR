@@ -11,7 +11,18 @@ public class FireRain : Skill
         get { return "Fire Rain"; }
         set { }
     }
+    public override string Tooltip
+    {
+        get
+        {
+            return "Casts 3 fire missiles that hit random units in the targeted area";
+        }
 
+        set
+        {
+            base.Tooltip = value;
+        }
+    }
     public override int MinRange
     {
         get { return 2; }
@@ -20,19 +31,19 @@ public class FireRain : Skill
 
     public override int MaxRange
     {
-        get { return 4; }
+        get { return 7; }
         set { base.MaxRange = value; }
     }
 
     public override int MinDamage
     {
-        get { return 5; }
+        get { return 7; }
         set { base.MinDamage = value; }
     }
 
     public override int MaxDamage
     {
-        get { return 7; }
+        get { return 9; }
         set { base.MaxDamage = value; }
     }
 

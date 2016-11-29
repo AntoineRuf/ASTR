@@ -106,6 +106,7 @@ public class Headvice : Skill
             int damage = UnityEngine.Random.Range(MinDamage, MaxDamage + 1);
             caster.DealDamage2(receiver, damage);
             StunDebuff stunDebuff = new StunDebuff();
+            stunDebuff.Apply(receiver);
             receiver.Buffs.Add(stunDebuff);
         }
 

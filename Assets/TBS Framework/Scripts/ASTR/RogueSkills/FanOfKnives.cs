@@ -122,6 +122,7 @@ using UnityEngine;
                 if (currentCell.Occupent != null)
                 {
                     int damage = UnityEngine.Random.Range(MinDamage, MaxDamage);
+                    caster.DealDamage2(currentCell.Occupent, damage);
                     VulnerabilityDebuff vulnebuff = new VulnerabilityDebuff();
                     currentCell.Occupent.Buffs.Add(vulnebuff);
                     vulnebuff.Apply(currentCell.Occupent);

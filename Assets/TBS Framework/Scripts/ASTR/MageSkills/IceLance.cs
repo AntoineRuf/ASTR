@@ -11,7 +11,18 @@ public class IceLance : Skill
         get { return "Ice Lance"; }
         set { }
     }
+    public override string Tooltip
+    {
+        get
+        {
+            return "Great damage in line. Slow the target for their next turn";
+        }
 
+        set
+        {
+            base.Tooltip = value;
+        }
+    }
     public override int MinRange
     {
         get { return 1; }

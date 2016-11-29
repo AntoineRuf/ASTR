@@ -132,7 +132,7 @@ public class SquadBuilderController : MonoBehaviour {
         SkillNames.Add("Incinerate");
         SkillNames.Add("Fire Rain");
         SkillNames.Add("Ice Lance");
-        SkillNames.Add("Headvice");
+        SkillNames.Add("Purify");
         for (int i = 0; i < 4; ++i)
         {
             Transform item = UnitPanel.FindChild("Actifs Slots").FindChild("SkillSheet").GetChild(i).GetChild(0);
@@ -150,7 +150,7 @@ public class SquadBuilderController : MonoBehaviour {
         string UnitPanelName = string.Format("Unit{0}", unitNumber);
         Transform UnitPanel = SquadPanel.FindChild(UnitPanelName);
         List<string> SkillNames = new List<string>();
-        SkillNames.Add("Snake Venom");
+        SkillNames.Add("Quick Dash");
         SkillNames.Add("Backstab");
         SkillNames.Add("Lethal Toxin");
         SkillNames.Add("Fan of Knives");

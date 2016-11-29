@@ -12,7 +12,18 @@ public class Incinerate : Skill
         get { return "Incinerate"; }
         set { }
     }
+    public override string Tooltip
+    {
+        get
+        {
+            return "A great damaging AoE fireball";
+        }
 
+        set
+        {
+            base.Tooltip = value;
+        }
+    }
     public override int MinRange
     {
         get { return 2; }

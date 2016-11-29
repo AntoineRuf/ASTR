@@ -11,7 +11,18 @@ public class Purify : Skill
         get { return "Purify"; }
         set { }
     }
+    public override string Tooltip
+    {
+        get
+        {
+            return "Heal an ally";
+        }
 
+        set
+        {
+            base.Tooltip = value;
+        }
+    }
     public override int MinRange
     {
         get { return 1; }

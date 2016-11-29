@@ -16,7 +16,7 @@ public class TwinDaggers : Skill
     {
         get
         {
-            return "Basic rogue attack. Throw daggers to a cell. Deal more damage up close.";
+            return "Basic Rogue attack. Throw daggers to a cell. Deal more damage up close.";
         }
 
         set

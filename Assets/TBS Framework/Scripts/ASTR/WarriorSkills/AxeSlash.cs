@@ -14,7 +14,7 @@ public class AxeSlash : Skill
 
     public override string Tooltip
     {
-        get { return "Basic attack. Slashes in front of the warrior."; }
+        get { return "Basic Warrior attack. Slashes in front of the warrior."; }
         set { }
     }
 

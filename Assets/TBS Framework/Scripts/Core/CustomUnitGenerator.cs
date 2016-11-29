@@ -17,10 +17,10 @@ public class CustomUnitGenerator : MonoBehaviour, IUnitGenerator
         List<Unit> ret = new List<Unit>();
         Vector2[] spawnPos = new Vector2[6];
         spawnPos[0] = new Vector2(3, 1);
-        spawnPos[2] = new Vector2(1, 1);
-        spawnPos[4] = new Vector2(1, 3);
-        spawnPos[1] = new Vector2(13, 8);
-        spawnPos[3] = new Vector2(13, 10);
+        spawnPos[1] = new Vector2(1, 1);
+        spawnPos[2] = new Vector2(1, 3);
+        spawnPos[3] = new Vector2(13, 8);
+        spawnPos[4] = new Vector2(13, 10);
         spawnPos[5] = new Vector2(11, 10);
         SquadSelectionToFightScene Go = FindObjectOfType<SquadSelectionToFightScene>();
         Debug.Log(Go.squad1.playerData[0].Skills[0].Name);
@@ -50,7 +50,7 @@ public class CustomUnitGenerator : MonoBehaviour, IUnitGenerator
                         unit.transform.position = cell.transform.position;
                         unit.Initialize();
                         unit.PlayerNumber = i;
-                        unit.TeamNumber = i%2;
+                        unit.TeamNumber = i/3;
                         unit.UnitName = units[i].Name;
                         Prefab.transform.parent = UnitsParent;
                         ret.Add(unit);
@@ -79,7 +79,7 @@ public class CustomUnitGenerator : MonoBehaviour, IUnitGenerator
                         unit.transform.position = cell.transform.position;
                         unit.Initialize();
                         unit.PlayerNumber = i;
-                        unit.TeamNumber = i % 2;
+                        unit.TeamNumber = i / 3;
                         unit.UnitName = units[i].Name;
                         Prefab.transform.parent = UnitsParent;
                         ret.Add(unit);
@@ -108,7 +108,7 @@ public class CustomUnitGenerator : MonoBehaviour, IUnitGenerator
                         unit.transform.position = cell.transform.position;
                         unit.Initialize();
                         unit.PlayerNumber = i;
-                        unit.TeamNumber = i % 2;
+                        unit.TeamNumber = i / 3;
                         unit.UnitName = units[i].Name;
                         Prefab.transform.parent = UnitsParent;
                         ret.Add(unit);

@@ -11,7 +11,18 @@ public class ManaStrike : Skill
         get { return "ManaStrike"; }
         set { }
     }
+    public override string Tooltip
+    {
+        get
+        {
+            return "Mage basic attack. Reduces cooldowns of skills by 1";
+        }
 
+        set
+        {
+            base.Tooltip = value;
+        }
+    }
     public override int MinRange
     {
         get { return 2; }

@@ -11,7 +11,18 @@ public class VoidArmor : Skill
         get { return "Void Armor"; }
         set { }
     }
+    public override string Tooltip
+    {
+        get
+        {
+            return "Boosts self defense";
+        }
 
+        set
+        {
+            base.Tooltip = value;
+        }
+    }
     public override int MinRange
     {
         get { return 0; }
