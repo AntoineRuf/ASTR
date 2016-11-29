@@ -81,7 +81,7 @@ public class TwinDaggers : Skill
 
     public override int isAoE
     {
-        get { return 3; }
+        get { return 0; }
         set { }
     }
 

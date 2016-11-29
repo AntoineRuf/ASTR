@@ -108,7 +108,7 @@ public class CustomUnitGenerator : MonoBehaviour, IUnitGenerator
                         unit.transform.position = cell.transform.position;
                         unit.Initialize();
                         unit.PlayerNumber = i;
-                        unit.TeamNumber = i % 3;
+                        unit.TeamNumber = i % 2;
                         unit.UnitName = units[i].Name;
                         Prefab.transform.parent = UnitsParent;
                         ret.Add(unit);
